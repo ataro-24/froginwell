@@ -4,8 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Official Website</title>
+  
   <!-- FontAwesome (SNSアイコン用) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Google Fonts (Orb & Caveat) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Orb&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --navy: #0B132B;
@@ -21,8 +28,9 @@
       padding: 0;
     }
 
+    /* サイト全体の基本フォントを Orb に設定 */
     body {
-      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+      font-family: 'Orb', 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
       color: var(--text-dark);
       background-color: var(--gray);
       line-height: 1.6;
@@ -48,8 +56,9 @@
 
     .site-logo {
       color: var(--yellow);
-      font-weight: bold;
-      font-size: 20px;
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 26px;
       letter-spacing: 1px;
     }
 
@@ -104,11 +113,11 @@
       right: 0;
     }
 
-    /* 閉じるボタンエリア */
+    /* 閉じるボタン */
     .close-btn {
       align-self: flex-end;
       color: var(--yellow);
-      font-size: 16px;
+      font-size: 18px;
       font-weight: bold;
       cursor: pointer;
       display: flex;
@@ -129,16 +138,18 @@
       gap: 24px;
     }
 
+    /* メニュー内のリンク文字をすべて黄色に設定 */
     .nav-links a {
-      color: var(--white);
+      color: var(--yellow);
       text-decoration: none;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 500;
-      transition: color 0.3s ease;
+      transition: opacity 0.3s ease, transform 0.2s ease;
     }
 
     .nav-links a:hover {
-      color: var(--yellow);
+      opacity: 0.75;
+      transform: translateX(4px);
     }
 
     /* -----------------------------------
@@ -158,22 +169,26 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center; /* 中央揃え */
-      text-align: center;   /* テキスト中央揃え */
+      align-items: center;
+      text-align: center;
       padding: 60px 40px;
     }
 
+    /* 日本語名：Orb */
     .hero-name {
-      font-size: 48px;
+      font-family: 'Orb', serif;
+      font-size: 52px;
       font-weight: bold;
       line-height: 1.2;
       margin-bottom: 8px;
       color: var(--yellow);
     }
 
+    /* ローマ字表記：Caveat */
     .hero-name-en {
-      font-size: 18px;
-      color: var(--yellow); /* 黄色文字に変更 */
+      font-family: 'Caveat', cursive;
+      font-size: 32px;
+      color: var(--yellow);
       letter-spacing: 2px;
       margin-bottom: 40px;
     }
@@ -186,8 +201,8 @@
     }
 
     .social-links a {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       border: 2px solid var(--yellow);
       color: var(--yellow);
@@ -199,11 +214,11 @@
       transition: all 0.3s ease;
     }
 
-    /* note用カスタムスタイル */
+    /* noteテキスト用スタイル */
     .social-links a .note-text {
-      font-size: 14px;
+      font-family: 'Caveat', cursive;
+      font-size: 18px;
       font-weight: bold;
-      font-family: sans-serif;
     }
 
     .social-links a:hover {
@@ -238,7 +253,10 @@
         padding: 40px 24px;
       }
       .hero-name {
-        font-size: 36px;
+        font-size: 38px;
+      }
+      .hero-name-en {
+        font-size: 26px;
       }
       .hero-right {
         min-height: 400px;
