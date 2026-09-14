@@ -8,10 +8,10 @@
   <!-- FontAwesome (SNSアイコン用) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
-  <!-- Google Fonts (Orb & Caveat) -->
+  <!-- Google Fonts (Zen Maru Gothic & Caveat) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Orb&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -28,9 +28,10 @@
       padding: 0;
     }
 
-    /* サイト全体の基本フォントを Orb に設定 */
+    /* サイト全体の日本語基本フォントを Zen Maru Gothic (400) に設定 */
     body {
-      font-family: 'Orb', 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 400;
       color: var(--text-dark);
       background-color: var(--gray);
       line-height: 1.6;
@@ -54,11 +55,12 @@
       backdrop-filter: blur(8px);
     }
 
+    /* 英字ロゴ：Caveat */
     .site-logo {
       color: var(--yellow);
       font-family: 'Caveat', cursive;
       font-weight: 700;
-      font-size: 26px;
+      font-size: 28px;
       letter-spacing: 1px;
     }
 
@@ -113,12 +115,13 @@
       right: 0;
     }
 
-    /* 閉じるボタン */
+    /* 閉じるボタン：Zen Maru Gothic (400) */
     .close-btn {
       align-self: flex-end;
       color: var(--yellow);
-      font-size: 18px;
-      font-weight: bold;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -138,13 +141,20 @@
       gap: 24px;
     }
 
-    /* メニュー内のリンク文字をすべて黄色に設定 */
+    /* メニュー項目：Zen Maru Gothic (500) で程よくくっきり */
     .nav-links a {
       color: var(--yellow);
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 500;
       text-decoration: none;
       font-size: 20px;
-      font-weight: 500;
       transition: opacity 0.3s ease, transform 0.2s ease;
+    }
+
+    /* メニュー内の英語（TOPなど）：Caveat */
+    .nav-links a.en-link {
+      font-family: 'Caveat', cursive;
+      font-size: 26px;
     }
 
     .nav-links a:hover {
@@ -174,11 +184,11 @@
       padding: 60px 40px;
     }
 
-    /* 日本語名：Orb */
+    /* 日本語名：Zen Maru Gothic (700) でしっかり主張 */
     .hero-name {
-      font-family: 'Orb', serif;
-      font-size: 52px;
-      font-weight: bold;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 700;
+      font-size: 48px;
       line-height: 1.2;
       margin-bottom: 8px;
       color: var(--yellow);
@@ -214,7 +224,7 @@
       transition: all 0.3s ease;
     }
 
-    /* noteテキスト用スタイル */
+    /* noteテキスト：Caveat */
     .social-links a .note-text {
       font-family: 'Caveat', cursive;
       font-size: 18px;
@@ -253,7 +263,7 @@
         padding: 40px 24px;
       }
       .hero-name {
-        font-size: 38px;
+        font-size: 36px;
       }
       .hero-name-en {
         font-size: 26px;
@@ -283,7 +293,7 @@
       <span>閉じる</span> <i class="fa-solid fa-xmark"></i>
     </div>
     <div class="nav-links">
-      <a href="#hero">TOP</a>
+      <a href="#hero" class="en-link">TOP</a>
       <a href="#profile">プロフィール</a>
       <a href="#history">出演歴</a>
       <a href="#gallery">フォトギャラリー</a>
