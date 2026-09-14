@@ -89,13 +89,12 @@
       position: fixed;
       top: 0;
       right: -100%;
-      width: 280px;
+      width: 300px;
       height: 100vh;
       background-color: var(--navy);
-      padding: 100px 40px;
+      padding: 40px 30px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
       transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       z-index: 101;
       box-shadow: -5px 0 20px rgba(0,0,0,0.3);
@@ -105,7 +104,32 @@
       right: 0;
     }
 
-    .nav-menu a {
+    /* 閉じるボタンエリア */
+    .close-btn {
+      align-self: flex-end;
+      color: var(--yellow);
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 40px;
+      padding: 8px;
+      transition: opacity 0.3s ease;
+    }
+
+    .close-btn:hover {
+      opacity: 0.8;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .nav-links a {
       color: var(--white);
       text-decoration: none;
       font-size: 18px;
@@ -113,7 +137,7 @@
       transition: color 0.3s ease;
     }
 
-    .nav-menu a:hover {
+    .nav-links a:hover {
       color: var(--yellow);
     }
 
@@ -123,10 +147,10 @@
     .hero {
       display: flex;
       min-height: 100vh;
-      padding-top: 70px; /* ヘッダーの高さ分 */
+      padding-top: 70px;
     }
 
-    /* 左側：ネイビー背景・イエロー文字・SNS */
+    /* 左側：ネイビー背景・イエロー文字・中央揃え */
     .hero-left {
       flex: 1;
       background-color: var(--navy);
@@ -134,7 +158,9 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 60px 40px 60px 80px;
+      align-items: center; /* 中央揃え */
+      text-align: center;   /* テキスト中央揃え */
+      padding: 60px 40px;
     }
 
     .hero-name {
@@ -147,7 +173,7 @@
 
     .hero-name-en {
       font-size: 18px;
-      color: var(--white);
+      color: var(--yellow); /* 黄色文字に変更 */
       letter-spacing: 2px;
       margin-bottom: 40px;
     }
@@ -156,6 +182,7 @@
     .social-links {
       display: flex;
       gap: 20px;
+      justify-content: center;
     }
 
     .social-links a {
@@ -170,6 +197,13 @@
       font-size: 20px;
       text-decoration: none;
       transition: all 0.3s ease;
+    }
+
+    /* note用カスタムスタイル */
+    .social-links a .note-text {
+      font-size: 14px;
+      font-weight: bold;
+      font-family: sans-serif;
     }
 
     .social-links a:hover {
@@ -198,7 +232,7 @@
     ----------------------------------- */
     @media (max-width: 768px) {
       .hero {
-        flex-direction: column-reverse; /* スマホでは写真を上にする場合は column に変更してね */
+        flex-direction: column-reverse;
       }
       .hero-left {
         padding: 40px 24px;
@@ -216,7 +250,7 @@
 
   <!-- ヘッダー＆ハンバーガーメニュー -->
   <header>
-    <div class="site-logo">OFFICIAL PORTFOLIO</div>
+    <div class="site-logo">OFFICIAL WEBSITE</div>
     <div class="menu-btn" id="menuBtn">
       <span></span>
       <span></span>
@@ -226,48 +260,63 @@
 
   <!-- ナビゲーションメニュー -->
   <nav class="nav-menu" id="navMenu">
-    <a href="#hero">TOP</a>
-    <a href="#profile">プロフィール</a>
-    <a href="#history">出演歴</a>
-    <a href="#gallery">フォトギャラリー</a>
-    <a href="#blog">ブログ</a>
-    <a href="#contact">お問い合わせ</a>
+    <!-- 閉じるボタン -->
+    <div class="close-btn" id="closeBtn">
+      <span>閉じる</span> <i class="fa-solid fa-xmark"></i>
+    </div>
+    <div class="nav-links">
+      <a href="#hero">TOP</a>
+      <a href="#profile">プロフィール</a>
+      <a href="#history">出演歴</a>
+      <a href="#gallery">フォトギャラリー</a>
+      <a href="#blog">ブログ</a>
+      <a href="#contact">お問い合わせ</a>
+    </div>
   </nav>
 
   <!-- メイン表示エリア -->
   <main class="hero" id="hero">
-    <!-- 左側：テキスト＆SNS -->
+    <!-- 左側：テキスト＆SNS（中央揃え） -->
     <div class="hero-left">
       <h1 class="hero-name">あなたの お名前</h1>
       <p class="hero-name-en">YOUR NAME</p>
       
       <div class="social-links">
+        <!-- X (Twitter) -->
         <a href="#" target="_blank" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+        <!-- Instagram -->
         <a href="#" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <!-- note -->
+        <a href="#" target="_blank" aria-label="note"><span class="note-text">note</span></a>
       </div>
     </div>
 
     <!-- 右側：写真 -->
     <div class="hero-right">
-      <!-- サンプル画像を設置しています。後でお気に入りの写真に差し替えてね！ -->
       <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=80" alt="Main Photo" class="hero-img">
     </div>
   </main>
 
-  <!-- ハンバーガーメニューのJavaScript -->
+  <!-- JavaScript -->
   <script>
     const menuBtn = document.getElementById('menuBtn');
+    const closeBtn = document.getElementById('closeBtn');
     const navMenu = document.getElementById('navMenu');
 
-    // ボタンをクリックしたらメニューを開閉する
+    // 開く
     menuBtn.addEventListener('click', () => {
-      menuBtn.classList.toggle('open');
-      navMenu.classList.toggle('active');
+      menuBtn.classList.add('open');
+      navMenu.classList.add('active');
+    });
+
+    // 閉じるボタンで閉じる
+    closeBtn.addEventListener('click', () => {
+      menuBtn.classList.remove('open');
+      navMenu.classList.remove('active');
     });
 
     // メニュー内のリンクを押したら自動で閉じる
-    document.querySelectorAll('.nav-menu a').forEach(link => {
+    document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         menuBtn.classList.remove('open');
         navMenu.classList.remove('active');
