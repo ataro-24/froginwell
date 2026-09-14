@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Official Website</title>
+  <title>Ataro website</title>
   
   <!-- FontAwesome (SNSアイコン用) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -20,6 +20,11 @@
       --white: #FFFFFF;
       --gray: #F4F5F7;
       --text-dark: #1C2541;
+      
+      /* モノクロ用カラー定義 */
+      --mono-light: #FFFFFF;
+      --mono-dark: #000000;
+      --mono-border: rgba(255, 255, 255, 0.4);
     }
 
     * {
@@ -28,7 +33,7 @@
       padding: 0;
     }
 
-    /* サイト全体の日本語基本フォントを Zen Maru Gothic (400) に設定 */
+    /* サイト全体の日本語基本フォント */
     body {
       font-family: 'Zen Maru Gothic', sans-serif;
       font-weight: 400;
@@ -55,7 +60,7 @@
       backdrop-filter: blur(8px);
     }
 
-    /* 英字ロゴ：Caveat */
+    /* 英字ロゴ：Caveat (Ataro website に変更) */
     .site-logo {
       color: var(--yellow);
       font-family: 'Caveat', cursive;
@@ -84,7 +89,6 @@
       transition: all 0.3s ease;
     }
 
-    /* メニュー開閉用アニメーション */
     .menu-btn.open span:nth-child(1) {
       transform: translateY(10.5px) rotate(45deg);
     }
@@ -115,7 +119,6 @@
       right: 0;
     }
 
-    /* 閉じるボタン：Zen Maru Gothic (400) */
     .close-btn {
       align-self: flex-end;
       color: var(--yellow);
@@ -141,7 +144,6 @@
       gap: 24px;
     }
 
-    /* メニュー項目：Zen Maru Gothic (500) で程よくくっきり */
     .nav-links a {
       color: var(--yellow);
       font-family: 'Zen Maru Gothic', sans-serif;
@@ -151,7 +153,6 @@
       transition: opacity 0.3s ease, transform 0.2s ease;
     }
 
-    /* メニュー内の英語（TOPなど）：Caveat */
     .nav-links a.en-link {
       font-family: 'Caveat', cursive;
       font-size: 26px;
@@ -163,7 +164,7 @@
     }
 
     /* -----------------------------------
-       ヒーローセクション（名前・SNS & 写真）
+       ヒーローセクション
     ----------------------------------- */
     .hero {
       display: flex;
@@ -171,7 +172,6 @@
       padding-top: 70px;
     }
 
-    /* 左側：ネイビー背景・イエロー文字・中央揃え */
     .hero-left {
       flex: 1;
       background-color: var(--navy);
@@ -184,7 +184,6 @@
       padding: 60px 40px;
     }
 
-    /* 日本語名：Zen Maru Gothic (700) でしっかり主張 */
     .hero-name {
       font-family: 'Zen Maru Gothic', sans-serif;
       font-weight: 700;
@@ -194,7 +193,6 @@
       color: var(--yellow);
     }
 
-    /* ローマ字表記：Caveat */
     .hero-name-en {
       font-family: 'Caveat', cursive;
       font-size: 32px;
@@ -203,7 +201,7 @@
       margin-bottom: 40px;
     }
 
-    /* SNSアイコン */
+    /* モノクロ仕様のSNSアイコンエリア */
     .social-links {
       display: flex;
       gap: 20px;
@@ -214,8 +212,8 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      border: 2px solid var(--yellow);
-      color: var(--yellow);
+      border: 1.5px solid var(--mono-border);
+      color: var(--mono-light);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -224,20 +222,26 @@
       transition: all 0.3s ease;
     }
 
-    /* noteテキスト：Caveat */
-    .social-links a .note-text {
-      font-family: 'Caveat', cursive;
-      font-size: 18px;
-      font-weight: bold;
+    /* SVGアイコン（note等）のスタイル統一 */
+    .social-links a svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--mono-light);
+      transition: fill 0.3s ease;
     }
 
+    /* モノクロ・ホバー演出（白黒反転） */
     .social-links a:hover {
-      background-color: var(--yellow);
+      background-color: var(--mono-light);
       color: var(--navy);
+      border-color: var(--mono-light);
       transform: translateY(-3px);
     }
 
-    /* 右側：写真１枚 */
+    .social-links a:hover svg {
+      fill: var(--navy);
+    }
+
     .hero-right {
       flex: 1;
       background-color: #e0e0e0;
@@ -252,9 +256,7 @@
       display: block;
     }
 
-    /* -----------------------------------
-       レスポンシブ対応（スマホ表示）
-    ----------------------------------- */
+    /* レスポンシブ対応 */
     @media (max-width: 768px) {
       .hero {
         flex-direction: column-reverse;
@@ -278,7 +280,8 @@
 
   <!-- ヘッダー＆ハンバーガーメニュー -->
   <header>
-    <div class="site-logo">OFFICIAL WEBSITE</div>
+    <!-- ロゴテキスト変更 -->
+    <div class="site-logo">Ataro website</div>
     <div class="menu-btn" id="menuBtn">
       <span></span>
       <span></span>
@@ -288,7 +291,6 @@
 
   <!-- ナビゲーションメニュー -->
   <nav class="nav-menu" id="navMenu">
-    <!-- 閉じるボタン -->
     <div class="close-btn" id="closeBtn">
       <span>閉じる</span> <i class="fa-solid fa-xmark"></i>
     </div>
@@ -296,7 +298,7 @@
       <a href="#hero" class="en-link">TOP</a>
       <a href="#profile">プロフィール</a>
       <a href="#history">出演歴</a>
-      <a href="#gallery">フォトギャラリー</a>
+      <a href="#gallery">ポートフォリオ</a>
       <a href="#blog">ブログ</a>
       <a href="#contact">お問い合わせ</a>
     </div>
@@ -304,22 +306,39 @@
 
   <!-- メイン表示エリア -->
   <main class="hero" id="hero">
-    <!-- 左側：テキスト＆SNS（中央揃え） -->
     <div class="hero-left">
-      <h1 class="hero-name">あなたの お名前</h1>
-      <p class="hero-name-en">YOUR NAME</p>
+      <h1 class="hero-name">高井　蛙太郎</h1>
+      <p class="hero-name-en">Takai Ataro</p>
       
+      <!-- ガイドライン準拠 モノクロSNSアイコン -->
       <div class="social-links">
         <!-- X (Twitter) -->
-        <a href="#" target="_blank" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" target="_blank" aria-label="X (Twitter)">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        
         <!-- Instagram -->
-        <a href="#" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <!-- note -->
-        <a href="#" target="_blank" aria-label="note"><span class="note-text">note</span></a>
+        <a href="#" target="_blank" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        
+        <!-- note (SVG挿入枠) -->
+        <a href="#" target="_blank" aria-label="note">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <!-- 
+              【ここにnote公式のパスデータを追加してください】
+              公式ガイドラインから取得した <path d="..." /> の部分を以下に貼り付ければOKです！
+              現在はダミーの「n」文字パスを入れています。
+            -->
+            <path d="M105.251 215.151C90.5437 214.742 69.9529 215.559 55 215.559V292.039H76.4079V234.189C76.4079 234.189 95.4463 233.535 102.31 234.352C108.765 235.088 111.135 239.092 111.38 247.426C111.543 256.904 111.38 261.889 111.38 292.039H132.788C132.788 292.039 133.033 257.558 132.788 245.547C132.461 224.22 125.025 215.641 105.251 215.151Z" fill="black"/>
+<path d="M204.283 214.906C183.121 214.906 165.88 232.228 165.88 253.554C165.88 274.881 183.121 292.203 204.283 292.203C225.446 292.203 242.687 274.881 242.687 253.554C242.687 232.228 225.446 214.906 204.283 214.906ZM204.283 273.737C193.171 273.737 184.183 264.667 184.183 253.473C184.183 242.278 193.171 233.209 204.283 233.209C215.396 233.209 224.384 242.278 224.384 253.473C224.384 264.749 215.396 273.737 204.283 273.737Z" fill="black"/>
+<path d="M445 253.554C445 232.228 427.759 214.906 406.596 214.906C385.434 214.906 368.193 232.228 368.193 253.554C368.193 266.056 373.913 276.76 382.819 283.869C389.029 288.771 397.69 292.203 409.293 292.203C414.931 292.203 429.557 290.651 440.097 278.966L431.436 267.363C427.759 270.632 418.526 275.207 411.172 275.207C401.857 275.207 396.219 273.41 392.134 269.569C389.601 267.282 387.803 263.768 386.986 259.438H444.428C444.755 257.476 445 255.597 445 253.554ZM387.15 246.527C389.274 237.458 395.647 230.757 406.515 230.757C417.872 230.757 423.837 237.948 425.798 246.527H387.15Z" fill="black"/>
+<path d="M315.408 207.797H295.39V229.287H274.799V248.08H295.39V270.387H315.408V248.08H335.999V229.287H315.408V207.797Z" fill="black"/>            
+          </svg>
+        </a>
       </div>
     </div>
 
-    <!-- 右側：写真 -->
     <div class="hero-right">
       <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=80" alt="Main Photo" class="hero-img">
     </div>
@@ -331,19 +350,16 @@
     const closeBtn = document.getElementById('closeBtn');
     const navMenu = document.getElementById('navMenu');
 
-    // 開く
     menuBtn.addEventListener('click', () => {
       menuBtn.classList.add('open');
       navMenu.classList.add('active');
     });
 
-    // 閉じるボタンで閉じる
     closeBtn.addEventListener('click', () => {
       menuBtn.classList.remove('open');
       navMenu.classList.remove('active');
     });
 
-    // メニュー内のリンクを押したら自動で閉じる
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         menuBtn.classList.remove('open');
