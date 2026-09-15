@@ -354,6 +354,10 @@
       navMenu.classList.remove('active');
     });
 
-    document.querySelectorAll('.nav-links a').forEach(link => {
+document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
-        m
+        menuBtn.classList.remove('open');
+        navMenu.classList.remove('active');
+      });
+    });
+  </script>
