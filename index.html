@@ -257,8 +257,8 @@
        プロフィールセクション
     ----------------------------------- */
     .profile-section {
-      background-color: var(--yellow); /* 背景：イエロー */
-      color: var(--navy);            /* 文字：ネイビー */
+      background-color: var(--yellow);
+      color: var(--navy);
       padding: 100px 40px;
       display: flex;
       justify-content: center;
@@ -273,7 +273,6 @@
       align-items: center;
     }
 
-    /* プロフィール写真エリア */
     .profile-image-wrap {
       flex: 1;
       max-width: 500px;
@@ -288,16 +287,8 @@
       object-fit: cover;
     }
 
-    /* プロフィール本文エリア */
     .profile-content {
       flex: 1;
-    }
-
-    .profile-title-en {
-      font-family: 'Caveat', cursive;
-      font-size: 36px;
-      color: var(--navy);
-      letter-spacing: 2px;
     }
 
     .profile-title {
@@ -306,9 +297,25 @@
       font-size: 40px;
       margin-bottom: 24px;
       color: var(--navy);
+      position: relative;
     }
 
-    /* プロフィール詳細のCSS調整 */
+    .profile-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background-color: var(--navy);
+      margin-top: 8px;
+      border-radius: 2px;
+    }
+
+    .profile-text {
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
     .profile-details {
       display: flex;
       flex-direction: column;
@@ -318,19 +325,152 @@
 
     .profile-detail-item {
       display: flex;
-      border-bottom: 1px solid rgba(11, 19, 43, 0.15);
+      border-bottom: 1px solid rgba(11, 19, 43, 0.2);
       padding-bottom: 8px;
     }
 
     .profile-detail-label {
-      font-weight: 400; /* ラベル側を通常太さに */
-      width: 140px;
-      flex-shrink: 0;
-      opacity: 0.9;
+      font-weight: 700;
+      width: 120px;
     }
 
-    .profile-detail-value {
-      font-weight: 700; /* 要素側を太字に */
+    /* -----------------------------------
+       出演歴セクション (HISTORY) - カラム拡大＆1行レイアウト
+    ----------------------------------- */
+    .history-section {
+      padding: 100px 40px;
+      background-color: var(--navy);
+    }
+
+    .history-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .history-title {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+      color: var(--yellow);
+      position: relative;
+      display: inline-block;
+    }
+
+    .history-title::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background-color: var(--yellow);
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+
+    /* 左右2カラム構造（もうひと回り拡大：最大幅1200px） */
+    .history-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 40px;
+      align-items: stretch;
+    }
+
+    .history-col {
+      flex: 1;
+      padding: 40px 32px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 左カラム：舞台（ネイビー背景 × イエロー文字） */
+    .history-col.stage {
+      background-color: var(--navy);
+      color: var(--yellow);
+      border: 2px solid var(--yellow);
+    }
+
+    /* 右カラム：映像（イエロー背景 × ネイビー文字） */
+    .history-col.screen {
+      background-color: var(--yellow);
+      color: var(--navy);
+    }
+
+    /* 「舞台」「映像」タイトル */
+    .col-title {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 700;
+      font-size: 26px;
+      margin-bottom: 28px;
+      text-align: center;
+      padding-bottom: 12px;
+      border-bottom: 2px solid;
+    }
+
+    .stage .col-title {
+      border-color: var(--yellow);
+    }
+
+    .screen .col-title {
+      border-color: var(--navy);
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .history-item {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed;
+    }
+
+    .stage .history-item {
+      border-color: rgba(255, 209, 102, 0.25);
+    }
+
+    .screen .history-item {
+      border-color: rgba(11, 19, 43, 0.15);
+    }
+
+    .history-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    /* 年号（Caveat / 22px / 太字） */
+    .history-year {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      font-weight: 700;
+      min-width: 50px;
+      line-height: 1;
+    }
+
+    /* 作品名＋役名・詳細を1行で並べる横並びエリア (各13px) */
+    .history-info-row {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    .history-work {
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    .history-role {
+      font-size: 13px;
+      font-weight: 400;
+      opacity: 0.85;
+      text-align: right;
     }
 
     /* レスポンシブ対応 */
@@ -351,7 +491,6 @@
         min-height: 400px;
       }
 
-      /* プロフィールのスマホ対応 */
       .profile-section {
         padding: 60px 24px;
       }
@@ -365,164 +504,28 @@
       .profile-title {
         font-size: 32px;
       }
-    }
-    
-/* -----------------------------------
-       出演歴セクション (HISTORY - 案1シンプル版・文字小さめ)
-    ----------------------------------- */
-    .history-section {
-      padding: 100px 40px;
-      background-color: var(--navy);
-    }
 
-    .history-header {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-
-    .history-title-en {
-      font-family: 'Caveat', cursive;
-      font-size: 32px;
-      color: var(--yellow);
-      letter-spacing: 2px;
-    }
-
-    .history-title {
-      font-family: 'Zen Maru Gothic', sans-serif;
-      font-weight: 700;
-      font-size: 32px;
-      color: var(--yellow);
-      position: relative;
-      display: inline-block;
-    }
-
-    .history-title::after {
-      content: '';
-      display: block;
-      width: 50px;
-      height: 3px;
-      background-color: var(--yellow);
-      margin: 8px auto 0;
-      border-radius: 2px;
-    }
-
-    /* 左右2カラム構造 */
-    .history-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: flex;
-      gap: 32px;
-      align-items: stretch;
-    }
-
-    .history-col {
-      flex: 1;
-      padding: 32px 24px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    /* 左カラム：舞台 */
-    .history-col.stage {
-      background-color: var(--navy);
-      color: var(--yellow);
-      border: 2px solid var(--yellow);
-    }
-
-    /* 右カラム：映像 */
-    .history-col.screen {
-      background-color: var(--yellow);
-      color: var(--navy);
-    }
-
-    /* 「舞台」「映像」のタイトル（太字） */
-    .col-title {
-      font-family: 'Zen Maru Gothic', sans-serif;
-      font-weight: 700; /* 太字 */
-      font-size: 24px;
-      margin-bottom: 24px;
-      text-align: center;
-      padding-bottom: 10px;
-      border-bottom: 2px solid;
-    }
-
-    .stage .col-title {
-      border-color: var(--yellow);
-    }
-
-    .screen .col-title {
-      border-color: var(--navy);
-    }
-
-    .history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .history-item {
-      display: flex;
-      gap: 16px;
-      align-items: baseline;
-      padding-bottom: 14px;
-      border-bottom: 1px dashed;
-    }
-
-    .stage .history-item {
-      border-color: rgba(255, 209, 102, 0.25);
-    }
-
-    .screen .history-item {
-      border-color: rgba(11, 19, 43, 0.15);
-    }
-
-    .history-item:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    /* 年号（太字） */
-    .history-year {
-      font-family: 'Caveat', cursive;
-      font-size: 22px;
-      font-weight: 700; /* 太字 */
-      min-width: 50px;
-      line-height: 1;
-    }
-
-    .history-info {
-      flex: 1;
-    }
-
-    /* 作品名（通常表示） */
-    .history-work {
-      font-size: 13px;
-      font-weight: 400; /* 太字を解除 */
-      line-height: 1.5;
-    }
-
-    /* 役名・詳細（通常表示） */
-    .history-role {
-      font-size: 13px;
-      font-weight: 400; /* 太字を解除 */
-      opacity: 0.85;
-      margin-top: 2px;
-    }
-
-    /* スマホ対応 */
-    @media (max-width: 768px) {
       .history-section {
-        padding: 50px 20px;
+        padding: 60px 20px;
       }
       .history-container {
         flex-direction: column;
-        gap: 24px;
+        gap: 30px;
       }
       .history-col.stage {
         order: 1;
       }
       .history-col.screen {
         order: 2;
+      }
+      /* スマホでは作品名と詳細を縦に並べる */
+      .history-info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+      }
+      .history-role {
+        text-align: left;
       }
     }
   </style>
@@ -557,24 +560,17 @@
   <!-- メイン表示エリア (TOP) -->
   <main class="hero" id="hero">
     <div class="hero-left">
-      <!-- スペースありのお名前 -->
       <h1 class="hero-name">高井 蛙太郎</h1>
       <p class="hero-name-en">Takai Ataro</p>
       
-      <!-- SNSリンク一覧 -->
       <div class="social-links">
-        <!-- X (Twitter) -->
-        <a href="https://x.com/notakanon" target="_blank" aria-label="X (Twitter)">
+        <a href="#" target="_blank" aria-label="X (Twitter)">
           <i class="fa-brands fa-x-twitter"></i>
         </a>
-        
-        <!-- Instagram -->
-        <a href="https://www.instagram.com/notakanon" target="_blank" aria-label="Instagram">
+        <a href="#" target="_blank" aria-label="Instagram">
           <i class="fa-brands fa-instagram"></i>
         </a>
-        
-        <!-- note -->
-        <a href="https://note.com/flaxenfrog" target="_blank" aria-label="note">
+        <a href="#" target="_blank" aria-label="note">
           <svg viewBox="0 0 500 500" aria-hidden="true">
             <path d="M105.251 215.151C90.5437 214.742 69.9529 215.559 55 215.559V292.039H76.4079V234.189C76.4079 234.189 95.4463 233.535 102.31 234.352C108.765 235.088 111.135 239.092 111.38 247.426C111.543 256.904 111.38 261.889 111.38 292.039H132.788C132.788 292.039 133.033 257.558 132.788 245.547C132.461 224.22 125.025 215.641 105.251 215.151Z" />
             <path d="M204.283 214.906C183.121 214.906 165.88 232.228 165.88 253.554C165.88 274.881 183.121 292.203 204.283 292.203C225.446 292.203 242.687 274.881 242.687 253.554C242.687 232.228 225.446 214.906 204.283 214.906ZM204.283 273.737C193.171 273.737 184.183 264.667 184.183 253.473C184.183 242.278 193.171 233.209 204.283 233.209C215.396 233.209 224.384 242.278 224.384 253.473C224.384 264.749 215.396 273.737 204.283 273.737Z" />
@@ -590,65 +586,45 @@
     </div>
   </main>
 
-  <!-- プロフィールセクション (背景イエロー / 文字ネイビー) -->
+  <!-- プロフィールセクション (PROFILE見出し無し) -->
   <section class="profile-section" id="profile">
     <div class="profile-container">
-      
-      <!-- 左側：大きなプロフィール写真 -->
       <div class="profile-image-wrap">
-        <img src="2406155326.jpg" alt="高井蛙太郎 プロフィール写真" class="profile-img">
+        <img src="2406156648.jpg" alt="高井蛙太郎 プロフィール写真" class="profile-img">
       </div>
 
-      <!-- 右側：詳細データ -->
       <div class="profile-content">
-        <p class="profile-title-en">PROFILE</p>
         <h2 class="profile-title">プロフィール</h2>
+        <p class="profile-text">
+          ここに自己紹介の文章が入りますわ♪<br>
+          これまでの活動内容や、大切にしていること、普段の雰囲気などが伝わるような素敵なメッセージを書いてみましょうね。
+        </p>
 
-        <!-- 箇条書きの詳細データ -->
         <div class="profile-details">
           <div class="profile-detail-item">
             <span class="profile-detail-label">名前</span>
-            <span class="profile-detail-value">高井 蛙太郎（たかい あたろう）</span>
+            <span>高井 蛙太郎（たかい あたろう）</span>
           </div>
           <div class="profile-detail-item">
             <span class="profile-detail-label">生年月日</span>
-            <span class="profile-detail-value">1997年2月4日</span>
-          </div>
-          <div class="profile-detail-item">
-            <span class="profile-detail-label">年齢</span>
-            <span class="profile-detail-value">29歳</span>
+            <span>XXXX年XX月XX日</span>
           </div>
           <div class="profile-detail-item">
             <span class="profile-detail-label">出身地</span>
-            <span class="profile-detail-value">愛知県</span>
-          </div>
-          <div class="profile-detail-item">
-            <span class="profile-detail-label">身長</span>
-            <span class="profile-detail-value">164cm</span>
-          </div>
-          <div class="profile-detail-item">
-            <span class="profile-detail-label">体重</span>
-            <span class="profile-detail-value">58kg</span>
+            <span>〇〇県</span>
           </div>
           <div class="profile-detail-item">
             <span class="profile-detail-label">趣味・特技</span>
-            <span class="profile-detail-value">野球 / ゲーム / 詩作 / スナップ写真</span>
-          </div>
-          <div class="profile-detail-item">
-            <span class="profile-detail-label">資格</span>
-            <span class="profile-detail-value">準中型自動車運転免許(MT) / 漢字検定準1級</span>
+            <span>〇〇 / 〇〇</span>
           </div>
         </div>
-
       </div>
-
     </div>
   </section>
 
-<!-- 出演歴セクション (HISTORY - 案1シンプル版) -->
+  <!-- 出演歴セクション (HISTORY見出し無し / 1行レイアウト) -->
   <section class="history-section" id="history">
     <div class="history-header">
-      <p class="history-title-en">HISTORY</p>
       <h2 class="history-title">出演歴</h2>
     </div>
 
@@ -661,25 +637,25 @@
           
           <div class="history-item">
             <span class="history-year">2026</span>
-            <div class="history-info">
-              <p class="history-work">舞台「作品タイトル」</p>
-              <p class="history-role">役名 / 〇〇劇場</p>
+            <div class="history-info-row">
+              <span class="history-work">舞台「作品タイトル」</span>
+              <span class="history-role">役名 / 〇〇劇場</span>
             </div>
           </div>
 
           <div class="history-item">
             <span class="history-year">2025</span>
-            <div class="history-info">
-              <p class="history-work">公演名タイトル</p>
-              <p class="history-role">主演・役名 / 〇〇ホール</p>
+            <div class="history-info-row">
+              <span class="history-work">公演名タイトル</span>
+              <span class="history-role">主演・役名 / 〇〇ホール</span>
             </div>
           </div>
 
           <div class="history-item">
             <span class="history-year">2024</span>
-            <div class="history-info">
-              <p class="history-work">旗揚げ公演「作品名」</p>
-              <p class="history-role">演出・出演 / 〇〇スタジオ</p>
+            <div class="history-info-row">
+              <span class="history-work">旗揚げ公演「作品名」</span>
+              <span class="history-role">演出・出演 / 〇〇スタジオ</span>
             </div>
           </div>
 
@@ -693,25 +669,25 @@
           
           <div class="history-item">
             <span class="history-year">2026</span>
-            <div class="history-info">
-              <p class="history-work">映画「作品タイトル」</p>
-              <p class="history-role">監督：〇〇 / 役名</p>
+            <div class="history-info-row">
+              <span class="history-work">映画「作品タイトル」</span>
+              <span class="history-role">監督：〇〇 / 役名</span>
             </div>
           </div>
 
           <div class="history-item">
             <span class="history-year">2025</span>
-            <div class="history-info">
-              <p class="history-work">ドラマ「作品名」第〇話</p>
-              <p class="history-role">〇〇テレビ / ゲスト出演</p>
+            <div class="history-info-row">
+              <span class="history-work">ドラマ「作品名」第〇話</span>
+              <span class="history-role">〇〇テレビ / ゲスト出演</span>
             </div>
           </div>
 
           <div class="history-item">
             <span class="history-year">2024</span>
-            <div class="history-info">
-              <p class="history-work">短編映画「作品名」</p>
-              <p class="history-role">主演・役名</p>
+            <div class="history-info-row">
+              <span class="history-work">短編映画「作品名」</span>
+              <span class="history-role">主演・役名</span>
             </div>
           </div>
 
