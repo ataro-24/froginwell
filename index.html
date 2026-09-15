@@ -300,7 +300,6 @@
       letter-spacing: 2px;
     }
 
-    /* アンダーバー(::after)を削除したすっきりデザイン */
     .profile-title {
       font-family: 'Zen Maru Gothic', sans-serif;
       font-weight: 700;
@@ -324,10 +323,14 @@
     }
 
     .profile-detail-label {
-      font-weight: 700;
+      font-weight: 400; /* ラベル側を通常太さに */
       width: 140px;
       flex-shrink: 0;
       opacity: 0.9;
+    }
+
+    .profile-detail-value {
+      font-weight: 700; /* 要素側を太字に */
     }
 
     /* レスポンシブ対応 */
@@ -395,7 +398,7 @@
   <!-- メイン表示エリア (TOP) -->
   <main class="hero" id="hero">
     <div class="hero-left">
-      <!-- 雛形1：スペースありのお名前 -->
+      <!-- スペースありのお名前 -->
       <h1 class="hero-name">高井 蛙太郎</h1>
       <p class="hero-name-en">Takai Ataro</p>
       
@@ -446,35 +449,35 @@
         <div class="profile-details">
           <div class="profile-detail-item">
             <span class="profile-detail-label">名前</span>
-            <span>高井 蛙太郎（たかい あたろう）</span>
+            <span class="profile-detail-value">高井 蛙太郎（たかい あたろう）</span>
           </div>
           <div class="profile-detail-item">
             <span class="profile-detail-label">生年月日</span>
-            <span>１９９７年２月４日</span>
+            <span class="profile-detail-value">1997年2月4日</span>
           </div>
           <div class="profile-detail-item">
             <span class="profile-detail-label">年齢</span>
-            <span>２９歳</span>
+            <span class="profile-detail-value">29歳</span>
           </div>
           <div class="profile-detail-item">
             <span class="profile-detail-label">出身地</span>
-            <span>愛知県</span>
+            <span class="profile-detail-value">愛知県</span>
           </div>
           <div class="profile-detail-item">
             <span class="profile-detail-label">身長</span>
-            <span>１６４cm</span>
+            <span class="profile-detail-value">164cm</span>
           </div>
           <div class="profile-detail-item">
             <span class="profile-detail-label">体重</span>
-            <span>５８kg</span>
+            <span class="profile-detail-value">58kg</span>
           </div>
           <div class="profile-detail-item">
             <span class="profile-detail-label">趣味・特技</span>
-            <span>野球 / ゲーム / 詩作 / スナップ写真</span>
+            <span class="profile-detail-value">野球 / ゲーム / 詩作 / スナップ写真</span>
           </div>
           <div class="profile-detail-item">
             <span class="profile-detail-label">資格</span>
-            <span>準中型自動車運転免許(MT) / 漢字検定準１級</span>
+            <span class="profile-detail-value">準中型自動車運転免許(MT) / 漢字検定準1級</span>
           </div>
         </div>
 
