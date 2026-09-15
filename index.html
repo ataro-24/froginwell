@@ -200,7 +200,7 @@
       margin-bottom: 40px;
     }
 
-    /* 雛形1：ボタン64px / アイコン40px */
+    /* SNSボタン (64px / アイコン40px / モノクロ) */
     .social-links {
       display: flex;
       gap: 20px;
@@ -329,13 +329,21 @@
       padding-bottom: 8px;
     }
 
+    /* ラベルを細文字（400）に変更 */
     .profile-detail-label {
-      font-weight: 700;
+      font-weight: 400;
       width: 120px;
+      flex-shrink: 0;
+    }
+
+    /* 値（アイテム）を太文字（700）に変更 */
+    .profile-detail-value {
+      font-weight: 700;
+      flex: 1;
     }
 
     /* -----------------------------------
-       出演歴セクション (HISTORY) - カラム拡大＆1行レイアウト
+       出演歴セクション (HISTORY)
     ----------------------------------- */
     .history-section {
       padding: 100px 40px;
@@ -366,7 +374,7 @@
       border-radius: 2px;
     }
 
-    /* 左右2カラム構造（もうひと回り拡大：最大幅1200px） */
+    /* 左右2カラム構造（最大幅1200px） */
     .history-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -414,31 +422,13 @@
       border-color: var(--navy);
     }
 
-    .history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+    /* 年ごとのブロック */
+    .history-year-block {
+      margin-bottom: 24px;
     }
 
-    .history-item {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      padding-bottom: 12px;
-      border-bottom: 1px dashed;
-    }
-
-    .stage .history-item {
-      border-color: rgba(255, 209, 102, 0.25);
-    }
-
-    .screen .history-item {
-      border-color: rgba(11, 19, 43, 0.15);
-    }
-
-    .history-item:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
+    .history-year-block:last-child {
+      margin-bottom: 0;
     }
 
     /* 年号（Caveat / 22px / 太字） */
@@ -446,19 +436,43 @@
       font-family: 'Caveat', cursive;
       font-size: 22px;
       font-weight: 700;
-      min-width: 50px;
       line-height: 1;
+      margin-bottom: 12px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid;
+      display: inline-block;
     }
 
-    /* 作品名＋役名・詳細を1行で並べる横並びエリア (各13px) */
-    .history-info-row {
-      flex: 1;
+    .stage .history-year {
+      border-color: rgba(255, 209, 102, 0.4);
+    }
+
+    .screen .history-year {
+      border-color: rgba(11, 19, 43, 0.3);
+    }
+
+    /* 年ごとのリスト */
+    .history-list {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* 月・作品名・役名・詳細を左詰めで詰めて並べる行 */
+    .history-item {
+      display: flex;
+      align-items: baseline;
       gap: 12px;
       font-size: 13px;
       font-weight: 400;
+      line-height: 1.5;
+    }
+
+    .history-month {
+      font-size: 13px;
+      font-weight: 400;
+      min-width: 32px;
+      flex-shrink: 0;
     }
 
     .history-work {
@@ -470,7 +484,18 @@
       font-size: 13px;
       font-weight: 400;
       opacity: 0.85;
-      text-align: right;
+    }
+
+    .history-detail {
+      font-size: 13px;
+      font-weight: 400;
+      opacity: 0.85;
+    }
+
+    /* 区切り（スラッシュなど） */
+    .history-sep {
+      opacity: 0.5;
+      font-size: 12px;
     }
 
     /* レスポンシブ対応 */
@@ -518,14 +543,10 @@
       .history-col.screen {
         order: 2;
       }
-      /* スマホでは作品名と詳細を縦に並べる */
-      .history-info-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2px;
-      }
-      .history-role {
-        text-align: left;
+
+      .history-item {
+        flex-wrap: wrap;
+        gap: 6px 10px;
       }
     }
   </style>
@@ -563,14 +584,15 @@
       <h1 class="hero-name">高井 蛙太郎</h1>
       <p class="hero-name-en">Takai Ataro</p>
       
+      <!-- SNSリンク -->
       <div class="social-links">
-        <a href="#" target="_blank" aria-label="X (Twitter)">
+        <a href="https://x.com/notakanon" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
           <i class="fa-brands fa-x-twitter"></i>
         </a>
-        <a href="#" target="_blank" aria-label="Instagram">
+        <a href="https://www.instagram.com/notakanon" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <i class="fa-brands fa-instagram"></i>
         </a>
-        <a href="#" target="_blank" aria-label="note">
+        <a href="https://note.com/flaxenfrog" target="_blank" rel="noopener noreferrer" aria-label="note">
           <svg viewBox="0 0 500 500" aria-hidden="true">
             <path d="M105.251 215.151C90.5437 214.742 69.9529 215.559 55 215.559V292.039H76.4079V234.189C76.4079 234.189 95.4463 233.535 102.31 234.352C108.765 235.088 111.135 239.092 111.38 247.426C111.543 256.904 111.38 261.889 111.38 292.039H132.788C132.788 292.039 133.033 257.558 132.788 245.547C132.461 224.22 125.025 215.641 105.251 215.151Z" />
             <path d="M204.283 214.906C183.121 214.906 165.88 232.228 165.88 253.554C165.88 274.881 183.121 292.203 204.283 292.203C225.446 292.203 242.687 274.881 242.687 253.554C242.687 232.228 225.446 214.906 204.283 214.906ZM204.283 273.737C193.171 273.737 184.183 264.667 184.183 253.473C184.183 242.278 193.171 233.209 204.283 233.209C215.396 233.209 224.384 242.278 224.384 253.473C224.384 264.749 215.396 273.737 204.283 273.737Z" />
@@ -586,7 +608,7 @@
     </div>
   </main>
 
-  <!-- プロフィールセクション (PROFILE見出し無し) -->
+  <!-- プロフィールセクション (太字・細文字を逆転) -->
   <section class="profile-section" id="profile">
     <div class="profile-container">
       <div class="profile-image-wrap">
@@ -595,34 +617,46 @@
 
       <div class="profile-content">
         <h2 class="profile-title">プロフィール</h2>
-        <p class="profile-text">
-          ここに自己紹介の文章が入りますわ♪<br>
-          これまでの活動内容や、大切にしていること、普段の雰囲気などが伝わるような素敵なメッセージを書いてみましょうね。
-        </p>
 
         <div class="profile-details">
           <div class="profile-detail-item">
             <span class="profile-detail-label">名前</span>
-            <span>高井 蛙太郎（たかい あたろう）</span>
+            <span class="profile-detail-value">高井 蛙太郎（たかい あたろう）</span>
           </div>
           <div class="profile-detail-item">
             <span class="profile-detail-label">生年月日</span>
-            <span>XXXX年XX月XX日</span>
+            <span class="profile-detail-value">1997年2月4日</span>
+          </div>
+          <div class="profile-detail-item">
+            <span class="profile-detail-label">年齢</span>
+            <span class="profile-detail-value">29歳</span>
           </div>
           <div class="profile-detail-item">
             <span class="profile-detail-label">出身地</span>
-            <span>〇〇県</span>
+            <span class="profile-detail-value">愛知県</span>
+          </div>
+          <div class="profile-detail-item">
+            <span class="profile-detail-label">身長</span>
+            <span class="profile-detail-value">164cm</span>
+          </div>
+          <div class="profile-detail-item">
+            <span class="profile-detail-label">体重</span>
+            <span class="profile-detail-value">58kg</span>
           </div>
           <div class="profile-detail-item">
             <span class="profile-detail-label">趣味・特技</span>
-            <span>〇〇 / 〇〇</span>
+            <span class="profile-detail-value">野球 / ゲーム / 詩作 / スナップ写真</span>
+          </div>
+          <div class="profile-detail-item">
+            <span class="profile-detail-label">資格</span>
+            <span class="profile-detail-value">準中型自動車運転免許(MT) / 漢字検定準1級</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 出演歴セクション (HISTORY見出し無し / 1行レイアウト) -->
+  <!-- 出演歴セクション -->
   <section class="history-section" id="history">
     <div class="history-header">
       <h2 class="history-title">出演歴</h2>
@@ -630,68 +664,100 @@
 
     <div class="history-container">
       
-      <!-- 左側：舞台（ネイビー背景 × イエロー文字） -->
+      <!-- 左側：舞台 -->
       <div class="history-col stage">
         <h3 class="col-title">舞台</h3>
-        <div class="history-list">
-          
-          <div class="history-item">
-            <span class="history-year">2026</span>
-            <div class="history-info-row">
+
+        <!-- 2026年 -->
+        <div class="history-year-block">
+          <div class="history-year">2026</div>
+          <div class="history-list">
+            
+            <div class="history-item">
+              <span class="history-month">4月</span>
               <span class="history-work">舞台「作品タイトル」</span>
-              <span class="history-role">役名 / 〇〇劇場</span>
+              <span class="history-sep">/</span>
+              <span class="history-role">役名</span>
+              <span class="history-sep">/</span>
+              <span class="history-detail">〇〇劇場</span>
             </div>
-          </div>
 
-          <div class="history-item">
-            <span class="history-year">2025</span>
-            <div class="history-info-row">
+            <div class="history-item">
+              <span class="history-month">1月</span>
               <span class="history-work">公演名タイトル</span>
-              <span class="history-role">主演・役名 / 〇〇ホール</span>
+              <span class="history-sep">/</span>
+              <span class="history-role">主演・役名</span>
+              <span class="history-sep">/</span>
+              <span class="history-detail">〇〇ホール</span>
             </div>
-          </div>
 
-          <div class="history-item">
-            <span class="history-year">2024</span>
-            <div class="history-info-row">
-              <span class="history-work">旗揚げ公演「作品名」</span>
-              <span class="history-role">演出・出演 / 〇〇スタジオ</span>
-            </div>
           </div>
-
         </div>
+
+        <!-- 2025年 -->
+        <div class="history-year-block">
+          <div class="history-year">2025</div>
+          <div class="history-list">
+            
+            <div class="history-item">
+              <span class="history-month">8月</span>
+              <span class="history-work">旗揚げ公演「作品名」</span>
+              <span class="history-sep">/</span>
+              <span class="history-role">演出・出演</span>
+              <span class="history-sep">/</span>
+              <span class="history-detail">〇〇スタジオ</span>
+            </div>
+
+          </div>
+        </div>
+
       </div>
 
-      <!-- 右側：映像（イエロー背景 × ネイビー文字） -->
+      <!-- 右側：映像 -->
       <div class="history-col screen">
         <h3 class="col-title">映像</h3>
-        <div class="history-list">
-          
-          <div class="history-item">
-            <span class="history-year">2026</span>
-            <div class="history-info-row">
+
+        <!-- 2026年 -->
+        <div class="history-year-block">
+          <div class="history-year">2026</div>
+          <div class="history-list">
+            
+            <div class="history-item">
+              <span class="history-month">5月</span>
               <span class="history-work">映画「作品タイトル」</span>
-              <span class="history-role">監督：〇〇 / 役名</span>
+              <span class="history-sep">/</span>
+              <span class="history-role">役名</span>
+              <span class="history-sep">/</span>
+              <span class="history-detail">監督：〇〇</span>
             </div>
-          </div>
 
-          <div class="history-item">
-            <span class="history-year">2025</span>
-            <div class="history-info-row">
+          </div>
+        </div>
+
+        <!-- 2025年 -->
+        <div class="history-year-block">
+          <div class="history-year">2025</div>
+          <div class="history-list">
+            
+            <div class="history-item">
+              <span class="history-month">10月</span>
               <span class="history-work">ドラマ「作品名」第〇話</span>
-              <span class="history-role">〇〇テレビ / ゲスト出演</span>
+              <span class="history-sep">/</span>
+              <span class="history-role">ゲスト出演</span>
+              <span class="history-sep">/</span>
+              <span class="history-detail">〇〇テレビ</span>
             </div>
-          </div>
 
-          <div class="history-item">
-            <span class="history-year">2024</span>
-            <div class="history-info-row">
+            <div class="history-item">
+              <span class="history-month">3月</span>
               <span class="history-work">短編映画「作品名」</span>
+              <span class="history-sep">/</span>
               <span class="history-role">主演・役名</span>
             </div>
-          </div>
 
+          </div>
         </div>
+
       </div>
 
     </div>
