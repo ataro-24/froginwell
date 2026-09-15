@@ -183,10 +183,11 @@
       padding: 60px 40px;
     }
 
+    /* お名前の表示（約1.5倍に拡大） */
     .hero-name {
       font-family: 'Zen Maru Gothic', sans-serif;
       font-weight: 700;
-      font-size: 48px;
+      font-size: 72px; /* 48px -> 72px */
       line-height: 1.2;
       margin-bottom: 8px;
       color: var(--yellow);
@@ -194,13 +195,13 @@
 
     .hero-name-en {
       font-family: 'Caveat', cursive;
-      font-size: 32px;
+      font-size: 48px; /* 32px -> 48px */
       color: var(--yellow);
       letter-spacing: 2px;
       margin-bottom: 40px;
     }
 
-    /* 白地に黒アイコンのSNSエリア */
+    /* 白地に黒アイコンのSNSエリア（サイズ拡大） */
     .social-links {
       display: flex;
       gap: 20px;
@@ -208,24 +209,24 @@
     }
 
     .social-links a {
-      width: 48px;
-      height: 48px;
+      width: 56px; /* ボタン枠を拡大 */
+      height: 56px;
       border-radius: 50%;
       background-color: var(--mono-bg); /* 背景：白 */
       color: var(--mono-icon); /* 文字/アイコン：黒 */
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 20px;
+      font-size: 30px; /* アイコンサイズを30pxへ変更 */
       text-decoration: none;
       transition: all 0.3s ease;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     }
 
-    /* SVGアイコン（note）のカラー適用 */
+    /* SVGアイコン（note）のサイズ・カラー調整 */
     .social-links a svg {
-      width: 24px;
-      height: 24px;
+      width: 30px; /* noteロゴを30px指定 */
+      height: 30px;
       fill: var(--mono-icon); /* アイコン：黒 */
       transition: fill 0.3s ease;
     }
@@ -264,10 +265,10 @@
         padding: 40px 24px;
       }
       .hero-name {
-        font-size: 36px;
+        font-size: 52px;
       }
       .hero-name-en {
-        font-size: 26px;
+        font-size: 36px;
       }
       .hero-right {
         min-height: 400px;
@@ -308,22 +309,25 @@
       <h1 class="hero-name">高井 蛙太郎</h1>
       <p class="hero-name-en">Takai　Ataro</p>
       
-      <!-- 白地に黒アイコン（ガイドライン準拠） -->
+      <!-- 白地に黒アイコン（ガイドライン準拠＆30px統一） -->
       <div class="social-links">
         <!-- X (Twitter) -->
-        <a href="#" target="_blank" aria-label="X (Twitter)">
+        <a href="https://x.com/notakanon" target="_blank" aria-label="X (Twitter)">
           <i class="fa-brands fa-x-twitter"></i>
         </a>
         
         <!-- Instagram -->
-        <a href="#" target="_blank" aria-label="Instagram">
+        <a href="https://www.instagram.com/notakanon" target="_blank" aria-label="Instagram">
           <i class="fa-brands fa-instagram"></i>
         </a>
         
-        <!-- note (新SVG反映済み) -->
-        <a href="#" target="_blank" aria-label="note">
-          <svg viewBox="0 0 493 493" aria-hidden="true">
-            <path d="m139.57,142.06c41.19,0,97.6-2.09,138.1-1.04,54.34,1.39,74.76,25.06,75.45,83.53.69,33.06,0,127.73,0,127.73h-58.79c0-82.83.35-96.5,0-122.6-.69-22.97-7.25-33.92-24.9-36.01-18.69-2.09-71.07-.35-71.07-.35v158.96h-58.79v-210.22Z" />
+        <!-- note (指定SVG・30px対応) -->
+        <a href="https://note.com/flaxenfrog" target="_blank" aria-label="note">
+          <svg viewBox="0 0 500 500" aria-hidden="true">
+            <path d="M105.251 215.151C90.5437 214.742 69.9529 215.559 55 215.559V292.039H76.4079V234.189C76.4079 234.189 95.4463 233.535 102.31 234.352C108.765 235.088 111.135 239.092 111.38 247.426C111.543 256.904 111.38 261.889 111.38 292.039H132.788C132.788 292.039 133.033 257.558 132.788 245.547C132.461 224.22 125.025 215.641 105.251 215.151Z" />
+            <path d="M204.283 214.906C183.121 214.906 165.88 232.228 165.88 253.554C165.88 274.881 183.121 292.203 204.283 292.203C225.446 292.203 242.687 274.881 242.687 253.554C242.687 232.228 225.446 214.906 204.283 214.906ZM204.283 273.737C193.171 273.737 184.183 264.667 184.183 253.473C184.183 242.278 193.171 233.209 204.283 233.209C215.396 233.209 224.384 242.278 224.384 253.473C224.384 264.749 215.396 273.737 204.283 273.737Z" />
+            <path d="M445 253.554C445 232.228 427.759 214.906 406.596 214.906C385.434 214.906 368.193 232.228 368.193 253.554C368.193 266.056 373.913 276.76 382.819 283.869C389.029 288.771 397.69 292.203 409.293 292.203C414.931 292.203 429.557 290.651 440.097 278.966L431.436 267.363C427.759 270.632 418.526 275.207 411.172 275.207C401.857 275.207 396.219 273.41 392.134 269.569C389.601 267.282 387.803 263.768 386.986 259.438H444.428C444.755 257.476 445 255.597 445 253.554ZM387.15 246.527C389.274 237.458 395.647 230.757 406.515 230.757C417.872 230.757 423.837 237.948 425.798 246.527H387.15Z" />
+            <path d="M315.408 207.797H295.39V229.287H274.799V248.08H295.39V270.387H315.408V248.08H335.999V229.287H315.408V207.797Z" />
           </svg>
         </a>
       </div>
@@ -352,11 +356,4 @@
 
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
-        menuBtn.classList.remove('open');
-        navMenu.classList.remove('active');
-      });
-    });
-  </script>
-
-</body>
-</html>
+        m
