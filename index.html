@@ -254,7 +254,7 @@
     }
 
     /* -----------------------------------
-       プロフィールセクション (新規追加♪)
+       プロフィールセクション
     ----------------------------------- */
     .profile-section {
       background-color: var(--yellow); /* 背景：イエロー */
@@ -273,7 +273,7 @@
       align-items: center;
     }
 
-    /* プロフィール写真エリア（大きく1枚） */
+    /* プロフィール写真エリア */
     .profile-image-wrap {
       flex: 1;
       max-width: 500px;
@@ -282,7 +282,7 @@
     .profile-img {
       width: 100%;
       height: auto;
-      border-radius: 16px; /* 角をほんのり丸く */
+      border-radius: 16px;
       box-shadow: 0 12px 30px rgba(11, 19, 43, 0.2);
       display: block;
       object-fit: cover;
@@ -300,31 +300,16 @@
       letter-spacing: 2px;
     }
 
+    /* アンダーバー(::after)を削除したすっきりデザイン */
     .profile-title {
       font-family: 'Zen Maru Gothic', sans-serif;
       font-weight: 700;
       font-size: 40px;
       margin-bottom: 24px;
       color: var(--navy);
-      position: relative;
     }
 
-    .profile-title::after {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 4px;
-      background-color: var(--navy);
-      margin-top: 8px;
-      border-radius: 2px;
-    }
-
-    .profile-text {
-      font-size: 18px;
-      line-height: 1.8;
-      margin-bottom: 30px;
-    }
-
+    /* プロフィール詳細のCSS調整 */
     .profile-details {
       display: flex;
       flex-direction: column;
@@ -334,13 +319,15 @@
 
     .profile-detail-item {
       display: flex;
-      border-bottom: 1px solid rgba(11, 19, 43, 0.2);
+      border-bottom: 1px solid rgba(11, 19, 43, 0.15);
       padding-bottom: 8px;
     }
 
     .profile-detail-label {
       font-weight: 700;
-      width: 120px;
+      width: 140px;
+      flex-shrink: 0;
+      opacity: 0.9;
     }
 
     /* レスポンシブ対応 */
@@ -412,20 +399,20 @@
       <h1 class="hero-name">高井 蛙太郎</h1>
       <p class="hero-name-en">Takai Ataro</p>
       
-      <!-- 雛形1：ボタン64px / アイコン40px -->
+      <!-- SNSリンク一覧 -->
       <div class="social-links">
         <!-- X (Twitter) -->
-        <a href="#" target="_blank" aria-label="X (Twitter)">
+        <a href="https://x.com/notakanon" target="_blank" aria-label="X (Twitter)">
           <i class="fa-brands fa-x-twitter"></i>
         </a>
         
         <!-- Instagram -->
-        <a href="#" target="_blank" aria-label="Instagram">
+        <a href="https://www.instagram.com/notakanon" target="_blank" aria-label="Instagram">
           <i class="fa-brands fa-instagram"></i>
         </a>
         
         <!-- note -->
-        <a href="#" target="_blank" aria-label="note">
+        <a href="https://note.com/flaxenfrog" target="_blank" aria-label="note">
           <svg viewBox="0 0 500 500" aria-hidden="true">
             <path d="M105.251 215.151C90.5437 214.742 69.9529 215.559 55 215.559V292.039H76.4079V234.189C76.4079 234.189 95.4463 233.535 102.31 234.352C108.765 235.088 111.135 239.092 111.38 247.426C111.543 256.904 111.38 261.889 111.38 292.039H132.788C132.788 292.039 133.033 257.558 132.788 245.547C132.461 224.22 125.025 215.641 105.251 215.151Z" />
             <path d="M204.283 214.906C183.121 214.906 165.88 232.228 165.88 253.554C165.88 274.881 183.121 292.203 204.283 292.203C225.446 292.203 242.687 274.881 242.687 253.554C242.687 232.228 225.446 214.906 204.283 214.906ZM204.283 273.737C193.171 273.737 184.183 264.667 184.183 253.473C184.183 242.278 193.171 233.209 204.283 233.209C215.396 233.209 224.384 242.278 224.384 253.473C224.384 264.749 215.396 273.737 204.283 273.737Z" />
@@ -447,21 +434,15 @@
       
       <!-- 左側：大きなプロフィール写真 -->
       <div class="profile-image-wrap">
-        <!-- ※お好きな画像ファイル名に変更してちょうだいね -->
-        <img src="2406156648.jpg" alt="高井蛙太郎 プロフィール写真" class="profile-img">
+        <img src="2406155326.jpg" alt="高井蛙太郎 プロフィール写真" class="profile-img">
       </div>
 
-      <!-- 右側：自己紹介文章 & 詳細データ -->
+      <!-- 右側：詳細データ -->
       <div class="profile-content">
         <p class="profile-title-en">PROFILE</p>
         <h2 class="profile-title">プロフィール</h2>
-        
-        <p class="profile-text">
-          ここに自己紹介の文章が入りますわ♪<br>
-          これまでの活動内容や、大切にしていること、普段の雰囲気などが伝わるような素敵なメッセージを書いてみましょうね。
-        </p>
 
-        <!-- 箇条書きの詳細データ例 -->
+        <!-- 箇条書きの詳細データ -->
         <div class="profile-details">
           <div class="profile-detail-item">
             <span class="profile-detail-label">名前</span>
