@@ -366,6 +366,181 @@
         font-size: 32px;
       }
     }
+    
+ /* -----------------------------------
+       出演歴セクション (HISTORY)
+    ----------------------------------- */
+    .history-section {
+      padding: 100px 40px;
+      background-color: var(--navy); /* 全体の背景はネイビー */
+    }
+
+    .history-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .history-title-en {
+      font-family: 'Caveat', cursive;
+      font-size: 36px;
+      color: var(--yellow);
+      letter-spacing: 2px;
+    }
+
+    .history-title {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 700;
+      font-size: 40px;
+      color: var(--yellow);
+      position: relative;
+      display: inline-block;
+    }
+
+    .history-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background-color: var(--yellow);
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+
+    /* 左右2カラム（案1ベース） */
+    .history-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 40px;
+      align-items: stretch;
+    }
+
+    .history-col {
+      flex: 1;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 左カラム：舞台（ネイビー背景 × イエロー文字） */
+    .history-col.stage {
+      background-color: var(--navy);
+      color: var(--yellow);
+      border: 2px solid var(--yellow);
+    }
+
+    /* 右カラム：映像（イエロー背景 × ネイビー文字） */
+    .history-col.screen {
+      background-color: var(--yellow);
+      color: var(--navy);
+    }
+
+    .col-title {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      margin-bottom: 30px;
+      text-align: center;
+      padding-bottom: 12px;
+      border-bottom: 2px dashed dashed;
+    }
+
+    .stage .col-title {
+      border-color: var(--yellow);
+    }
+
+    .screen .col-title {
+      border-color: var(--navy);
+    }
+
+    /* タイムラインデザイン（案2要素） */
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    /* 縦の直線 */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+    }
+
+    .stage .timeline::before {
+      background-color: var(--yellow);
+    }
+
+    .screen .timeline::before {
+      background-color: var(--navy);
+    }
+
+    /* タイムラインの各項目 */
+    .timeline-item {
+      position: relative;
+    }
+
+    /* タイムラインの点 */
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -24px;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      transform: translateX(-50%);
+    }
+
+    .stage .timeline-item::before {
+      background-color: var(--yellow);
+    }
+
+    .screen .timeline-item::before {
+      background-color: var(--navy);
+    }
+
+    .timeline-date {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .timeline-content {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .timeline-detail {
+      font-size: 14px;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+
+    /* スマホ対応（スマホ時：舞台[ネイビー]が上にくるように順序制御） */
+    @media (max-width: 768px) {
+      .history-section {
+        padding: 60px 24px;
+      }
+      .history-container {
+        flex-direction: column; /* 縦並び */
+        gap: 30px;
+      }
+      .history-col.stage {
+        order: 1; /* ネイビー（舞台）を先に表示 */
+      }
+      .history-col.screen {
+        order: 2; /* イエロー（映像）を後に表示 */
+      }
+    }
+  
   </style>
 </head>
 <body>
@@ -481,6 +656,70 @@
           </div>
         </div>
 
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 出演歴セクション (HISTORY) -->
+  <section class="history-section" id="history">
+    <div class="history-header">
+      <p class="history-title-en">HISTORY</p>
+      <h2 class="history-title">出演歴</h2>
+    </div>
+
+    <div class="history-container">
+      
+      <!-- 左側：舞台（ネイビー背景 × イエロー文字） -->
+      <div class="history-col stage">
+        <h3 class="col-title">舞台</h3>
+        <div class="timeline">
+          
+          <div class="timeline-item">
+            <div class="timeline-date">2026</div>
+            <div class="timeline-content">舞台「作品タイトル」</div>
+            <div class="timeline-detail">役名 / 〇〇劇場</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2025</div>
+            <div class="timeline-content">公演名タイトル</div>
+            <div class="timeline-detail">主演・役名 / 〇〇ホール</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2024</div>
+            <div class="timeline-content">旗揚げ公演「作品名」</div>
+            <div class="timeline-detail">演出・出演 / 〇〇スタジオ</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 右側：映像（イエロー背景 × ネイビー文字） -->
+      <div class="history-col screen">
+        <h3 class="col-title">映像</h3>
+        <div class="timeline">
+          
+          <div class="timeline-item">
+            <div class="timeline-date">2026</div>
+            <div class="timeline-content">映画「作品タイトル」</div>
+            <div class="timeline-detail">監督：〇〇 / 役名</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2025</div>
+            <div class="timeline-content">ドラマ「作品名」第〇話</div>
+            <div class="timeline-detail">〇〇テレビ / ゲスト出演</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2024</div>
+            <div class="timeline-content">短編映画「作品名」</div>
+            <div class="timeline-detail">主演・役名</div>
+          </div>
+
+        </div>
       </div>
 
     </div>
