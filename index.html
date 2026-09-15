@@ -163,7 +163,7 @@
     }
 
     /* -----------------------------------
-       ヒーローセクション
+       ヒーローセクション (TOP)
     ----------------------------------- */
     .hero {
       display: flex;
@@ -183,11 +183,10 @@
       padding: 60px 40px;
     }
 
-    /* お名前の表示（約1.5倍に拡大） */
     .hero-name {
       font-family: 'Zen Maru Gothic', sans-serif;
       font-weight: 700;
-      font-size: 72px; /* 48px -> 72px */
+      font-size: 72px;
       line-height: 1.2;
       margin-bottom: 8px;
       color: var(--yellow);
@@ -195,13 +194,13 @@
 
     .hero-name-en {
       font-family: 'Caveat', cursive;
-      font-size: 48px; /* 32px -> 48px */
+      font-size: 48px;
       color: var(--yellow);
       letter-spacing: 2px;
       margin-bottom: 40px;
     }
 
-    /* 白地に黒アイコンのSNSエリア（サイズ拡大） */
+    /* 雛形1：ボタン64px / アイコン40px */
     .social-links {
       display: flex;
       gap: 20px;
@@ -209,37 +208,35 @@
     }
 
     .social-links a {
-      width: 64px; /* ボタン枠を拡大 */
+      width: 64px;
       height: 64px;
       border-radius: 50%;
-      background-color: var(--mono-bg); /* 背景：白 */
-      color: var(--mono-icon); /* 文字/アイコン：黒 */
+      background-color: var(--mono-bg);
+      color: var(--mono-icon);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 40px; /* アイコンサイズを30pxへ変更 */
+      font-size: 40px;
       text-decoration: none;
       transition: all 0.3s ease;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     }
 
-    /* SVGアイコン（note）のサイズ・カラー調整 */
     .social-links a svg {
-      width: 40px; /* noteロゴを30px指定 */
+      width: 40px;
       height: 40px;
-      fill: var(--mono-icon); /* アイコン：黒 */
+      fill: var(--mono-icon);
       transition: fill 0.3s ease;
     }
 
-    /* ホバー時の演出（黒地に白文字へ反転） */
     .social-links a:hover {
-      background-color: var(--mono-icon); /* 背景：黒 */
-      color: var(--mono-bg); /* 文字/アイコン：白 */
+      background-color: var(--mono-icon);
+      color: var(--mono-bg);
       transform: translateY(-3px);
     }
 
     .social-links a:hover svg {
-      fill: var(--mono-bg); /* アイコン：白 */
+      fill: var(--mono-bg);
     }
 
     .hero-right {
@@ -254,6 +251,96 @@
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+
+    /* -----------------------------------
+       プロフィールセクション (新規追加♪)
+    ----------------------------------- */
+    .profile-section {
+      background-color: var(--yellow); /* 背景：イエロー */
+      color: var(--navy);            /* 文字：ネイビー */
+      padding: 100px 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .profile-container {
+      max-width: 1100px;
+      width: 100%;
+      display: flex;
+      gap: 60px;
+      align-items: center;
+    }
+
+    /* プロフィール写真エリア（大きく1枚） */
+    .profile-image-wrap {
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .profile-img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px; /* 角をほんのり丸く */
+      box-shadow: 0 12px 30px rgba(11, 19, 43, 0.2);
+      display: block;
+      object-fit: cover;
+    }
+
+    /* プロフィール本文エリア */
+    .profile-content {
+      flex: 1;
+    }
+
+    .profile-title-en {
+      font-family: 'Caveat', cursive;
+      font-size: 36px;
+      color: var(--navy);
+      letter-spacing: 2px;
+    }
+
+    .profile-title {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 700;
+      font-size: 40px;
+      margin-bottom: 24px;
+      color: var(--navy);
+      position: relative;
+    }
+
+    .profile-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background-color: var(--navy);
+      margin-top: 8px;
+      border-radius: 2px;
+    }
+
+    .profile-text {
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    .profile-details {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 16px;
+    }
+
+    .profile-detail-item {
+      display: flex;
+      border-bottom: 1px solid rgba(11, 19, 43, 0.2);
+      padding-bottom: 8px;
+    }
+
+    .profile-detail-label {
+      font-weight: 700;
+      width: 120px;
     }
 
     /* レスポンシブ対応 */
@@ -272,6 +359,21 @@
       }
       .hero-right {
         min-height: 400px;
+      }
+
+      /* プロフィールのスマホ対応 */
+      .profile-section {
+        padding: 60px 24px;
+      }
+      .profile-container {
+        flex-direction: column;
+        gap: 40px;
+      }
+      .profile-image-wrap {
+        max-width: 100%;
+      }
+      .profile-title {
+        font-size: 32px;
       }
     }
   </style>
@@ -303,26 +405,27 @@
     </div>
   </nav>
 
-  <!-- メイン表示エリア -->
+  <!-- メイン表示エリア (TOP) -->
   <main class="hero" id="hero">
     <div class="hero-left">
+      <!-- 雛形1：スペースありのお名前 -->
       <h1 class="hero-name">高井 蛙太郎</h1>
-      <p class="hero-name-en">Takai　Ataro</p>
+      <p class="hero-name-en">Takai Ataro</p>
       
-      <!-- 白地に黒アイコン（ガイドライン準拠＆30px統一） -->
+      <!-- 雛形1：ボタン64px / アイコン40px -->
       <div class="social-links">
         <!-- X (Twitter) -->
-        <a href="https://x.com/notakanon" target="_blank" aria-label="X (Twitter)">
+        <a href="#" target="_blank" aria-label="X (Twitter)">
           <i class="fa-brands fa-x-twitter"></i>
         </a>
         
         <!-- Instagram -->
-        <a href="https://www.instagram.com/notakanon" target="_blank" aria-label="Instagram">
+        <a href="#" target="_blank" aria-label="Instagram">
           <i class="fa-brands fa-instagram"></i>
         </a>
         
-        <!-- note (指定SVG・30px対応) -->
-        <a href="https://note.com/flaxenfrog" target="_blank" aria-label="note">
+        <!-- note -->
+        <a href="#" target="_blank" aria-label="note">
           <svg viewBox="0 0 500 500" aria-hidden="true">
             <path d="M105.251 215.151C90.5437 214.742 69.9529 215.559 55 215.559V292.039H76.4079V234.189C76.4079 234.189 95.4463 233.535 102.31 234.352C108.765 235.088 111.135 239.092 111.38 247.426C111.543 256.904 111.38 261.889 111.38 292.039H132.788C132.788 292.039 133.033 257.558 132.788 245.547C132.461 224.22 125.025 215.641 105.251 215.151Z" />
             <path d="M204.283 214.906C183.121 214.906 165.88 232.228 165.88 253.554C165.88 274.881 183.121 292.203 204.283 292.203C225.446 292.203 242.687 274.881 242.687 253.554C242.687 232.228 225.446 214.906 204.283 214.906ZM204.283 273.737C193.171 273.737 184.183 264.667 184.183 253.473C184.183 242.278 193.171 233.209 204.283 233.209C215.396 233.209 224.384 242.278 224.384 253.473C224.384 264.749 215.396 273.737 204.283 273.737Z" />
@@ -337,6 +440,67 @@
       <img src="2406156648.jpg" alt="高井蛙太郎" class="hero-img">
     </div>
   </main>
+
+  <!-- プロフィールセクション (背景イエロー / 文字ネイビー) -->
+  <section class="profile-section" id="profile">
+    <div class="profile-container">
+      
+      <!-- 左側：大きなプロフィール写真 -->
+      <div class="profile-image-wrap">
+        <!-- ※お好きな画像ファイル名に変更してちょうだいね -->
+        <img src="2406156648.jpg" alt="高井蛙太郎 プロフィール写真" class="profile-img">
+      </div>
+
+      <!-- 右側：自己紹介文章 & 詳細データ -->
+      <div class="profile-content">
+        <p class="profile-title-en">PROFILE</p>
+        <h2 class="profile-title">プロフィール</h2>
+        
+        <p class="profile-text">
+          ここに自己紹介の文章が入りますわ♪<br>
+          これまでの活動内容や、大切にしていること、普段の雰囲気などが伝わるような素敵なメッセージを書いてみましょうね。
+        </p>
+
+        <!-- 箇条書きの詳細データ例 -->
+        <div class="profile-details">
+          <div class="profile-detail-item">
+            <span class="profile-detail-label">名前</span>
+            <span>高井 蛙太郎（たかい あたろう）</span>
+          </div>
+          <div class="profile-detail-item">
+            <span class="profile-detail-label">生年月日</span>
+            <span>1997年2月4日</span>
+          </div>
+          <div class="profile-detail-item">
+            <span class="profile-detail-label">年齢</span>
+            <span>29歳</span>
+          </div>
+          <div class="profile-detail-item">
+            <span class="profile-detail-label">出身地</span>
+            <span>愛知県</span>
+          </div>
+          <div class="profile-detail-item">
+            <span class="profile-detail-label">身長</span>
+            <span>164cm</span>
+          </div>
+          <div class="profile-detail-item">
+            <span class="profile-detail-label">体重</span>
+            <span>58kg</span>
+          </div>
+          <div class="profile-detail-item">
+            <span class="profile-detail-label">趣味・特技</span>
+            <span>野球 / ゲーム / 詩作 / スナップ写真</span>
+          </div>
+          <div class="profile-detail-item">
+            <span class="profile-detail-label">資格</span>
+            <span>準中型自動車運転免許(MT) / 漢字検定準１級</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
 
   <!-- JavaScript -->
   <script>
@@ -354,10 +518,13 @@
       navMenu.classList.remove('active');
     });
 
-document.querySelectorAll('.nav-links a').forEach(link => {
+    document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         menuBtn.classList.remove('open');
         navMenu.classList.remove('active');
       });
     });
   </script>
+
+</body>
+</html>
