@@ -367,8 +367,8 @@
       }
     }
     
- /* -----------------------------------
-       出演歴セクション (HISTORY)
+/* -----------------------------------
+       出演歴セクション (HISTORY - 案1シンプル版)
     ----------------------------------- */
     .history-section {
       padding: 100px 40px;
@@ -406,7 +406,7 @@
       border-radius: 2px;
     }
 
-    /* 左右2カラム（案1ベース） */
+    /* 左右2カラム構造 */
     .history-container {
       max-width: 1100px;
       margin: 0 auto;
@@ -442,7 +442,7 @@
       margin-bottom: 30px;
       text-align: center;
       padding-bottom: 12px;
-      border-bottom: 2px dashed dashed;
+      border-bottom: 2px solid;
     }
 
     .stage .col-title {
@@ -453,94 +453,74 @@
       border-color: var(--navy);
     }
 
-    /* タイムラインデザイン（案2要素） */
-    .timeline {
-      position: relative;
-      padding-left: 24px;
+    /* 案1：シンプルなリスト形式 */
+    .history-list {
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: 24px;
     }
 
-    /* 縦の直線 */
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 7px;
-      top: 8px;
-      bottom: 8px;
-      width: 2px;
+    .history-item {
+      display: flex;
+      gap: 16px;
+      align-items: baseline;
+      padding-bottom: 16px;
+      border-bottom: 1px dashed;
     }
 
-    .stage .timeline::before {
-      background-color: var(--yellow);
+    .stage .history-item {
+      border-color: rgba(255, 209, 102, 0.3);
     }
 
-    .screen .timeline::before {
-      background-color: var(--navy);
+    .screen .history-item {
+      border-color: rgba(11, 19, 43, 0.2);
     }
 
-    /* タイムラインの各項目 */
-    .timeline-item {
-      position: relative;
+    .history-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
     }
 
-    /* タイムラインの点 */
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -24px;
-      top: 8px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      transform: translateX(-50%);
-    }
-
-    .stage .timeline-item::before {
-      background-color: var(--yellow);
-    }
-
-    .screen .timeline-item::before {
-      background-color: var(--navy);
-    }
-
-    .timeline-date {
+    .history-year {
       font-family: 'Caveat', cursive;
-      font-size: 22px;
+      font-size: 26px;
       font-weight: 700;
+      min-width: 60px;
       line-height: 1;
-      margin-bottom: 4px;
     }
 
-    .timeline-content {
-      font-size: 16px;
-      font-weight: 500;
+    .history-info {
+      flex: 1;
     }
 
-    .timeline-detail {
+    .history-work {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .history-role {
       font-size: 14px;
       opacity: 0.85;
-      margin-top: 2px;
+      margin-top: 4px;
     }
 
-    /* スマホ対応（スマホ時：舞台[ネイビー]が上にくるように順序制御） */
+    /* スマホ対応（ネイビーの舞台を上に配置） */
     @media (max-width: 768px) {
       .history-section {
         padding: 60px 24px;
       }
       .history-container {
-        flex-direction: column; /* 縦並び */
+        flex-direction: column;
         gap: 30px;
       }
       .history-col.stage {
-        order: 1; /* ネイビー（舞台）を先に表示 */
+        order: 1;
       }
       .history-col.screen {
-        order: 2; /* イエロー（映像）を後に表示 */
+        order: 2;
       }
     }
-  
   </style>
 </head>
 <body>
@@ -661,7 +641,7 @@
     </div>
   </section>
 
-  <!-- 出演歴セクション (HISTORY) -->
+<!-- 出演歴セクション (HISTORY - 案1シンプル版) -->
   <section class="history-section" id="history">
     <div class="history-header">
       <p class="history-title-en">HISTORY</p>
@@ -673,24 +653,30 @@
       <!-- 左側：舞台（ネイビー背景 × イエロー文字） -->
       <div class="history-col stage">
         <h3 class="col-title">舞台</h3>
-        <div class="timeline">
+        <div class="history-list">
           
-          <div class="timeline-item">
-            <div class="timeline-date">2026</div>
-            <div class="timeline-content">舞台「作品タイトル」</div>
-            <div class="timeline-detail">役名 / 〇〇劇場</div>
+          <div class="history-item">
+            <span class="history-year">2026</span>
+            <div class="history-info">
+              <p class="history-work">舞台「作品タイトル」</p>
+              <p class="history-role">役名 / 〇〇劇場</p>
+            </div>
           </div>
 
-          <div class="timeline-item">
-            <div class="timeline-date">2025</div>
-            <div class="timeline-content">公演名タイトル</div>
-            <div class="timeline-detail">主演・役名 / 〇〇ホール</div>
+          <div class="history-item">
+            <span class="history-year">2025</span>
+            <div class="history-info">
+              <p class="history-work">公演名タイトル</p>
+              <p class="history-role">主演・役名 / 〇〇ホール</p>
+            </div>
           </div>
 
-          <div class="timeline-item">
-            <div class="timeline-date">2024</div>
-            <div class="timeline-content">旗揚げ公演「作品名」</div>
-            <div class="timeline-detail">演出・出演 / 〇〇スタジオ</div>
+          <div class="history-item">
+            <span class="history-year">2024</span>
+            <div class="history-info">
+              <p class="history-work">旗揚げ公演「作品名」</p>
+              <p class="history-role">演出・出演 / 〇〇スタジオ</p>
+            </div>
           </div>
 
         </div>
@@ -699,24 +685,30 @@
       <!-- 右側：映像（イエロー背景 × ネイビー文字） -->
       <div class="history-col screen">
         <h3 class="col-title">映像</h3>
-        <div class="timeline">
+        <div class="history-list">
           
-          <div class="timeline-item">
-            <div class="timeline-date">2026</div>
-            <div class="timeline-content">映画「作品タイトル」</div>
-            <div class="timeline-detail">監督：〇〇 / 役名</div>
+          <div class="history-item">
+            <span class="history-year">2026</span>
+            <div class="history-info">
+              <p class="history-work">映画「作品タイトル」</p>
+              <p class="history-role">監督：〇〇 / 役名</p>
+            </div>
           </div>
 
-          <div class="timeline-item">
-            <div class="timeline-date">2025</div>
-            <div class="timeline-content">ドラマ「作品名」第〇話</div>
-            <div class="timeline-detail">〇〇テレビ / ゲスト出演</div>
+          <div class="history-item">
+            <span class="history-year">2025</span>
+            <div class="history-info">
+              <p class="history-work">ドラマ「作品名」第〇話</p>
+              <p class="history-role">〇〇テレビ / ゲスト出演</p>
+            </div>
           </div>
 
-          <div class="timeline-item">
-            <div class="timeline-date">2024</div>
-            <div class="timeline-content">短編映画「作品名」</div>
-            <div class="timeline-detail">主演・役名</div>
+          <div class="history-item">
+            <span class="history-year">2024</span>
+            <div class="history-info">
+              <p class="history-work">短編映画「作品名」</p>
+              <p class="history-role">主演・役名</p>
+            </div>
           </div>
 
         </div>
