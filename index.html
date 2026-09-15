@@ -368,21 +368,21 @@
     }
     
 /* -----------------------------------
-       出演歴セクション (HISTORY - 案1シンプル版)
+       出演歴セクション (HISTORY - 案1シンプル版・文字小さめ)
     ----------------------------------- */
     .history-section {
       padding: 100px 40px;
-      background-color: var(--navy); /* 全体の背景はネイビー */
+      background-color: var(--navy);
     }
 
     .history-header {
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 50px;
     }
 
     .history-title-en {
       font-family: 'Caveat', cursive;
-      font-size: 36px;
+      font-size: 32px;
       color: var(--yellow);
       letter-spacing: 2px;
     }
@@ -390,7 +390,7 @@
     .history-title {
       font-family: 'Zen Maru Gothic', sans-serif;
       font-weight: 700;
-      font-size: 40px;
+      font-size: 32px;
       color: var(--yellow);
       position: relative;
       display: inline-block;
@@ -399,8 +399,8 @@
     .history-title::after {
       content: '';
       display: block;
-      width: 60px;
-      height: 4px;
+      width: 50px;
+      height: 3px;
       background-color: var(--yellow);
       margin: 8px auto 0;
       border-radius: 2px;
@@ -408,40 +408,41 @@
 
     /* 左右2カラム構造 */
     .history-container {
-      max-width: 1100px;
+      max-width: 1000px;
       margin: 0 auto;
       display: flex;
-      gap: 40px;
+      gap: 32px;
       align-items: stretch;
     }
 
     .history-col {
       flex: 1;
-      padding: 40px 30px;
+      padding: 32px 24px;
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
 
-    /* 左カラム：舞台（ネイビー背景 × イエロー文字） */
+    /* 左カラム：舞台 */
     .history-col.stage {
       background-color: var(--navy);
       color: var(--yellow);
       border: 2px solid var(--yellow);
     }
 
-    /* 右カラム：映像（イエロー背景 × ネイビー文字） */
+    /* 右カラム：映像 */
     .history-col.screen {
       background-color: var(--yellow);
       color: var(--navy);
     }
 
+    /* 「舞台」「映像」のタイトル（太字） */
     .col-title {
       font-family: 'Zen Maru Gothic', sans-serif;
-      font-weight: 700;
-      font-size: 28px;
-      margin-bottom: 30px;
+      font-weight: 700; /* 太字 */
+      font-size: 24px;
+      margin-bottom: 24px;
       text-align: center;
-      padding-bottom: 12px;
+      padding-bottom: 10px;
       border-bottom: 2px solid;
     }
 
@@ -453,27 +454,26 @@
       border-color: var(--navy);
     }
 
-    /* 案1：シンプルなリスト形式 */
     .history-list {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 18px;
     }
 
     .history-item {
       display: flex;
       gap: 16px;
       align-items: baseline;
-      padding-bottom: 16px;
+      padding-bottom: 14px;
       border-bottom: 1px dashed;
     }
 
     .stage .history-item {
-      border-color: rgba(255, 209, 102, 0.3);
+      border-color: rgba(255, 209, 102, 0.25);
     }
 
     .screen .history-item {
-      border-color: rgba(11, 19, 43, 0.2);
+      border-color: rgba(11, 19, 43, 0.15);
     }
 
     .history-item:last-child {
@@ -481,11 +481,12 @@
       padding-bottom: 0;
     }
 
+    /* 年号（太字） */
     .history-year {
       font-family: 'Caveat', cursive;
-      font-size: 26px;
-      font-weight: 700;
-      min-width: 60px;
+      font-size: 22px;
+      font-weight: 700; /* 太字 */
+      min-width: 50px;
       line-height: 1;
     }
 
@@ -493,26 +494,29 @@
       flex: 1;
     }
 
+    /* 作品名（通常表示） */
     .history-work {
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 1.4;
+      font-size: 13px;
+      font-weight: 400; /* 太字を解除 */
+      line-height: 1.5;
     }
 
+    /* 役名・詳細（通常表示） */
     .history-role {
-      font-size: 14px;
+      font-size: 13px;
+      font-weight: 400; /* 太字を解除 */
       opacity: 0.85;
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
-    /* スマホ対応（ネイビーの舞台を上に配置） */
+    /* スマホ対応 */
     @media (max-width: 768px) {
       .history-section {
-        padding: 60px 24px;
+        padding: 50px 20px;
       }
       .history-container {
         flex-direction: column;
-        gap: 30px;
+        gap: 24px;
       }
       .history-col.stage {
         order: 1;
