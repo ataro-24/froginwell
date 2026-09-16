@@ -18,7 +18,7 @@
       --navy: #0B132B;
       --yellow: #FFD166;
       --white: #FFFFFF;
-      --gray: #F4F5F7;
+      --gray-dark: #DCDFE5; /* 濃いめのグレー */
       --text-dark: #1C2541;
       
       /* SNSアイコン（雛形2共通） */
@@ -72,7 +72,7 @@
     /* タブナビゲーション */
     .tab-nav {
       display: flex;
-      gap: 8px;
+      gap: 6px;
     }
 
     .tab-btn {
@@ -80,9 +80,9 @@
       border: none;
       color: var(--white);
       font-family: 'Zen Maru Gothic', sans-serif;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 500;
-      padding: 8px 14px;
+      padding: 8px 12px;
       cursor: pointer;
       position: relative;
       transition: color 0.3s ease;
@@ -102,8 +102,8 @@
       content: '';
       position: absolute;
       bottom: 2px;
-      left: 14px;
-      right: 14px;
+      left: 12px;
+      right: 12px;
       height: 3px;
       background-color: var(--yellow);
       border-radius: 2px;
@@ -161,55 +161,75 @@
       padding: 30px 20px;
     }
 
+    /* 名前をもう一回り大きく */
     .hero-name {
-      font-size: 52px;
+      font-size: 64px;
       font-weight: 700;
       line-height: 1.1;
       margin-bottom: 4px;
     }
 
+    /* 英字表記も合わせて拡大 */
     .hero-name-en {
       font-family: 'Caveat', cursive;
-      font-size: 36px;
+      font-size: 44px;
       letter-spacing: 2px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
-    /* 年齢・身長・体重（イエローで縦並び） */
+    /* 簡易プロフィール表記 */
     .hero-sub-info {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 700;
       color: var(--yellow);
       margin-bottom: 24px;
     }
 
-    /* SNSリンク (雛形2) */
+    /* SNSアイコン（イエローの四角枠 & 見出し） */
+    .sns-box {
+      border: 2px solid var(--yellow);
+      border-radius: 8px;
+      padding: 12px 20px;
+      position: relative;
+      margin-top: 10px;
+    }
+
+    .sns-title {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--navy);
+      color: var(--yellow);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 0 8px;
+      letter-spacing: 1px;
+    }
+
     .social-links {
       display: flex;
       gap: 16px;
     }
 
     .social-links a {
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background-color: var(--mono-bg);
       color: var(--mono-icon);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 28px;
+      font-size: 26px;
       text-decoration: none;
       transition: all 0.3s ease;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     }
 
     .social-links a svg {
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       fill: var(--mono-icon);
       transition: fill 0.3s ease;
     }
@@ -237,7 +257,7 @@
     }
 
     /* -----------------------------------
-       TOPタブ：出演歴 (雛形2ベース 左右2カラム)
+       TOPタブ：出演歴 (2カラム)
     ----------------------------------- */
     .history-section {
       background-color: var(--navy);
@@ -288,7 +308,7 @@
     .history-sep { opacity: 0.5; }
 
     /* -----------------------------------
-       TOPタブ：お知らせ ＆ YouTube (横並び2カラム)
+       TOPタブ：お知らせ ＆ デモリール (2カラム)
     ----------------------------------- */
     .media-section {
       background-color: var(--navy);
@@ -313,7 +333,7 @@
     }
 
     .news-card {
-      background-color: var(--gray); /* ピンポイントでグレーを使用 */
+      background-color: var(--gray-dark); /* 濃いめのグレー */
       color: var(--text-dark);
       padding: 12px 16px;
       border-radius: 8px;
@@ -345,7 +365,7 @@
     .news-date {
       font-family: 'Caveat', cursive;
       font-size: 16px;
-      color: #666;
+      color: #555;
       flex-shrink: 0;
     }
 
@@ -356,7 +376,20 @@
       line-height: 1.4;
     }
 
-    /* YouTube（右カラム） */
+    .news-more-link {
+      text-align: right;
+      margin-top: 8px;
+    }
+
+    .news-more-link a {
+      color: var(--yellow);
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* デモリール（右カラム） */
     .youtube-container {
       width: 100%;
       aspect-ratio: 16 / 9;
@@ -364,6 +397,7 @@
       border-radius: 8px;
       overflow: hidden;
       border: 1px solid rgba(255, 209, 102, 0.3);
+      margin-bottom: 10px;
     }
 
     .youtube-container iframe {
@@ -372,8 +406,15 @@
       border: none;
     }
 
+    .demo-credits {
+      font-size: 13px;
+      color: var(--yellow);
+      text-align: center;
+      line-height: 1.6;
+    }
+
     /* -----------------------------------
-       TOPタブ：お問い合わせフォーム
+       TOPタブ：ご依頼・メッセージ フォーム
     ----------------------------------- */
     .contact-section {
       background-color: var(--navy);
@@ -406,7 +447,7 @@
       padding: 10px 14px;
       border-radius: 6px;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      background-color: var(--gray); /* ピンポイントでグレーを使用 */
+      background-color: var(--gray-dark); /* 濃いめのグレー */
       color: var(--text-dark);
       font-family: inherit;
       font-size: 14px;
@@ -475,7 +516,7 @@
     .profile-detail-value { font-weight: 700; flex: 1; }
 
     /* -----------------------------------
-       別タブ：ポートフォリオ / ブログ (ダミー表示)
+       別タブ：お知らせ・ポートフォリオ・ブログ
     ----------------------------------- */
     .grid-container {
       max-width: 900px;
@@ -486,7 +527,7 @@
     }
 
     .dummy-card {
-      background-color: var(--gray); /* ピンポイントでグレーを使用 */
+      background-color: var(--gray-dark); /* 濃いめのグレー */
       color: var(--text-dark);
       border-radius: 8px;
       overflow: hidden;
@@ -495,11 +536,11 @@
     .dummy-card-img {
       width: 100%;
       height: 180px;
-      background-color: #ccc;
+      background-color: #b0b5c0;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #666;
+      color: #444;
     }
 
     .dummy-card-body {
@@ -517,11 +558,12 @@
     @media (max-width: 768px) {
       header { padding: 0 16px; }
       .site-logo { font-size: 22px; }
-      .tab-btn { font-size: 13px; padding: 6px 8px; }
+      .tab-btn { font-size: 12px; padding: 6px 6px; }
 
       .hero { flex-direction: column-reverse; min-height: auto; }
       .hero-right { min-height: 300px; }
-      .hero-name { font-size: 40px; }
+      .hero-name { font-size: 48px; }
+      .hero-name-en { font-size: 36px; }
 
       .history-container { flex-direction: column; }
       .media-container { flex-direction: column; }
@@ -536,10 +578,11 @@
   <header>
     <div class="site-logo">Ataro website</div>
     <nav class="tab-nav">
-      <button class="tab-btn active" onclick="switchTab('top')">TOP</button>
-      <button class="tab-btn" onclick="switchTab('profile')">詳細プロフィール</button>
-      <button class="tab-btn" onclick="switchTab('portfolio')">ポートフォリオ</button>
-      <button class="tab-btn" onclick="switchTab('blog')">ブログ</button>
+      <button class="tab-btn active" data-tab="top" onclick="switchTab('top')">TOP</button>
+      <button class="tab-btn" data-tab="profile" onclick="switchTab('profile')">詳細プロフィール</button>
+      <button class="tab-btn" data-tab="news" onclick="switchTab('news')">お知らせ</button>
+      <button class="tab-btn" data-tab="portfolio" onclick="switchTab('portfolio')">ポートフォリオ</button>
+      <button class="tab-btn" data-tab="blog" onclick="switchTab('blog')">ブログ</button>
     </nav>
   </header>
 
@@ -554,29 +597,30 @@
         <h1 class="hero-name">高井 蛙太郎</h1>
         <p class="hero-name-en">Takai Ataro</p>
         
-        <!-- 年齢・身長・体重（イエローで縦並び） -->
+        <!-- 簡易プロフィール -->
         <div class="hero-sub-info">
-          <span>29歳</span>
-          <span>164cm</span>
-          <span>58kg</span>
+          29歳／164㎝／58㎏
         </div>
 
-        <!-- SNSリンク (雛形2モノクロ仕様) -->
-        <div class="social-links">
-          <a href="https://x.com/notakanon" target="_blank" rel="noopener noreferrer" aria-label="X">
-            <i class="fa-brands fa-x-twitter"></i>
-          </a>
-          <a href="https://www.instagram.com/notakanon" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-          <a href="https://note.com/flaxenfrog" target="_blank" rel="noopener noreferrer" aria-label="note">
-            <svg viewBox="0 0 500 500" aria-hidden="true">
-              <path d="M105.251 215.151C90.5437 214.742 69.9529 215.559 55 215.559V292.039H76.4079V234.189C76.4079 234.189 95.4463 233.535 102.31 234.352C108.765 235.088 111.135 239.092 111.38 247.426C111.543 256.904 111.38 261.889 111.38 292.039H132.788C132.788 292.039 133.033 257.558 132.788 245.547C132.461 224.22 125.025 215.641 105.251 215.151Z" />
-              <path d="M204.283 214.906C183.121 214.906 165.88 232.228 165.88 253.554C165.88 274.881 183.121 292.203 204.283 292.203C225.446 292.203 242.687 274.881 242.687 253.554C242.687 232.228 225.446 214.906 204.283 214.906ZM204.283 273.737C193.171 273.737 184.183 264.667 184.183 253.473C184.183 242.278 193.171 233.209 204.283 233.209C215.396 233.209 224.384 242.278 224.384 253.473C224.384 264.749 215.396 273.737 204.283 273.737Z" />
-              <path d="M445 253.554C445 232.228 427.759 214.906 406.596 214.906C385.434 214.906 368.193 232.228 368.193 253.554C368.193 266.056 373.913 276.76 382.819 283.869C389.029 288.771 397.69 292.203 409.293 292.203C414.931 292.203 429.557 290.651 440.097 278.966L431.436 267.363C427.759 270.632 418.526 275.207 411.172 275.207C401.857 275.207 396.219 273.41 392.134 269.569C389.601 267.282 387.803 263.768 386.986 259.438H444.428C444.755 257.476 445 255.597 445 253.554ZM387.15 246.527C389.274 237.458 395.647 230.757 406.515 230.757C417.872 230.757 423.837 237.948 425.798 246.527H387.15Z" />
-              <path d="M315.408 207.797H295.39V229.287H274.799V248.08H295.39V270.387H315.408V248.08H335.999V229.287H315.408V207.797Z" />
-            </svg>
-          </a>
+        <!-- SNSリンク (イエローの四角枠 & 見出し) -->
+        <div class="sns-box">
+          <span class="sns-title">SNS</span>
+          <div class="social-links">
+            <a href="https://x.com/notakanon" target="_blank" rel="noopener noreferrer" aria-label="X">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://www.instagram.com/notakanon" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://note.com/flaxenfrog" target="_blank" rel="noopener noreferrer" aria-label="note">
+              <svg viewBox="0 0 500 500" aria-hidden="true">
+                <path d="M105.251 215.151C90.5437 214.742 69.9529 215.559 55 215.559V292.039H76.4079V234.189C76.4079 234.189 95.4463 233.535 102.31 234.352C108.765 235.088 111.135 239.092 111.38 247.426C111.543 256.904 111.38 261.889 111.38 292.039H132.788C132.788 292.039 133.033 257.558 132.788 245.547C132.461 224.22 125.025 215.641 105.251 215.151Z" />
+                <path d="M204.283 214.906C183.121 214.906 165.88 232.228 165.88 253.554C165.88 274.881 183.121 292.203 204.283 292.203C225.446 292.203 242.687 274.881 242.687 253.554C242.687 232.228 225.446 214.906 204.283 214.906ZM204.283 273.737C193.171 273.737 184.183 264.667 184.183 253.473C184.183 242.278 193.171 233.209 204.283 233.209C215.396 233.209 224.384 242.278 224.384 253.473C224.384 264.749 215.396 273.737 204.283 273.737Z" />
+                <path d="M445 253.554C445 232.228 427.759 214.906 406.596 214.906C385.434 214.906 368.193 232.228 368.193 253.554C368.193 266.056 373.913 276.76 382.819 283.869C389.029 288.771 397.69 292.203 409.293 292.203C414.931 292.203 429.557 290.651 440.097 278.966L431.436 267.363C427.759 270.632 418.526 275.207 411.172 275.207C401.857 275.207 396.219 273.41 392.134 269.569C389.601 267.282 387.803 263.768 386.986 259.438H444.428C444.755 257.476 445 255.597 445 253.554ZM387.15 246.527C389.274 237.458 395.647 230.757 406.515 230.757C417.872 230.757 423.837 237.948 425.798 246.527H387.15Z" />
+                <path d="M315.408 207.797H295.39V229.287H274.799V248.08H295.39V270.387H315.408V248.08H335.999V229.287H315.408V207.797Z" />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
       <div class="hero-right">
@@ -584,10 +628,10 @@
       </div>
     </section>
 
-    <!-- 出演歴 (雛形2ベース 2カラム) -->
+    <!-- 出演歴 (2カラム) -->
     <section class="history-section section-padding">
       <div class="container">
-        <h2 class="section-title">最新の出演歴</h2>
+        <h2 class="section-title">出演歴</h2>
         <div class="history-container">
           <!-- 舞台 -->
           <div class="history-col stage">
@@ -626,11 +670,11 @@
       </div>
     </section>
 
-    <!-- お知らせ ＆ YouTube (2カラム並び) -->
+    <!-- お知らせ ＆ デモリール (2カラム並び) -->
     <section class="media-section section-padding">
       <div class="container">
         <div class="media-container">
-          <!-- 左：お知らせ（舞台の下） -->
+          <!-- 左：お知らせ -->
           <div class="media-col">
             <h2 class="section-title">お知らせ</h2>
             <div class="news-list">
@@ -650,23 +694,31 @@
                 <p class="news-text">オフィシャルサイトをリニューアルオープンしました。</p>
               </div>
             </div>
+            <!-- お知らせタブへ飛ばすmoreリンク -->
+            <div class="news-more-link">
+              <a onclick="switchTab('news')">more &raquo;</a>
+            </div>
           </div>
 
-          <!-- 右：YouTube（映像の下） -->
+          <!-- 右：デモリール『微塵も』 -->
           <div class="media-col">
-            <h2 class="section-title">Featured Video</h2>
+            <h2 class="section-title">デモリール『微塵も』</h2>
             <div class="youtube-container">
-              <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" allowfullscreen></iframe>
+              <iframe src="https://www.youtube.com/embed/bARXUG0cnck" title="デモリール『微塵も』" allowfullscreen></iframe>
+            </div>
+            <div class="demo-credits">
+              監督 植松蒼介<br>
+              脚本 高矢航志
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- お問い合わせフォーム -->
+    <!-- ご依頼・メッセージ フォーム -->
     <section class="contact-section section-padding">
       <div class="container">
-        <h2 class="section-title">お問い合わせ</h2>
+        <h2 class="section-title">ご依頼・メッセージ</h2>
         <form class="contact-form" onsubmit="event.preventDefault(); alert('送信機能は準備中です');">
           <div class="form-group">
             <label for="name">お名前</label>
@@ -678,7 +730,7 @@
           </div>
           <div class="form-group">
             <label for="message">メッセージ</label>
-            <textarea id="message" rows="4" placeholder="お問い合わせ内容をご記入ください" required></textarea>
+            <textarea id="message" rows="4" placeholder="ご依頼やメッセージ内容をご記入ください" required></textarea>
           </div>
           <button type="submit" class="submit-btn">送信する</button>
         </form>
@@ -688,7 +740,7 @@
   </div>
 
   <!-- ===============================================
-       2. 詳細プロフィール タブ (雛形2)
+       2. 詳細プロフィール タブ
   ================================================ -->
   <div id="tab-profile" class="tab-content">
     <section class="section-padding">
@@ -738,7 +790,40 @@
   </div>
 
   <!-- ===============================================
-       3. ポートフォリオ タブ
+       3. お知らせ タブ (新規追加)
+  ================================================ -->
+  <div id="tab-news" class="tab-content">
+    <section class="section-padding">
+      <div class="container">
+        <h2 class="section-title">お知らせ一覧</h2>
+        <div class="news-list" style="max-width: 800px; margin: 0 auto;">
+          <div class="news-card featured">
+            <span class="news-badge">NEW</span>
+            <span class="news-date">2026.09.15</span>
+            <p class="news-text">最新の出演舞台「作品タイトル」のチケット予約開始！</p>
+          </div>
+          <div class="news-card">
+            <span class="news-badge">INFO</span>
+            <span class="news-date">2026.08.01</span>
+            <p class="news-text">短編映画「作品名」の公開が決定いたしました。</p>
+          </div>
+          <div class="news-card">
+            <span class="news-badge">INFO</span>
+            <span class="news-date">2026.05.20</span>
+            <p class="news-text">オフィシャルサイトをリニューアルオープンしました。</p>
+          </div>
+          <div class="news-card">
+            <span class="news-badge">INFO</span>
+            <span class="news-date">2026.03.10</span>
+            <p class="news-text">過去の出演情報をアーカイブに追加いたしました。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===============================================
+       4. ポートフォリオ タブ
   ================================================ -->
   <div id="tab-portfolio" class="tab-content">
     <section class="section-padding">
@@ -749,21 +834,21 @@
             <div class="dummy-card-img">Photo 1</div>
             <div class="dummy-card-body">
               <div class="dummy-card-title">スナップ写真作品 #1</div>
-              <p style="font-size: 13px; color: #666;">作品の説明テキストが入ります。</p>
+              <p style="font-size: 13px; color: #444;">作品の説明テキストが入ります。</p>
             </div>
           </div>
           <div class="dummy-card">
             <div class="dummy-card-img">Photo 2</div>
             <div class="dummy-card-body">
               <div class="dummy-card-title">舞台スチール</div>
-              <p style="font-size: 13px; color: #666;">作品の説明テキストが入ります。</p>
+              <p style="font-size: 13px; color: #444;">作品の説明テキストが入ります。</p>
             </div>
           </div>
           <div class="dummy-card">
             <div class="dummy-card-img">Photo 3</div>
             <div class="dummy-card-body">
               <div class="dummy-card-title">ポートレート集</div>
-              <p style="font-size: 13px; color: #666;">作品の説明テキストが入ります。</p>
+              <p style="font-size: 13px; color: #444;">作品の説明テキストが入ります。</p>
             </div>
           </div>
         </div>
@@ -772,7 +857,7 @@
   </div>
 
   <!-- ===============================================
-       4. ブログ タブ
+       5. ブログ タブ
   ================================================ -->
   <div id="tab-blog" class="tab-content">
     <section class="section-padding">
@@ -783,7 +868,7 @@
             <div class="dummy-card-img">Blog Image</div>
             <div class="dummy-card-body">
               <div class="dummy-card-title">【日常】最近撮影したスナップ写真たち</div>
-              <p style="font-size: 12px; color: #666; margin-bottom: 6px;">2026.09.10</p>
+              <p style="font-size: 12px; color: #555; margin-bottom: 6px;">2026.09.10</p>
               <p style="font-size: 13px;">ブログの本文プレビューがここに入ります...</p>
             </div>
           </div>
@@ -791,7 +876,7 @@
             <div class="dummy-card-img">Blog Image</div>
             <div class="dummy-card-body">
               <div class="dummy-card-title">次回公演に向けての稽古が始まりました</div>
-              <p style="font-size: 12px; color: #666; margin-bottom: 6px;">2026.08.25</p>
+              <p style="font-size: 12px; color: #555; margin-bottom: 6px;">2026.08.25</p>
               <p style="font-size: 13px;">ブログの本文プレビューがここに入ります...</p>
             </div>
           </div>
@@ -803,15 +888,27 @@
   <!-- JavaScript (タブ切り替え処理) -->
   <script>
     function switchTab(tabName) {
+      // すべてのタブコンテンツを非表示にする
       const contents = document.querySelectorAll('.tab-content');
       contents.forEach(content => content.classList.remove('active'));
 
+      // すべてのタブボタンのアクティブ状態を解除する
       const buttons = document.querySelectorAll('.tab-btn');
       buttons.forEach(btn => btn.classList.remove('active'));
 
-      document.getElementById('tab-' + tabName).classList.add('active');
-      event.currentTarget.classList.add('active');
+      // 該当のタブコンテンツを表示する
+      const targetContent = document.getElementById('tab-' + tabName);
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
 
+      // 該当のタブボタンをアクティブにする
+      const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+      if (targetBtn) {
+        targetBtn.classList.add('active');
+      }
+
+      // ページ最上部へスクロール
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
