@@ -208,7 +208,7 @@
       letter-spacing: 1px;
       line-height: 1;
       margin-bottom: 2px;
-      color: var(--gray-text); /* グレーの文字色 */
+      color: var(--gray-text);
     }
 
     .hero-name {
@@ -222,23 +222,23 @@
       font-family: 'Caveat', cursive;
       font-size: 44px;
       letter-spacing: 2px;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       color: var(--yellow);
     }
 
-    /* 簡易プロフィールカード（背景イエロー・文字ネイビー） */
+    /* 簡易プロフィールカード（サイズ拡大） */
     .hero-profile-card {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
       background-color: var(--yellow);
       color: var(--navy);
-      border-radius: 50px;
-      padding: 8px 20px 8px 8px;
-      margin-bottom: 24px;
+      border-radius: 60px;
+      padding: 10px 28px 10px 10px; /* パディングを拡大 */
+      margin-bottom: 28px;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
     }
 
     .hero-profile-card:hover {
@@ -247,23 +247,24 @@
     }
 
     .hero-profile-thumb {
-      width: 44px;
-      height: 44px;
+      width: 56px; /* 44px -> 56px に拡大 */
+      height: 56px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid var(--navy);
     }
 
     .hero-profile-info {
-      font-size: 15px;
+      font-size: 18px; /* 15px -> 18px に拡大 */
       font-weight: 700;
       color: var(--navy);
+      letter-spacing: 0.5px;
     }
 
-    /* SNSボックス（全体を四角いグレー枠で囲むデザイン） */
+    /* SNSボックス（白丸背景＋黒ロゴ） */
     .sns-box {
       background-color: transparent;
-      border: 1px solid var(--gray-text); /* 四角いグレー枠 */
+      border: 1px solid var(--gray-text);
       border-radius: 8px;
       padding: 16px 24px;
       position: relative;
@@ -285,36 +286,38 @@
 
     .social-links {
       display: flex;
-      gap: 24px;
+      gap: 20px;
       align-items: center;
     }
 
+    /* 白で塗りつぶした丸ボタン */
     .social-links a {
-      color: var(--white);
+      width: 44px;
+      height: 44px;
+      background-color: var(--white); /* 背景を白で塗りつぶし */
+      border-radius: 50%;
+      color: var(--navy); /* アイコンロゴを黒/ネイビーに */
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 26px;
+      font-size: 22px;
       text-decoration: none;
       transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
 
-    /* noteアイコンサイズ調整 (15%拡大) */
+    /* noteアイコンサイズ調整 (白丸内で大きめ表示) */
     .social-links a svg {
-      width: 28px;
-      height: 28px;
-      fill: var(--white);
+      width: 26px;
+      height: 26px;
+      fill: var(--navy);
       transform: scale(1.15); 
       transition: fill 0.3s ease;
     }
 
     .social-links a:hover {
-      color: var(--yellow);
+      background-color: var(--yellow); /* ホバー時にイエローへ */
       transform: translateY(-2px);
-    }
-
-    .social-links a:hover svg {
-      fill: var(--yellow);
     }
 
     .hero-right {
@@ -435,7 +438,7 @@
     .demo-credits {
       font-size: 13px;
       color: var(--yellow);
-      text-align: right; /* 右端に配置 */
+      text-align: right;
       line-height: 1.6;
     }
 
@@ -443,7 +446,7 @@
     .news-box-wrap {
       display: flex;
       flex-direction: column;
-      border: 1px solid var(--gray-text); /* カラム全体のグレー枠線 */
+      border: 1px solid var(--gray-text);
       border-radius: 12px;
       padding: 20px;
     }
@@ -488,7 +491,6 @@
       line-height: 1.4;
     }
 
-    /* お知らせのmoreリンク（右下に配置） */
     .news-more-link {
       text-align: right;
       margin-top: 12px;
@@ -698,7 +700,7 @@
         </div>
         <p class="hero-name-en">Takai Ataro</p>
         
-        <!-- 簡易プロフィールカード -->
+        <!-- 簡易プロフィールカード（大きめサイズ） -->
         <div class="hero-profile-card" onclick="switchTab('profile')">
           <img src="2406155326.jpg" alt="高井蛙太郎" class="hero-profile-thumb">
           <div class="hero-profile-info">
@@ -706,6 +708,7 @@
           </div>
         </div>
 
+        <!-- SNSボックス（白丸背景＋黒ロゴ） -->
         <div class="sns-box">
           <span class="sns-title">SNS</span>
           <div class="social-links">
@@ -825,7 +828,7 @@
               </div>
             </div>
 
-            <!-- 3. お知らせ（全体をグレーの枠線で囲む） -->
+            <!-- 3. お知らせ（グレーの枠線付き） -->
             <div class="news-box-wrap">
               <h2 class="section-title">お知らせ</h2>
               <div class="news-list">
@@ -843,7 +846,6 @@
                   <p class="news-text">オフィシャルサイトをリニューアルオープンしました。</p>
                 </div>
               </div>
-              <!-- お知らせのmoreリンク -->
               <div class="news-more-link">
                 <a onclick="switchTab('news')">more &raquo;</a>
               </div>
