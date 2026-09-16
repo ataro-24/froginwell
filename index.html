@@ -176,6 +176,7 @@
       color: var(--navy);
       text-decoration: underline;
       font-weight: 700;
+      cursor: pointer;
     }
 
     /* -----------------------------------
@@ -211,7 +212,7 @@
       letter-spacing: 1px;
       line-height: 1;
       margin-bottom: 2px;
-      color: var(--gray-text);
+      color: var(--gray-text); /* グレーの文字色を維持 */
     }
 
     .hero-name {
@@ -229,15 +230,43 @@
       color: var(--yellow);
     }
 
-    .hero-sub-info {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--gray-text);
+    /* 簡易プロフィールカード */
+    .hero-profile-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 209, 102, 0.3);
+      border-radius: 50px;
+      padding: 8px 20px 8px 8px;
       margin-bottom: 24px;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
+    .hero-profile-card:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-color: var(--yellow);
+      transform: translateY(-2px);
+    }
+
+    .hero-profile-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--yellow);
+    }
+
+    .hero-profile-info {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    /* SNSボックス */
     .sns-box {
-      background-color: var(--gray-dark);
+      background-color: transparent;
       border-radius: 8px;
       padding: 16px 24px;
       position: relative;
@@ -268,27 +297,32 @@
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background-color: var(--mono-bg);
-      color: var(--mono-icon);
+      background-color: transparent;
+      border: 2px solid var(--gray-text); /* グレーの線で囲む */
+      color: var(--white);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 28px;
+      font-size: 24px;
       text-decoration: none;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
     .social-links a svg {
-      width: 28px;
-      height: 28px;
-      fill: var(--mono-icon);
+      width: 24px;
+      height: 24px;
+      fill: var(--white);
       transition: fill 0.3s ease;
     }
 
     .social-links a:hover {
-      opacity: 0.8;
+      border-color: var(--yellow);
+      color: var(--yellow);
       transform: translateY(-3px);
+    }
+
+    .social-links a:hover svg {
+      fill: var(--yellow);
     }
 
     .hero-right {
@@ -305,8 +339,6 @@
 
     /* -----------------------------------
        TOPタブ：メインコンテンツエリア（2カラム構成）
-       左：舞台出演歴（縦長）
-       右：映像出演歴 ＋ デモリール ＋ お知らせ
     ----------------------------------- */
     .main-grid-section {
       background-color: var(--navy);
@@ -325,6 +357,12 @@
       display: flex;
       flex-direction: column;
       gap: 32px;
+    }
+
+    /* 出演歴エリアの共通大見出し */
+    .history-section-title {
+      grid-column: 1 / -1;
+      margin-bottom: 24px;
     }
 
     /* --- 舞台（左カラム・縦長） --- */
@@ -430,24 +468,14 @@
       gap: 12px;
     }
 
-    .news-card.featured {
-      border: 2px solid var(--yellow);
-      background-color: var(--white);
-    }
-
     .news-badge {
-      background-color: var(--navy);
-      color: var(--yellow);
+      background-color: var(--yellow);
+      color: var(--navy);
       font-size: 11px;
       font-weight: 700;
       padding: 2px 8px;
       border-radius: 12px;
       flex-shrink: 0;
-    }
-
-    .news-card.featured .news-badge {
-      background-color: var(--yellow);
-      color: var(--navy);
     }
 
     .news-date {
@@ -653,7 +681,7 @@
   </header>
 
   <!-- ===============================================
-       1. TOP タブ
+        1. TOP タブ
   ================================================ -->
   <div id="tab-top" class="tab-content active">
     
@@ -674,8 +702,12 @@
         </div>
         <p class="hero-name-en">Takai Ataro</p>
         
-        <div class="hero-sub-info">
-          29歳／164㎝／58㎏
+        <!-- 簡易プロフィールカード（名前の下・クリックで「プロフィール」タブへ遷移） -->
+        <div class="hero-profile-card" onclick="switchTab('profile')">
+          <img src="2406155326.jpg" alt="高井蛙太郎" class="hero-profile-thumb">
+          <div class="hero-profile-info">
+            29歳 ／ 164㎝ ／ 58㎏
+          </div>
         </div>
 
         <div class="sns-box">
@@ -706,12 +738,16 @@
     <!-- メインコンテンツ 2カラムエリア -->
     <section class="main-grid-section section-padding">
       <div class="container">
+        
+        <!-- 「出演歴」大見出し -->
+        <h2 class="section-title history-section-title">出演歴</h2>
+
         <div class="main-grid">
           
-          <!-- 左カラム：舞台 出演歴（縦長にたくさん入るスペース） -->
+          <!-- 左カラム：舞台 出演歴 -->
           <div class="grid-col-left">
             <div class="history-col stage">
-              <h2 class="section-title col-title">舞台</h2>
+              <h3 class="section-title col-title">舞台</h3>
               <div class="history-list">
                 <div class="history-item">
                   <span class="history-month">2026.04</span>
@@ -764,7 +800,7 @@
             
             <!-- 1. 映像 出演歴 -->
             <div class="history-col screen">
-              <h2 class="section-title col-title">映像</h2>
+              <h3 class="section-title col-title">映像</h3>
               <div class="history-list">
                 <div class="history-item">
                   <span class="history-month">2026.05</span>
@@ -797,23 +833,21 @@
             <div class="news-box-wrap">
               <h2 class="section-title">お知らせ</h2>
               <div class="news-list">
-                <div class="news-card featured">
+                <div class="news-card">
                   <span class="news-badge">NEW</span>
                   <span class="news-date">2026.09.15</span>
                   <p class="news-text">最新の出演舞台「作品タイトル」のチケット予約開始！</p>
                 </div>
                 <div class="news-card">
-                  <span class="news-badge">INFO</span>
                   <span class="news-date">2026.08.01</span>
                   <p class="news-text">短編映画「作品名」の公開が決定いたしました。</p>
                 </div>
                 <div class="news-card">
-                  <span class="news-badge">INFO</span>
                   <span class="news-date">2026.05.20</span>
                   <p class="news-text">オフィシャルサイトをリニューアルオープンしました。</p>
                 </div>
               </div>
-              <!-- お知らせのmoreリンク（右下に配置） -->
+              <!-- お知らせのmoreリンク -->
               <div class="news-more-link">
                 <a onclick="switchTab('news')">more &raquo;</a>
               </div>
@@ -850,7 +884,7 @@
   </div>
 
   <!-- ===============================================
-       2. プロフィール タブ
+        2. プロフィール タブ
   ================================================ -->
   <div id="tab-profile" class="tab-content">
     <section class="section-padding">
@@ -900,7 +934,7 @@
   </div>
 
   <!-- ===============================================
-       3. ポートフォリオ タブ
+        3. ポートフォリオ タブ
   ================================================ -->
   <div id="tab-portfolio" class="tab-content">
     <section class="section-padding">
@@ -934,7 +968,7 @@
   </div>
 
   <!-- ===============================================
-       4. ブログ タブ
+        4. ブログ タブ
   ================================================ -->
   <div id="tab-blog" class="tab-content">
     <section class="section-padding">
@@ -963,30 +997,27 @@
   </div>
 
   <!-- ===============================================
-       5. お知らせ タブ
+        5. お知らせ タブ
   ================================================ -->
   <div id="tab-news" class="tab-content">
     <section class="section-padding">
       <div class="container">
         <h2 class="section-title">お知らせ一覧</h2>
         <div class="news-list" style="max-width: 800px; margin: 0 auto;">
-          <div class="news-card featured">
+          <div class="news-card">
             <span class="news-badge">NEW</span>
             <span class="news-date">2026.09.15</span>
             <p class="news-text">最新の出演舞台「作品タイトル」のチケット予約開始！</p>
           </div>
           <div class="news-card">
-            <span class="news-badge">INFO</span>
             <span class="news-date">2026.08.01</span>
             <p class="news-text">短編映画「作品名」の公開が決定いたしました。</p>
           </div>
           <div class="news-card">
-            <span class="news-badge">INFO</span>
             <span class="news-date">2026.05.20</span>
             <p class="news-text">オフィシャルサイトをリニューアルオープンしました。</p>
           </div>
           <div class="news-card">
-            <span class="news-badge">INFO</span>
             <span class="news-date">2026.03.10</span>
             <p class="news-text">過去の出演情報をアーカイブに追加いたしました。</p>
           </div>
