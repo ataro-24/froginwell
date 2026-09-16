@@ -35,10 +35,10 @@
     body {
       font-family: 'Zen Maru Gothic', sans-serif;
       font-weight: 400;
-      color: var(--text-dark);
-      background-color: var(--gray);
-      line-height: 1.6;
-      padding-top: 70px; /* 固定ヘッダー分の余白 */
+      color: var(--white);
+      background-color: var(--navy);
+      line-height: 1.5;
+      padding-top: 60px; /* 固定ヘッダー分の余白 */
     }
 
     /* -----------------------------------
@@ -49,7 +49,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 70px;
+      height: 60px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -58,13 +58,14 @@
       background-color: rgba(11, 19, 43, 0.95);
       backdrop-filter: blur(8px);
       box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      border-bottom: 1px solid rgba(255, 209, 102, 0.2);
     }
 
     .site-logo {
       color: var(--yellow);
       font-family: 'Caveat', cursive;
       font-weight: 700;
-      font-size: 30px;
+      font-size: 28px;
       letter-spacing: 1px;
     }
 
@@ -79,9 +80,9 @@
       border: none;
       color: var(--white);
       font-family: 'Zen Maru Gothic', sans-serif;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 500;
-      padding: 10px 16px;
+      padding: 8px 14px;
       cursor: pointer;
       position: relative;
       transition: color 0.3s ease;
@@ -101,8 +102,8 @@
       content: '';
       position: absolute;
       bottom: 2px;
-      left: 16px;
-      right: 16px;
+      left: 14px;
+      right: 14px;
       height: 3px;
       background-color: var(--yellow);
       border-radius: 2px;
@@ -125,15 +126,19 @@
     .section-title {
       font-family: 'Zen Maru Gothic', sans-serif;
       font-weight: 700;
-      font-size: 32px;
+      font-size: 26px;
       text-align: center;
-      margin-bottom: 40px;
-      color: var(--navy);
-      position: relative;
+      margin-bottom: 24px;
+      color: var(--yellow);
     }
 
     .section-padding {
-      padding: 80px 40px;
+      padding: 40px 24px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     /* -----------------------------------
@@ -141,7 +146,7 @@
     ----------------------------------- */
     .hero {
       display: flex;
-      min-height: calc(100vh - 70px);
+      min-height: calc(85vh - 60px);
       background-color: var(--navy);
     }
 
@@ -153,47 +158,58 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 60px 40px;
+      padding: 30px 20px;
     }
 
     .hero-name {
-      font-size: 64px;
+      font-size: 52px;
       font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 8px;
+      line-height: 1.1;
+      margin-bottom: 4px;
     }
 
     .hero-name-en {
       font-family: 'Caveat', cursive;
-      font-size: 42px;
+      font-size: 36px;
       letter-spacing: 2px;
-      margin-bottom: 36px;
+      margin-bottom: 20px;
+    }
+
+    /* 年齢・身長・体重（イエローで縦並び） */
+    .hero-sub-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--yellow);
+      margin-bottom: 24px;
     }
 
     /* SNSリンク (雛形2) */
     .social-links {
       display: flex;
-      gap: 20px;
+      gap: 16px;
     }
 
     .social-links a {
-      width: 64px;
-      height: 64px;
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
       background-color: var(--mono-bg);
       color: var(--mono-icon);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 36px;
+      font-size: 28px;
       text-decoration: none;
       transition: all 0.3s ease;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     }
 
     .social-links a svg {
-      width: 36px;
-      height: 36px;
+      width: 28px;
+      height: 28px;
       fill: var(--mono-icon);
       transition: fill 0.3s ease;
     }
@@ -221,66 +237,22 @@
     }
 
     /* -----------------------------------
-       TOPタブ：簡易プロフィール
-    ----------------------------------- */
-    .simple-profile {
-      background-color: var(--yellow);
-      color: var(--navy);
-      padding: 60px 40px;
-      text-align: center;
-    }
-
-    .simple-profile-box {
-      max-width: 800px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 30px;
-      text-align: left;
-    }
-
-    .simple-profile-img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 4px 15px rgba(11, 19, 43, 0.2);
-      flex-shrink: 0;
-    }
-
-    .simple-profile-text h3 {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-
-    .simple-profile-text p {
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    /* -----------------------------------
        TOPタブ：出演歴 (雛形2ベース 左右2カラム)
     ----------------------------------- */
     .history-section {
       background-color: var(--navy);
-      color: var(--white);
-    }
-
-    .history-section .section-title {
-      color: var(--yellow);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .history-container {
-      max-width: 1100px;
-      margin: 0 auto;
       display: flex;
-      gap: 30px;
+      gap: 20px;
     }
 
     .history-col {
       flex: 1;
-      padding: 32px 24px;
-      border-radius: 16px;
+      padding: 24px 20px;
+      border-radius: 12px;
     }
 
     .history-col.stage {
@@ -295,10 +267,10 @@
     }
 
     .col-title {
-      font-size: 22px;
-      margin-bottom: 20px;
+      font-size: 20px;
+      margin-bottom: 16px;
       text-align: center;
-      padding-bottom: 8px;
+      padding-bottom: 6px;
       border-bottom: 2px solid;
     }
 
@@ -307,53 +279,61 @@
 
     .history-item {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       font-size: 14px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .history-month { font-weight: 700; min-width: 32px; }
     .history-sep { opacity: 0.5; }
 
     /* -----------------------------------
-       TOPタブ：お知らせ（最新を目立たせる）
+       TOPタブ：お知らせ ＆ YouTube (横並び2カラム)
     ----------------------------------- */
-    .news-section {
-      background-color: var(--gray);
+    .media-section {
+      background-color: var(--navy);
     }
 
+    .media-container {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .media-col {
+      flex: 1;
+      width: 50%;
+    }
+
+    /* お知らせ（左カラム） */
     .news-list {
-      max-width: 800px;
-      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
     }
 
     .news-card {
-      background-color: var(--white);
-      padding: 20px 24px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      background-color: var(--gray); /* ピンポイントでグレーを使用 */
+      color: var(--text-dark);
+      padding: 12px 16px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 12px;
     }
 
-    /* 最新記事を目立たせるスタイル */
     .news-card.featured {
       border: 2px solid var(--yellow);
-      background-color: #FFFDF5;
-      position: relative;
+      background-color: var(--white);
     }
 
     .news-badge {
       background-color: var(--navy);
       color: var(--yellow);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 20px;
+      padding: 2px 8px;
+      border-radius: 12px;
       flex-shrink: 0;
     }
 
@@ -364,32 +344,26 @@
 
     .news-date {
       font-family: 'Caveat', cursive;
-      font-size: 18px;
+      font-size: 16px;
       color: #666;
       flex-shrink: 0;
     }
 
     .news-text {
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 500;
       flex: 1;
+      line-height: 1.4;
     }
 
-    /* -----------------------------------
-       TOPタブ：YouTube 動画 (1本)
-    ----------------------------------- */
-    .youtube-section {
-      background-color: var(--white);
-      text-align: center;
-    }
-
+    /* YouTube（右カラム） */
     .youtube-container {
-      max-width: 800px;
-      margin: 0 auto;
+      width: 100%;
       aspect-ratio: 16 / 9;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      border-radius: 8px;
       overflow: hidden;
+      border: 1px solid rgba(255, 209, 102, 0.3);
     }
 
     .youtube-container iframe {
@@ -403,62 +377,59 @@
     ----------------------------------- */
     .contact-section {
       background-color: var(--navy);
-      color: var(--white);
-    }
-
-    .contact-section .section-title {
-      color: var(--yellow);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .contact-form {
-      max-width: 600px;
+      max-width: 550px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 14px;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
       text-align: left;
     }
 
     .form-group label {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
       color: var(--yellow);
     }
 
     .form-group input,
     .form-group textarea {
-      padding: 12px 16px;
-      border-radius: 8px;
+      padding: 10px 14px;
+      border-radius: 6px;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      background-color: rgba(255, 255, 255, 0.05);
-      color: var(--white);
+      background-color: var(--gray); /* ピンポイントでグレーを使用 */
+      color: var(--text-dark);
       font-family: inherit;
-      font-size: 15px;
+      font-size: 14px;
     }
 
     .form-group input:focus,
     .form-group textarea:focus {
       outline: none;
       border-color: var(--yellow);
+      background-color: var(--white);
     }
 
     .submit-btn {
       background-color: var(--yellow);
       color: var(--navy);
       border: none;
-      padding: 14px;
-      border-radius: 8px;
+      padding: 12px;
+      border-radius: 6px;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 15px;
       cursor: pointer;
       transition: opacity 0.3s;
-      margin-top: 10px;
+      margin-top: 6px;
     }
 
     .submit-btn:hover {
@@ -466,78 +437,78 @@
     }
 
     /* -----------------------------------
-       別タブ：詳細プロフィール (雛形2仕様)
+       別タブ：詳細プロフィール (雛形2)
     ----------------------------------- */
     .profile-container {
-      max-width: 1000px;
+      max-width: 900px;
       margin: 0 auto;
       display: flex;
-      gap: 50px;
+      gap: 40px;
       align-items: center;
     }
 
     .profile-img-wrap {
       flex: 1;
-      max-width: 400px;
+      max-width: 350px;
     }
 
     .profile-img {
       width: 100%;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
     }
 
     .profile-details {
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
     .profile-detail-item {
       display: flex;
-      border-bottom: 1px solid rgba(11, 19, 43, 0.15);
-      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding-bottom: 6px;
     }
 
-    .profile-detail-label { font-weight: 400; width: 120px; }
+    .profile-detail-label { font-weight: 400; width: 110px; color: var(--yellow); }
     .profile-detail-value { font-weight: 700; flex: 1; }
 
     /* -----------------------------------
        別タブ：ポートフォリオ / ブログ (ダミー表示)
     ----------------------------------- */
     .grid-container {
-      max-width: 1000px;
+      max-width: 900px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
     }
 
     .dummy-card {
-      background-color: var(--white);
-      border-radius: 12px;
+      background-color: var(--gray); /* ピンポイントでグレーを使用 */
+      color: var(--text-dark);
+      border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
     .dummy-card-img {
       width: 100%;
-      height: 200px;
-      background-color: #ddd;
+      height: 180px;
+      background-color: #ccc;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #888;
+      color: #666;
     }
 
     .dummy-card-body {
-      padding: 20px;
+      padding: 16px;
     }
 
     .dummy-card-title {
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     /* -----------------------------------
@@ -545,16 +516,16 @@
     ----------------------------------- */
     @media (max-width: 768px) {
       header { padding: 0 16px; }
-      .site-logo { font-size: 24px; }
-      .tab-btn { font-size: 14px; padding: 8px 10px; }
-      .tab-btn.active::after { left: 10px; right: 10px; }
+      .site-logo { font-size: 22px; }
+      .tab-btn { font-size: 13px; padding: 6px 8px; }
 
-      .hero { flex-direction: column-reverse; }
-      .hero-right { min-height: 350px; }
-      .hero-name { font-size: 48px; }
+      .hero { flex-direction: column-reverse; min-height: auto; }
+      .hero-right { min-height: 300px; }
+      .hero-name { font-size: 40px; }
 
-      .simple-profile-box { flex-direction: column; text-align: center; }
       .history-container { flex-direction: column; }
+      .media-container { flex-direction: column; }
+      .media-col { width: 100%; }
       .profile-container { flex-direction: column; }
     }
   </style>
@@ -583,6 +554,13 @@
         <h1 class="hero-name">高井 蛙太郎</h1>
         <p class="hero-name-en">Takai Ataro</p>
         
+        <!-- 年齢・身長・体重（イエローで縦並び） -->
+        <div class="hero-sub-info">
+          <span>29歳</span>
+          <span>164cm</span>
+          <span>58kg</span>
+        </div>
+
         <!-- SNSリンク (雛形2モノクロ仕様) -->
         <div class="social-links">
           <a href="https://x.com/notakanon" target="_blank" rel="noopener noreferrer" aria-label="X">
@@ -606,109 +584,105 @@
       </div>
     </section>
 
-    <!-- 簡易プロフィール -->
-    <section class="simple-profile">
-      <div class="simple-profile-box">
-        <img src="2406155326.jpg" alt="高井蛙太郎" class="simple-profile-img">
-        <div class="simple-profile-text">
-          <h3>高井 蛙太郎（たかい あたろう）</h3>
-          <p>1997年2月4日生まれ、愛知県出身。舞台や映像作品を中心に活動中。詳しい経歴やプロフィール情報は「詳細プロフィール」タブをご覧ください。</p>
-        </div>
-      </div>
-    </section>
-
     <!-- 出演歴 (雛形2ベース 2カラム) -->
     <section class="history-section section-padding">
-      <h2 class="section-title">最新の出演歴</h2>
-      <div class="history-container">
-        <!-- 舞台 -->
-        <div class="history-col stage">
-          <h3 class="col-title">舞台</h3>
-          <div class="history-item">
-            <span class="history-month">2026.04</span>
-            <span class="history-work">舞台「作品タイトル」</span>
-            <span class="history-sep">/</span>
-            <span>役名</span>
+      <div class="container">
+        <h2 class="section-title">最新の出演歴</h2>
+        <div class="history-container">
+          <!-- 舞台 -->
+          <div class="history-col stage">
+            <h3 class="col-title">舞台</h3>
+            <div class="history-item">
+              <span class="history-month">2026.04</span>
+              <span class="history-work">舞台「作品タイトル」</span>
+              <span class="history-sep">/</span>
+              <span>役名</span>
+            </div>
+            <div class="history-item">
+              <span class="history-month">2026.01</span>
+              <span class="history-work">公演名タイトル</span>
+              <span class="history-sep">/</span>
+              <span>主演</span>
+            </div>
           </div>
-          <div class="history-item">
-            <span class="history-month">2026.01</span>
-            <span class="history-work">公演名タイトル</span>
-            <span class="history-sep">/</span>
-            <span>主演</span>
-          </div>
-        </div>
 
-        <!-- 映像 -->
-        <div class="history-col screen">
-          <h3 class="col-title">映像</h3>
-          <div class="history-item">
-            <span class="history-month">2026.05</span>
-            <span class="history-work">映画「作品タイトル」</span>
-            <span class="history-sep">/</span>
-            <span>役名</span>
-          </div>
-          <div class="history-item">
-            <span class="history-month">2025.10</span>
-            <span class="history-work">ドラマ「作品名」</span>
-            <span class="history-sep">/</span>
-            <span>ゲスト出演</span>
+          <!-- 映像 -->
+          <div class="history-col screen">
+            <h3 class="col-title">映像</h3>
+            <div class="history-item">
+              <span class="history-month">2026.05</span>
+              <span class="history-work">映画「作品タイトル」</span>
+              <span class="history-sep">/</span>
+              <span>役名</span>
+            </div>
+            <div class="history-item">
+              <span class="history-month">2025.10</span>
+              <span class="history-work">ドラマ「作品名」</span>
+              <span class="history-sep">/</span>
+              <span>ゲスト出演</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- お知らせ (最新を固定強調) -->
-    <section class="news-section section-padding">
-      <h2 class="section-title">お知らせ</h2>
-      <div class="news-list">
-        <!-- 最新記事 (目立たせる) -->
-        <div class="news-card featured">
-          <span class="news-badge">NEW</span>
-          <span class="news-date">2026.09.15</span>
-          <p class="news-text">最新の出演舞台「作品タイトル」のチケット先行予約が開始されました！</p>
-        </div>
+    <!-- お知らせ ＆ YouTube (2カラム並び) -->
+    <section class="media-section section-padding">
+      <div class="container">
+        <div class="media-container">
+          <!-- 左：お知らせ（舞台の下） -->
+          <div class="media-col">
+            <h2 class="section-title">お知らせ</h2>
+            <div class="news-list">
+              <div class="news-card featured">
+                <span class="news-badge">NEW</span>
+                <span class="news-date">2026.09.15</span>
+                <p class="news-text">最新の出演舞台「作品タイトル」のチケット予約開始！</p>
+              </div>
+              <div class="news-card">
+                <span class="news-badge">INFO</span>
+                <span class="news-date">2026.08.01</span>
+                <p class="news-text">短編映画「作品名」の公開が決定いたしました。</p>
+              </div>
+              <div class="news-card">
+                <span class="news-badge">INFO</span>
+                <span class="news-date">2026.05.20</span>
+                <p class="news-text">オフィシャルサイトをリニューアルオープンしました。</p>
+              </div>
+            </div>
+          </div>
 
-        <div class="news-card">
-          <span class="news-badge">INFO</span>
-          <span class="news-date">2026.08.01</span>
-          <p class="news-text">短編映画「作品名」の公開が決定いたしました。</p>
+          <!-- 右：YouTube（映像の下） -->
+          <div class="media-col">
+            <h2 class="section-title">Featured Video</h2>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" allowfullscreen></iframe>
+            </div>
+          </div>
         </div>
-
-        <div class="news-card">
-          <span class="news-badge">INFO</span>
-          <span class="news-date">2026.05.20</span>
-          <p class="news-text">オフィシャルサイトをリニューアルオープンしました。</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- YouTube動画 (おすすめ1本) -->
-    <section class="youtube-section section-padding">
-      <h2 class="section-title">Featured Video</h2>
-      <div class="youtube-container">
-        <!-- サンプル用のダミー埋め込み (実際の動画URLに置き換え可能) -->
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" allowfullscreen></iframe>
       </div>
     </section>
 
     <!-- お問い合わせフォーム -->
     <section class="contact-section section-padding">
-      <h2 class="section-title">お問い合わせ</h2>
-      <form class="contact-form" onsubmit="event.preventDefault(); alert('送信機能は準備中です');">
-        <div class="form-group">
-          <label for="name">お名前</label>
-          <input type="text" id="name" placeholder="山田 太郎" required>
-        </div>
-        <div class="form-group">
-          <label for="email">メールアドレス</label>
-          <input type="email" id="email" placeholder="example@mail.com" required>
-        </div>
-        <div class="form-group">
-          <label for="message">メッセージ</label>
-          <textarea id="message" rows="5" placeholder="お問い合わせ内容をご記入ください" required></textarea>
-        </div>
-        <button type="submit" class="submit-btn">送信する</button>
-      </form>
+      <div class="container">
+        <h2 class="section-title">お問い合わせ</h2>
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('送信機能は準備中です');">
+          <div class="form-group">
+            <label for="name">お名前</label>
+            <input type="text" id="name" placeholder="山田 太郎" required>
+          </div>
+          <div class="form-group">
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" placeholder="example@mail.com" required>
+          </div>
+          <div class="form-group">
+            <label for="message">メッセージ</label>
+            <textarea id="message" rows="4" placeholder="お問い合わせ内容をご記入ください" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">送信する</button>
+        </form>
+      </div>
     </section>
 
   </div>
@@ -718,43 +692,45 @@
   ================================================ -->
   <div id="tab-profile" class="tab-content">
     <section class="section-padding">
-      <h2 class="section-title">プロフィール</h2>
-      <div class="profile-container">
-        <div class="profile-img-wrap">
-          <img src="2406155326.jpg" alt="高井蛙太郎 プロフィール写真" class="profile-img">
-        </div>
-        <div class="profile-details">
-          <div class="profile-detail-item">
-            <span class="profile-detail-label">名前</span>
-            <span class="profile-detail-value">高井 蛙太郎（たかい あたろう）</span>
+      <div class="container">
+        <h2 class="section-title">プロフィール</h2>
+        <div class="profile-container">
+          <div class="profile-img-wrap">
+            <img src="2406155326.jpg" alt="高井蛙太郎 プロフィール写真" class="profile-img">
           </div>
-          <div class="profile-detail-item">
-            <span class="profile-detail-label">生年月日</span>
-            <span class="profile-detail-value">1997年2月4日</span>
-          </div>
-          <div class="profile-detail-item">
-            <span class="profile-detail-label">年齢</span>
-            <span class="profile-detail-value">29歳</span>
-          </div>
-          <div class="profile-detail-item">
-            <span class="profile-detail-label">出身地</span>
-            <span class="profile-detail-value">愛知県</span>
-          </div>
-          <div class="profile-detail-item">
-            <span class="profile-detail-label">身長</span>
-            <span class="profile-detail-value">164cm</span>
-          </div>
-          <div class="profile-detail-item">
-            <span class="profile-detail-label">体重</span>
-            <span class="profile-detail-value">58kg</span>
-          </div>
-          <div class="profile-detail-item">
-            <span class="profile-detail-label">趣味・特技</span>
-            <span class="profile-detail-value">野球 / ゲーム / 詩作 / スナップ写真</span>
-          </div>
-          <div class="profile-detail-item">
-            <span class="profile-detail-label">資格</span>
-            <span class="profile-detail-value">準中型自動車運転免許(MT) / 漢字検定準1級</span>
+          <div class="profile-details">
+            <div class="profile-detail-item">
+              <span class="profile-detail-label">名前</span>
+              <span class="profile-detail-value">高井 蛙太郎（たかい あたろう）</span>
+            </div>
+            <div class="profile-detail-item">
+              <span class="profile-detail-label">生年月日</span>
+              <span class="profile-detail-value">1997年2月4日</span>
+            </div>
+            <div class="profile-detail-item">
+              <span class="profile-detail-label">年齢</span>
+              <span class="profile-detail-value">29歳</span>
+            </div>
+            <div class="profile-detail-item">
+              <span class="profile-detail-label">出身地</span>
+              <span class="profile-detail-value">愛知県</span>
+            </div>
+            <div class="profile-detail-item">
+              <span class="profile-detail-label">身長</span>
+              <span class="profile-detail-value">164cm</span>
+            </div>
+            <div class="profile-detail-item">
+              <span class="profile-detail-label">体重</span>
+              <span class="profile-detail-value">58kg</span>
+            </div>
+            <div class="profile-detail-item">
+              <span class="profile-detail-label">趣味・特技</span>
+              <span class="profile-detail-value">野球 / ゲーム / 詩作 / スナップ写真</span>
+            </div>
+            <div class="profile-detail-item">
+              <span class="profile-detail-label">資格</span>
+              <span class="profile-detail-value">準中型自動車運転免許(MT) / 漢字検定準1級</span>
+            </div>
           </div>
         </div>
       </div>
@@ -766,27 +742,29 @@
   ================================================ -->
   <div id="tab-portfolio" class="tab-content">
     <section class="section-padding">
-      <h2 class="section-title">ポートフォリオ</h2>
-      <div class="grid-container">
-        <div class="dummy-card">
-          <div class="dummy-card-img">Photo 1</div>
-          <div class="dummy-card-body">
-            <div class="dummy-card-title">スナップ写真作品 #1</div>
-            <p style="font-size: 13px; color: #666;">作品の説明テキストが入ります。</p>
+      <div class="container">
+        <h2 class="section-title">ポートフォリオ</h2>
+        <div class="grid-container">
+          <div class="dummy-card">
+            <div class="dummy-card-img">Photo 1</div>
+            <div class="dummy-card-body">
+              <div class="dummy-card-title">スナップ写真作品 #1</div>
+              <p style="font-size: 13px; color: #666;">作品の説明テキストが入ります。</p>
+            </div>
           </div>
-        </div>
-        <div class="dummy-card">
-          <div class="dummy-card-img">Photo 2</div>
-          <div class="dummy-card-body">
-            <div class="dummy-card-title">舞台スチール</div>
-            <p style="font-size: 13px; color: #666;">作品の説明テキストが入ります。</p>
+          <div class="dummy-card">
+            <div class="dummy-card-img">Photo 2</div>
+            <div class="dummy-card-body">
+              <div class="dummy-card-title">舞台スチール</div>
+              <p style="font-size: 13px; color: #666;">作品の説明テキストが入ります。</p>
+            </div>
           </div>
-        </div>
-        <div class="dummy-card">
-          <div class="dummy-card-img">Photo 3</div>
-          <div class="dummy-card-body">
-            <div class="dummy-card-title">ポートレート集</div>
-            <p style="font-size: 13px; color: #666;">作品の説明テキストが入ります。</p>
+          <div class="dummy-card">
+            <div class="dummy-card-img">Photo 3</div>
+            <div class="dummy-card-body">
+              <div class="dummy-card-title">ポートレート集</div>
+              <p style="font-size: 13px; color: #666;">作品の説明テキストが入ります。</p>
+            </div>
           </div>
         </div>
       </div>
@@ -798,22 +776,24 @@
   ================================================ -->
   <div id="tab-blog" class="tab-content">
     <section class="section-padding">
-      <h2 class="section-title">ブログ</h2>
-      <div class="grid-container">
-        <div class="dummy-card">
-          <div class="dummy-card-img">Blog Image</div>
-          <div class="dummy-card-body">
-            <div class="dummy-card-title">【日常】最近撮影したスナップ写真たち</div>
-            <p style="font-size: 13px; color: #666; margin-bottom: 8px;">2026.09.10</p>
-            <p style="font-size: 14px;">ブログの本文プレビューがここに入ります...</p>
+      <div class="container">
+        <h2 class="section-title">ブログ</h2>
+        <div class="grid-container">
+          <div class="dummy-card">
+            <div class="dummy-card-img">Blog Image</div>
+            <div class="dummy-card-body">
+              <div class="dummy-card-title">【日常】最近撮影したスナップ写真たち</div>
+              <p style="font-size: 12px; color: #666; margin-bottom: 6px;">2026.09.10</p>
+              <p style="font-size: 13px;">ブログの本文プレビューがここに入ります...</p>
+            </div>
           </div>
-        </div>
-        <div class="dummy-card">
-          <div class="dummy-card-img">Blog Image</div>
-          <div class="dummy-card-body">
-            <div class="dummy-card-title">次回公演に向けての稽古が始まりました</div>
-            <p style="font-size: 13px; color: #666; margin-bottom: 8px;">2026.08.25</p>
-            <p style="font-size: 14px;">ブログの本文プレビューがここに入ります...</p>
+          <div class="dummy-card">
+            <div class="dummy-card-img">Blog Image</div>
+            <div class="dummy-card-body">
+              <div class="dummy-card-title">次回公演に向けての稽古が始まりました</div>
+              <p style="font-size: 12px; color: #666; margin-bottom: 6px;">2026.08.25</p>
+              <p style="font-size: 13px;">ブログの本文プレビューがここに入ります...</p>
+            </div>
           </div>
         </div>
       </div>
@@ -823,19 +803,15 @@
   <!-- JavaScript (タブ切り替え処理) -->
   <script>
     function switchTab(tabName) {
-      // すべてのコンテンツを非表示にする
       const contents = document.querySelectorAll('.tab-content');
       contents.forEach(content => content.classList.remove('active'));
 
-      // すべてのタブボタンのアクティブ状態を解除する
       const buttons = document.querySelectorAll('.tab-btn');
       buttons.forEach(btn => btn.classList.remove('active'));
 
-      // 選択されたタブのコンテンツとボタンを有効化する
       document.getElementById('tab-' + tabName).classList.add('active');
       event.currentTarget.classList.add('active');
 
-      // ページ最上部へスクロール
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
