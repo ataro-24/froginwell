@@ -19,12 +19,8 @@
       --yellow: #FFD166;
       --white: #FFFFFF;
       --gray-dark: #DCDFE5; /* 濃いめのグレー */
-      --gray-text: #A0AAB8; /* テキスト用グレー */
+      --gray-text: #A0AAB8; /* テキスト・枠線用グレー */
       --text-dark: #1C2541;
-      
-      /* SNSアイコン用（モノクロ） */
-      --mono-bg: #FFFFFF;
-      --mono-icon: #000000;
     }
 
     * {
@@ -212,7 +208,7 @@
       letter-spacing: 1px;
       line-height: 1;
       margin-bottom: 2px;
-      color: var(--gray-text); /* グレーの文字色を維持 */
+      color: var(--gray-text); /* グレーの文字色 */
     }
 
     .hero-name {
@@ -230,23 +226,23 @@
       color: var(--yellow);
     }
 
-    /* 簡易プロフィールカード */
+    /* 簡易プロフィールカード（背景イエロー・文字ネイビー） */
     .hero-profile-card {
       display: flex;
       align-items: center;
       gap: 12px;
-      background-color: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 209, 102, 0.3);
+      background-color: var(--yellow);
+      color: var(--navy);
       border-radius: 50px;
       padding: 8px 20px 8px 8px;
       margin-bottom: 24px;
       cursor: pointer;
       transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     .hero-profile-card:hover {
-      background-color: rgba(255, 255, 255, 0.15);
-      border-color: var(--yellow);
+      opacity: 0.9;
       transform: translateY(-2px);
     }
 
@@ -255,18 +251,19 @@
       height: 44px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid var(--yellow);
+      border: 2px solid var(--navy);
     }
 
     .hero-profile-info {
       font-size: 15px;
       font-weight: 700;
-      color: var(--white);
+      color: var(--navy);
     }
 
-    /* SNSボックス */
+    /* SNSボックス（全体を四角いグレー枠で囲むデザイン） */
     .sns-box {
       background-color: transparent;
+      border: 1px solid var(--gray-text); /* 四角いグレー枠 */
       border-radius: 8px;
       padding: 16px 24px;
       position: relative;
@@ -280,45 +277,40 @@
       transform: translateX(-50%);
       background-color: var(--navy);
       color: var(--gray-text);
-      border: 1px solid var(--gray-text);
       font-size: 13px;
       font-weight: 700;
       padding: 0 10px;
-      border-radius: 4px;
       letter-spacing: 1px;
     }
 
     .social-links {
       display: flex;
-      gap: 20px;
+      gap: 24px;
+      align-items: center;
     }
 
     .social-links a {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background-color: transparent;
-      border: 2px solid var(--gray-text); /* グレーの線で囲む */
       color: var(--white);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 24px;
+      font-size: 26px;
       text-decoration: none;
       transition: all 0.3s ease;
     }
 
+    /* noteアイコンサイズ調整 (15%拡大) */
     .social-links a svg {
-      width: 24px;
-      height: 24px;
+      width: 28px;
+      height: 28px;
       fill: var(--white);
+      transform: scale(1.15); 
       transition: fill 0.3s ease;
     }
 
     .social-links a:hover {
-      border-color: var(--yellow);
       color: var(--yellow);
-      transform: translateY(-3px);
+      transform: translateY(-2px);
     }
 
     .social-links a:hover svg {
@@ -439,17 +431,21 @@
       border: none;
     }
 
+    /* デモリール クレジット（右端揃え） */
     .demo-credits {
       font-size: 13px;
       color: var(--yellow);
-      text-align: center;
+      text-align: right; /* 右端に配置 */
       line-height: 1.6;
     }
 
-    /* --- お知らせ（右カラム・下部） --- */
+    /* --- お知らせ（全体をグレーの枠線で囲む） --- */
     .news-box-wrap {
       display: flex;
       flex-direction: column;
+      border: 1px solid var(--gray-text); /* カラム全体のグレー枠線 */
+      border-radius: 12px;
+      padding: 20px;
     }
 
     .news-list {
@@ -495,7 +491,7 @@
     /* お知らせのmoreリンク（右下に配置） */
     .news-more-link {
       text-align: right;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .news-more-link a {
@@ -702,7 +698,7 @@
         </div>
         <p class="hero-name-en">Takai Ataro</p>
         
-        <!-- 簡易プロフィールカード（名前の下・クリックで「プロフィール」タブへ遷移） -->
+        <!-- 簡易プロフィールカード -->
         <div class="hero-profile-card" onclick="switchTab('profile')">
           <img src="2406155326.jpg" alt="高井蛙太郎" class="hero-profile-thumb">
           <div class="hero-profile-info">
@@ -829,7 +825,7 @@
               </div>
             </div>
 
-            <!-- 3. お知らせ -->
+            <!-- 3. お知らせ（全体をグレーの枠線で囲む） -->
             <div class="news-box-wrap">
               <h2 class="section-title">お知らせ</h2>
               <div class="news-list">
