@@ -19,9 +19,10 @@
       --yellow: #FFD166;
       --white: #FFFFFF;
       --gray-dark: #DCDFE5; /* 濃いめのグレー */
+      --gray-text: #A0AAB8; /* テキスト用グレー */
       --text-dark: #1C2541;
       
-      /* SNSアイコン用 */
+      /* SNSアイコン用（モノクロ） */
       --mono-bg: #FFFFFF;
       --mono-icon: #000000;
     }
@@ -126,9 +127,9 @@
     .section-title {
       font-family: 'Zen Maru Gothic', sans-serif;
       font-weight: 700;
-      font-size: 26px;
+      font-size: 24px;
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       color: var(--yellow);
     }
 
@@ -142,17 +143,52 @@
     }
 
     /* -----------------------------------
+       TOPタブ：次回出演情報バナー（横断幕）
+    ----------------------------------- */
+    .announcement-banner {
+      background-color: var(--yellow);
+      color: var(--navy);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .banner-badge {
+      background-color: var(--navy);
+      color: var(--yellow);
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      letter-spacing: 1px;
+      flex-shrink: 0;
+    }
+
+    .banner-text {
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .banner-text a {
+      color: var(--navy);
+      text-decoration: underline;
+      font-weight: 700;
+    }
+
+    /* -----------------------------------
        TOPタブ：ヒーローセクション
     ----------------------------------- */
     .hero {
       display: flex;
-      min-height: calc(85vh - 60px);
+      min-height: calc(80vh - 60px);
       background-color: var(--navy);
     }
 
     .hero-left {
       flex: 1;
-      color: var(--yellow);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -165,7 +201,7 @@
     .hero-name-wrap {
       display: inline-flex;
       flex-direction: column;
-      align-items: flex-start; /* 左揃え */
+      align-items: flex-start;
       margin-bottom: 4px;
     }
 
@@ -175,13 +211,14 @@
       letter-spacing: 1px;
       line-height: 1;
       margin-bottom: 2px;
-      color: var(--yellow);
+      color: var(--gray-text);
     }
 
     .hero-name {
       font-size: 64px;
       font-weight: 700;
       line-height: 1.1;
+      color: var(--yellow);
     }
 
     .hero-name-en {
@@ -189,18 +226,18 @@
       font-size: 44px;
       letter-spacing: 2px;
       margin-bottom: 16px;
+      color: var(--yellow);
     }
 
     .hero-sub-info {
       font-size: 18px;
       font-weight: 700;
-      color: var(--yellow);
+      color: var(--gray-text);
       margin-bottom: 24px;
     }
 
-    /* SNSアイコン（イエローで塗り潰した四角枠 & 見出し） */
     .sns-box {
-      background-color: var(--yellow);
+      background-color: var(--gray-dark);
       border-radius: 8px;
       padding: 16px 24px;
       position: relative;
@@ -213,8 +250,8 @@
       left: 50%;
       transform: translateX(-50%);
       background-color: var(--navy);
-      color: var(--yellow);
-      border: 1px solid var(--yellow);
+      color: var(--gray-text);
+      border: 1px solid var(--gray-text);
       font-size: 13px;
       font-weight: 700;
       padding: 0 10px;
@@ -227,37 +264,31 @@
       gap: 20px;
     }
 
-    /* アイコンを一回り大きく（56px） */
     .social-links a {
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background-color: var(--navy);
-      color: var(--yellow);
+      background-color: var(--mono-bg);
+      color: var(--mono-icon);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 30px;
+      font-size: 28px;
       text-decoration: none;
       transition: all 0.3s ease;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
     .social-links a svg {
-      width: 30px;
-      height: 30px;
-      fill: var(--yellow);
+      width: 28px;
+      height: 28px;
+      fill: var(--mono-icon);
       transition: fill 0.3s ease;
     }
 
     .social-links a:hover {
-      background-color: var(--white);
-      color: var(--navy);
+      opacity: 0.8;
       transform: translateY(-3px);
-    }
-
-    .social-links a:hover svg {
-      fill: var(--navy);
     }
 
     .hero-right {
@@ -273,77 +304,87 @@
     }
 
     /* -----------------------------------
-       TOPタブ：出演歴 (2カラム)
+       TOPタブ：メインコンテンツエリア（2カラム構成）
+       左：舞台出演歴（縦長）
+       右：映像出演歴 ＋ デモリール ＋ お知らせ
     ----------------------------------- */
-    .history-section {
+    .main-grid-section {
       background-color: var(--navy);
       border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .history-container {
+    .main-grid {
       display: flex;
-      gap: 20px;
+      gap: 32px;
+      align-items: flex-start;
     }
 
-    .history-col {
+    .grid-col-left, .grid-col-right {
       flex: 1;
-      padding: 24px 20px;
-      border-radius: 12px;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
     }
 
-    /* 舞台：イエロー背景 */
+    /* --- 舞台（左カラム・縦長） --- */
     .history-col.stage {
       background-color: var(--yellow);
       color: var(--navy);
+      padding: 24px;
+      border-radius: 12px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* 映像：ネイビー背景 */
-    .history-col.screen {
-      background-color: var(--navy);
-      color: var(--yellow);
-      border: 2px solid var(--yellow);
+    .stage .col-title {
+      border-bottom: 2px solid var(--navy);
+      color: var(--navy);
+      margin-bottom: 20px;
     }
 
-    .col-title {
-      font-size: 20px;
-      margin-bottom: 16px;
-      text-align: center;
-      padding-bottom: 6px;
-      border-bottom: 2px solid;
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
-
-    .stage .col-title { border-color: var(--navy); }
-    .screen .col-title { border-color: var(--yellow); }
 
     .history-item {
       display: flex;
       gap: 8px;
       font-size: 14px;
-      margin-bottom: 8px;
+      border-bottom: 1px dashed rgba(11, 19, 43, 0.2);
+      padding-bottom: 8px;
     }
 
-    .history-month { font-weight: 700; min-width: 32px; }
+    .history-item:last-child {
+      border-bottom: none;
+    }
+
+    .history-month { font-weight: 700; min-width: 60px; }
     .history-sep { opacity: 0.5; }
 
-    /* -----------------------------------
-       TOPタブ：デモリール ＆ お知らせ (2カラム)
-    ----------------------------------- */
-    .media-section {
+    /* --- 映像（右カラム・上部） --- */
+    .history-col.screen {
       background-color: var(--navy);
+      color: var(--yellow);
+      border: 2px solid var(--yellow);
+      padding: 24px;
+      border-radius: 12px;
     }
 
-    .media-container {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
+    .screen .col-title {
+      border-bottom: 2px solid var(--yellow);
+      color: var(--yellow);
+      margin-bottom: 16px;
     }
 
-    .media-col {
-      flex: 1;
-      width: 50%;
+    .screen .history-item {
+      border-bottom: 1px dashed rgba(255, 209, 102, 0.2);
     }
 
-    /* デモリール（左カラム） */
+    /* --- デモリール（右カラム・中央） --- */
     .youtube-container {
       width: 100%;
       aspect-ratio: 16 / 9;
@@ -351,7 +392,7 @@
       border-radius: 8px;
       overflow: hidden;
       border: 1px solid rgba(255, 209, 102, 0.3);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .youtube-container iframe {
@@ -367,7 +408,12 @@
       line-height: 1.6;
     }
 
-    /* お知らせ（右カラム） */
+    /* --- お知らせ（右カラム・下部） --- */
+    .news-box-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
     .news-list {
       display: flex;
       flex-direction: column;
@@ -375,7 +421,7 @@
     }
 
     .news-card {
-      background-color: var(--gray-dark); /* 濃いめのグレー */
+      background-color: var(--gray-dark);
       color: var(--text-dark);
       padding: 12px 16px;
       border-radius: 8px;
@@ -418,9 +464,10 @@
       line-height: 1.4;
     }
 
+    /* お知らせのmoreリンク（右下に配置） */
     .news-more-link {
       text-align: right;
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     .news-more-link a {
@@ -578,14 +625,15 @@
       .site-logo { font-size: 22px; }
       .tab-btn { font-size: 12px; padding: 6px 6px; }
 
+      .announcement-banner { flex-direction: column; text-align: center; gap: 6px; }
+
       .hero { flex-direction: column-reverse; min-height: auto; }
       .hero-right { min-height: 300px; }
       .hero-name { font-size: 48px; }
       .hero-name-en { font-size: 36px; }
 
-      .history-container { flex-direction: column; }
-      .media-container { flex-direction: column; }
-      .media-col { width: 100%; }
+      .main-grid { flex-direction: column; }
+      .grid-col-left, .grid-col-right { width: 100%; }
       .profile-container { flex-direction: column; }
     }
   </style>
@@ -609,22 +657,27 @@
   ================================================ -->
   <div id="tab-top" class="tab-content active">
     
+    <!-- 次回出演情報バナー（横断幕） -->
+    <div class="announcement-banner">
+      <span class="banner-badge">NEXT STAGE</span>
+      <div class="banner-text">
+        次回出演舞台「作品タイトル」2026年10月15日〜開演！ <a onclick="switchTab('news')">詳細・チケット予約はこちら &raquo;</a>
+      </div>
+    </div>
+
     <!-- ヒーローセクション -->
     <section class="hero">
       <div class="hero-left">
-        <!-- 名前の上に「Actor」を左揃えで配置 -->
         <div class="hero-name-wrap">
           <span class="hero-label-actor">Actor</span>
           <h1 class="hero-name">高井 蛙太郎</h1>
         </div>
         <p class="hero-name-en">Takai Ataro</p>
         
-        <!-- 簡易プロフィール -->
         <div class="hero-sub-info">
           29歳／164㎝／58㎏
         </div>
 
-        <!-- SNSリンク (黄色で塗り潰した四角枠 & 見出し) -->
         <div class="sns-box">
           <span class="sns-title">SNS</span>
           <div class="social-links">
@@ -650,89 +703,124 @@
       </div>
     </section>
 
-    <!-- 出演歴 (2カラム) -->
-    <section class="history-section section-padding">
+    <!-- メインコンテンツ 2カラムエリア -->
+    <section class="main-grid-section section-padding">
       <div class="container">
-        <h2 class="section-title">出演歴</h2>
-        <div class="history-container">
-          <!-- 舞台 (イエロー背景) -->
-          <div class="history-col stage">
-            <h3 class="col-title">舞台</h3>
-            <div class="history-item">
-              <span class="history-month">2026.04</span>
-              <span class="history-work">舞台「作品タイトル」</span>
-              <span class="history-sep">/</span>
-              <span>役名</span>
-            </div>
-            <div class="history-item">
-              <span class="history-month">2026.01</span>
-              <span class="history-work">公演名タイトル</span>
-              <span class="history-sep">/</span>
-              <span>主演</span>
+        <div class="main-grid">
+          
+          <!-- 左カラム：舞台 出演歴（縦長にたくさん入るスペース） -->
+          <div class="grid-col-left">
+            <div class="history-col stage">
+              <h2 class="section-title col-title">舞台</h2>
+              <div class="history-list">
+                <div class="history-item">
+                  <span class="history-month">2026.04</span>
+                  <span class="history-work">舞台「作品タイトルA」</span>
+                  <span class="history-sep">/</span>
+                  <span>役名A</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2026.01</span>
+                  <span class="history-work">公演名タイトルB</span>
+                  <span class="history-sep">/</span>
+                  <span>主演</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2025.11</span>
+                  <span class="history-work">舞台「作品タイトルC」</span>
+                  <span class="history-sep">/</span>
+                  <span>役名C</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2025.08</span>
+                  <span class="history-work">劇団〇〇 第5回公演</span>
+                  <span class="history-sep">/</span>
+                  <span>役名D</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2025.04</span>
+                  <span class="history-work">舞台「作品タイトルE」</span>
+                  <span class="history-sep">/</span>
+                  <span>役名E</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2024.12</span>
+                  <span class="history-work">プロデュース公演「タイトルF」</span>
+                  <span class="history-sep">/</span>
+                  <span>役名F</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2024.07</span>
+                  <span class="history-work">舞台「作品タイトルG」</span>
+                  <span class="history-sep">/</span>
+                  <span>役名G</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- 映像 (ネイビー背景) -->
-          <div class="history-col screen">
-            <h3 class="col-title">映像</h3>
-            <div class="history-item">
-              <span class="history-month">2026.05</span>
-              <span class="history-work">映画「作品タイトル」</span>
-              <span class="history-sep">/</span>
-              <span>役名</span>
+          <!-- 右カラム：映像出演歴 ＋ デモリール ＋ お知らせ -->
+          <div class="grid-col-right">
+            
+            <!-- 1. 映像 出演歴 -->
+            <div class="history-col screen">
+              <h2 class="section-title col-title">映像</h2>
+              <div class="history-list">
+                <div class="history-item">
+                  <span class="history-month">2026.05</span>
+                  <span class="history-work">映画「作品タイトル」</span>
+                  <span class="history-sep">/</span>
+                  <span>役名</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2025.10</span>
+                  <span class="history-work">ドラマ「作品名」</span>
+                  <span class="history-sep">/</span>
+                  <span>ゲスト出演</span>
+                </div>
+              </div>
             </div>
-            <div class="history-item">
-              <span class="history-month">2025.10</span>
-              <span class="history-work">ドラマ「作品名」</span>
-              <span class="history-sep">/</span>
-              <span>ゲスト出演</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- デモリール ＆ お知らせ (2カラム並び：位置入れ替え) -->
-    <section class="media-section section-padding">
-      <div class="container">
-        <div class="media-container">
-          <!-- 左：デモリール『微塵も』 -->
-          <div class="media-col">
-            <h2 class="section-title">デモリール『微塵も』</h2>
-            <div class="youtube-container">
-              <iframe src="https://www.youtube.com/embed/bARXUG0cnck" title="デモリール『微塵も』" allowfullscreen></iframe>
+            <!-- 2. デモリール -->
+            <div class="demo-box-wrap">
+              <h2 class="section-title">デモリール『微塵も』</h2>
+              <div class="youtube-container">
+                <iframe src="https://www.youtube.com/embed/bARXUG0cnck" title="デモリール『微塵も』" allowfullscreen></iframe>
+              </div>
+              <div class="demo-credits">
+                監督 植松蒼介<br>
+                脚本 高矢航志
+              </div>
             </div>
-            <div class="demo-credits">
-              監督 植松蒼介<br>
-              脚本 高矢航志
+
+            <!-- 3. お知らせ -->
+            <div class="news-box-wrap">
+              <h2 class="section-title">お知らせ</h2>
+              <div class="news-list">
+                <div class="news-card featured">
+                  <span class="news-badge">NEW</span>
+                  <span class="news-date">2026.09.15</span>
+                  <p class="news-text">最新の出演舞台「作品タイトル」のチケット予約開始！</p>
+                </div>
+                <div class="news-card">
+                  <span class="news-badge">INFO</span>
+                  <span class="news-date">2026.08.01</span>
+                  <p class="news-text">短編映画「作品名」の公開が決定いたしました。</p>
+                </div>
+                <div class="news-card">
+                  <span class="news-badge">INFO</span>
+                  <span class="news-date">2026.05.20</span>
+                  <p class="news-text">オフィシャルサイトをリニューアルオープンしました。</p>
+                </div>
+              </div>
+              <!-- お知らせのmoreリンク（右下に配置） -->
+              <div class="news-more-link">
+                <a onclick="switchTab('news')">more &raquo;</a>
+              </div>
             </div>
+
           </div>
 
-          <!-- 右：お知らせ -->
-          <div class="media-col">
-            <h2 class="section-title">お知らせ</h2>
-            <div class="news-list">
-              <div class="news-card featured">
-                <span class="news-badge">NEW</span>
-                <span class="news-date">2026.09.15</span>
-                <p class="news-text">最新の出演舞台「作品タイトル」のチケット予約開始！</p>
-              </div>
-              <div class="news-card">
-                <span class="news-badge">INFO</span>
-                <span class="news-date">2026.08.01</span>
-                <p class="news-text">短編映画「作品名」の公開が決定いたしました。</p>
-              </div>
-              <div class="news-card">
-                <span class="news-badge">INFO</span>
-                <span class="news-date">2026.05.20</span>
-                <p class="news-text">オフィシャルサイトをリニューアルオープンしました。</p>
-              </div>
-            </div>
-            <!-- お知らせタブへ飛ばすmoreリンク -->
-            <div class="news-more-link">
-              <a onclick="switchTab('news')">more &raquo;</a>
-            </div>
-          </div>
         </div>
       </div>
     </section>
