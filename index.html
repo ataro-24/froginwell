@@ -21,7 +21,7 @@
       --gray-dark: #DCDFE5; /* 濃いめのグレー */
       --text-dark: #1C2541;
       
-      /* SNSアイコン（雛形2共通） */
+      /* SNSアイコン用 */
       --mono-bg: #FFFFFF;
       --mono-icon: #000000;
     }
@@ -161,15 +161,29 @@
       padding: 30px 20px;
     }
 
-    /* 名前をもう一回り大きく */
+    /* 名前とActorのラッパー */
+    .hero-name-wrap {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start; /* 左揃え */
+      margin-bottom: 4px;
+    }
+
+    .hero-label-actor {
+      font-family: 'Caveat', cursive;
+      font-size: 24px;
+      letter-spacing: 1px;
+      line-height: 1;
+      margin-bottom: 2px;
+      color: var(--yellow);
+    }
+
     .hero-name {
       font-size: 64px;
       font-weight: 700;
       line-height: 1.1;
-      margin-bottom: 4px;
     }
 
-    /* 英字表記も合わせて拡大 */
     .hero-name-en {
       font-family: 'Caveat', cursive;
       font-size: 44px;
@@ -177,7 +191,6 @@
       margin-bottom: 16px;
     }
 
-    /* 簡易プロフィール表記 */
     .hero-sub-info {
       font-size: 18px;
       font-weight: 700;
@@ -185,11 +198,11 @@
       margin-bottom: 24px;
     }
 
-    /* SNSアイコン（イエローの四角枠 & 見出し） */
+    /* SNSアイコン（イエローで塗り潰した四角枠 & 見出し） */
     .sns-box {
-      border: 2px solid var(--yellow);
+      background-color: var(--yellow);
       border-radius: 8px;
-      padding: 12px 20px;
+      padding: 16px 24px;
       position: relative;
       margin-top: 10px;
     }
@@ -201,47 +214,50 @@
       transform: translateX(-50%);
       background-color: var(--navy);
       color: var(--yellow);
+      border: 1px solid var(--yellow);
       font-size: 13px;
       font-weight: 700;
-      padding: 0 8px;
+      padding: 0 10px;
+      border-radius: 4px;
       letter-spacing: 1px;
     }
 
     .social-links {
       display: flex;
-      gap: 16px;
+      gap: 20px;
     }
 
+    /* アイコンを一回り大きく（56px） */
     .social-links a {
-      width: 48px;
-      height: 48px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
-      background-color: var(--mono-bg);
-      color: var(--mono-icon);
+      background-color: var(--navy);
+      color: var(--yellow);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 26px;
+      font-size: 30px;
       text-decoration: none;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
     .social-links a svg {
-      width: 26px;
-      height: 26px;
-      fill: var(--mono-icon);
+      width: 30px;
+      height: 30px;
+      fill: var(--yellow);
       transition: fill 0.3s ease;
     }
 
     .social-links a:hover {
-      background-color: var(--mono-icon);
-      color: var(--mono-bg);
+      background-color: var(--white);
+      color: var(--navy);
       transform: translateY(-3px);
     }
 
     .social-links a:hover svg {
-      fill: var(--mono-bg);
+      fill: var(--navy);
     }
 
     .hero-right {
@@ -275,15 +291,17 @@
       border-radius: 12px;
     }
 
+    /* 舞台：イエロー背景 */
     .history-col.stage {
+      background-color: var(--yellow);
+      color: var(--navy);
+    }
+
+    /* 映像：ネイビー背景 */
+    .history-col.screen {
       background-color: var(--navy);
       color: var(--yellow);
       border: 2px solid var(--yellow);
-    }
-
-    .history-col.screen {
-      background-color: var(--yellow);
-      color: var(--navy);
     }
 
     .col-title {
@@ -294,8 +312,8 @@
       border-bottom: 2px solid;
     }
 
-    .stage .col-title { border-color: var(--yellow); }
-    .screen .col-title { border-color: var(--navy); }
+    .stage .col-title { border-color: var(--navy); }
+    .screen .col-title { border-color: var(--yellow); }
 
     .history-item {
       display: flex;
@@ -308,7 +326,7 @@
     .history-sep { opacity: 0.5; }
 
     /* -----------------------------------
-       TOPタブ：お知らせ ＆ デモリール (2カラム)
+       TOPタブ：デモリール ＆ お知らせ (2カラム)
     ----------------------------------- */
     .media-section {
       background-color: var(--navy);
@@ -325,7 +343,31 @@
       width: 50%;
     }
 
-    /* お知らせ（左カラム） */
+    /* デモリール（左カラム） */
+    .youtube-container {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 209, 102, 0.3);
+      margin-bottom: 10px;
+    }
+
+    .youtube-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .demo-credits {
+      font-size: 13px;
+      color: var(--yellow);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* お知らせ（右カラム） */
     .news-list {
       display: flex;
       flex-direction: column;
@@ -389,30 +431,6 @@
       cursor: pointer;
     }
 
-    /* デモリール（右カラム） */
-    .youtube-container {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 209, 102, 0.3);
-      margin-bottom: 10px;
-    }
-
-    .youtube-container iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .demo-credits {
-      font-size: 13px;
-      color: var(--yellow);
-      text-align: center;
-      line-height: 1.6;
-    }
-
     /* -----------------------------------
        TOPタブ：ご依頼・メッセージ フォーム
     ----------------------------------- */
@@ -447,7 +465,7 @@
       padding: 10px 14px;
       border-radius: 6px;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      background-color: var(--gray-dark); /* 濃いめのグレー */
+      background-color: var(--gray-dark);
       color: var(--text-dark);
       font-family: inherit;
       font-size: 14px;
@@ -478,7 +496,7 @@
     }
 
     /* -----------------------------------
-       別タブ：詳細プロフィール (雛形2)
+       別タブ：プロフィール
     ----------------------------------- */
     .profile-container {
       max-width: 900px;
@@ -516,7 +534,7 @@
     .profile-detail-value { font-weight: 700; flex: 1; }
 
     /* -----------------------------------
-       別タブ：お知らせ・ポートフォリオ・ブログ
+       別タブ：ポートフォリオ・ブログ・お知らせ
     ----------------------------------- */
     .grid-container {
       max-width: 900px;
@@ -527,7 +545,7 @@
     }
 
     .dummy-card {
-      background-color: var(--gray-dark); /* 濃いめのグレー */
+      background-color: var(--gray-dark);
       color: var(--text-dark);
       border-radius: 8px;
       overflow: hidden;
@@ -579,10 +597,10 @@
     <div class="site-logo">Ataro website</div>
     <nav class="tab-nav">
       <button class="tab-btn active" data-tab="top" onclick="switchTab('top')">TOP</button>
-      <button class="tab-btn" data-tab="profile" onclick="switchTab('profile')">詳細プロフィール</button>
-      <button class="tab-btn" data-tab="news" onclick="switchTab('news')">お知らせ</button>
+      <button class="tab-btn" data-tab="profile" onclick="switchTab('profile')">プロフィール</button>
       <button class="tab-btn" data-tab="portfolio" onclick="switchTab('portfolio')">ポートフォリオ</button>
       <button class="tab-btn" data-tab="blog" onclick="switchTab('blog')">ブログ</button>
+      <button class="tab-btn" data-tab="news" onclick="switchTab('news')">お知らせ</button>
     </nav>
   </header>
 
@@ -594,7 +612,11 @@
     <!-- ヒーローセクション -->
     <section class="hero">
       <div class="hero-left">
-        <h1 class="hero-name">高井 蛙太郎</h1>
+        <!-- 名前の上に「Actor」を左揃えで配置 -->
+        <div class="hero-name-wrap">
+          <span class="hero-label-actor">Actor</span>
+          <h1 class="hero-name">高井 蛙太郎</h1>
+        </div>
         <p class="hero-name-en">Takai Ataro</p>
         
         <!-- 簡易プロフィール -->
@@ -602,7 +624,7 @@
           29歳／164㎝／58㎏
         </div>
 
-        <!-- SNSリンク (イエローの四角枠 & 見出し) -->
+        <!-- SNSリンク (黄色で塗り潰した四角枠 & 見出し) -->
         <div class="sns-box">
           <span class="sns-title">SNS</span>
           <div class="social-links">
@@ -633,7 +655,7 @@
       <div class="container">
         <h2 class="section-title">出演歴</h2>
         <div class="history-container">
-          <!-- 舞台 -->
+          <!-- 舞台 (イエロー背景) -->
           <div class="history-col stage">
             <h3 class="col-title">舞台</h3>
             <div class="history-item">
@@ -650,7 +672,7 @@
             </div>
           </div>
 
-          <!-- 映像 -->
+          <!-- 映像 (ネイビー背景) -->
           <div class="history-col screen">
             <h3 class="col-title">映像</h3>
             <div class="history-item">
@@ -670,11 +692,23 @@
       </div>
     </section>
 
-    <!-- お知らせ ＆ デモリール (2カラム並び) -->
+    <!-- デモリール ＆ お知らせ (2カラム並び：位置入れ替え) -->
     <section class="media-section section-padding">
       <div class="container">
         <div class="media-container">
-          <!-- 左：お知らせ -->
+          <!-- 左：デモリール『微塵も』 -->
+          <div class="media-col">
+            <h2 class="section-title">デモリール『微塵も』</h2>
+            <div class="youtube-container">
+              <iframe src="https://www.youtube.com/embed/bARXUG0cnck" title="デモリール『微塵も』" allowfullscreen></iframe>
+            </div>
+            <div class="demo-credits">
+              監督 植松蒼介<br>
+              脚本 高矢航志
+            </div>
+          </div>
+
+          <!-- 右：お知らせ -->
           <div class="media-col">
             <h2 class="section-title">お知らせ</h2>
             <div class="news-list">
@@ -697,18 +731,6 @@
             <!-- お知らせタブへ飛ばすmoreリンク -->
             <div class="news-more-link">
               <a onclick="switchTab('news')">more &raquo;</a>
-            </div>
-          </div>
-
-          <!-- 右：デモリール『微塵も』 -->
-          <div class="media-col">
-            <h2 class="section-title">デモリール『微塵も』</h2>
-            <div class="youtube-container">
-              <iframe src="https://www.youtube.com/embed/bARXUG0cnck" title="デモリール『微塵も』" allowfullscreen></iframe>
-            </div>
-            <div class="demo-credits">
-              監督 植松蒼介<br>
-              脚本 高矢航志
             </div>
           </div>
         </div>
@@ -740,7 +762,7 @@
   </div>
 
   <!-- ===============================================
-       2. 詳細プロフィール タブ
+       2. プロフィール タブ
   ================================================ -->
   <div id="tab-profile" class="tab-content">
     <section class="section-padding">
@@ -790,40 +812,7 @@
   </div>
 
   <!-- ===============================================
-       3. お知らせ タブ (新規追加)
-  ================================================ -->
-  <div id="tab-news" class="tab-content">
-    <section class="section-padding">
-      <div class="container">
-        <h2 class="section-title">お知らせ一覧</h2>
-        <div class="news-list" style="max-width: 800px; margin: 0 auto;">
-          <div class="news-card featured">
-            <span class="news-badge">NEW</span>
-            <span class="news-date">2026.09.15</span>
-            <p class="news-text">最新の出演舞台「作品タイトル」のチケット予約開始！</p>
-          </div>
-          <div class="news-card">
-            <span class="news-badge">INFO</span>
-            <span class="news-date">2026.08.01</span>
-            <p class="news-text">短編映画「作品名」の公開が決定いたしました。</p>
-          </div>
-          <div class="news-card">
-            <span class="news-badge">INFO</span>
-            <span class="news-date">2026.05.20</span>
-            <p class="news-text">オフィシャルサイトをリニューアルオープンしました。</p>
-          </div>
-          <div class="news-card">
-            <span class="news-badge">INFO</span>
-            <span class="news-date">2026.03.10</span>
-            <p class="news-text">過去の出演情報をアーカイブに追加いたしました。</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ===============================================
-       4. ポートフォリオ タブ
+       3. ポートフォリオ タブ
   ================================================ -->
   <div id="tab-portfolio" class="tab-content">
     <section class="section-padding">
@@ -857,7 +846,7 @@
   </div>
 
   <!-- ===============================================
-       5. ブログ タブ
+       4. ブログ タブ
   ================================================ -->
   <div id="tab-blog" class="tab-content">
     <section class="section-padding">
@@ -885,30 +874,58 @@
     </section>
   </div>
 
+  <!-- ===============================================
+       5. お知らせ タブ
+  ================================================ -->
+  <div id="tab-news" class="tab-content">
+    <section class="section-padding">
+      <div class="container">
+        <h2 class="section-title">お知らせ一覧</h2>
+        <div class="news-list" style="max-width: 800px; margin: 0 auto;">
+          <div class="news-card featured">
+            <span class="news-badge">NEW</span>
+            <span class="news-date">2026.09.15</span>
+            <p class="news-text">最新の出演舞台「作品タイトル」のチケット予約開始！</p>
+          </div>
+          <div class="news-card">
+            <span class="news-badge">INFO</span>
+            <span class="news-date">2026.08.01</span>
+            <p class="news-text">短編映画「作品名」の公開が決定いたしました。</p>
+          </div>
+          <div class="news-card">
+            <span class="news-badge">INFO</span>
+            <span class="news-date">2026.05.20</span>
+            <p class="news-text">オフィシャルサイトをリニューアルオープンしました。</p>
+          </div>
+          <div class="news-card">
+            <span class="news-badge">INFO</span>
+            <span class="news-date">2026.03.10</span>
+            <p class="news-text">過去の出演情報をアーカイブに追加いたしました。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
   <!-- JavaScript (タブ切り替え処理) -->
   <script>
     function switchTab(tabName) {
-      // すべてのタブコンテンツを非表示にする
       const contents = document.querySelectorAll('.tab-content');
       contents.forEach(content => content.classList.remove('active'));
 
-      // すべてのタブボタンのアクティブ状態を解除する
       const buttons = document.querySelectorAll('.tab-btn');
       buttons.forEach(btn => btn.classList.remove('active'));
 
-      // 該当のタブコンテンツを表示する
       const targetContent = document.getElementById('tab-' + tabName);
       if (targetContent) {
         targetContent.classList.add('active');
       }
 
-      // 該当のタブボタンをアクティブにする
       const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
       if (targetBtn) {
         targetBtn.classList.add('active');
       }
 
-      // ページ最上部へスクロール
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
