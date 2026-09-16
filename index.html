@@ -296,7 +296,7 @@
       height: 44px;
       background-color: var(--white); /* 背景を白で塗りつぶし */
       border-radius: 50%;
-      color: var(--navy); /* アイコンロゴを黒/ネイビーに */
+      color: #000000; /* アイコンロゴを黒/ネイビーに */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -310,14 +310,20 @@
     .social-links a svg {
       width: 26px;
       height: 26px;
-      fill: var(--navy);
-      transform: scale(1.15); 
+      fill: #000000;
+      transform: scale(1.20); 
       transition: fill 0.3s ease;
     }
 
+/* ★ホバー時に白黒を反転させる設定 */
     .social-links a:hover {
-      background-color: var(--yellow); /* ホバー時にイエローへ */
+      background-color: #000000; /* ホバーで背景が黒に */
+      color: var(--white);        /* ホバーでフォント（XやInstagram）が白に */
       transform: translateY(-2px);
+    }
+
+    .social-links a:hover svg {
+      fill: var(--white);         /* ホバーでnoteのロゴも白に */
     }
 
     .hero-right {
