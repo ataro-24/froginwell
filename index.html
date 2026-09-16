@@ -21,7 +21,7 @@
       --gray: #F4F5F7;
       --text-dark: #1C2541;
       
-      /* 白地に黒字のモノクロ用定義 */
+      /* SNSアイコン（雛形2共通） */
       --mono-bg: #FFFFFF;
       --mono-icon: #000000;
     }
@@ -32,17 +32,17 @@
       padding: 0;
     }
 
-    /* サイト全体の日本語基本フォント */
     body {
       font-family: 'Zen Maru Gothic', sans-serif;
       font-weight: 400;
       color: var(--text-dark);
       background-color: var(--gray);
       line-height: 1.6;
+      padding-top: 70px; /* 固定ヘッダー分の余白 */
     }
 
     /* -----------------------------------
-       ヘッダー & ハンバーガーメニュー
+       1. 上部固定ヘッダー ＆ タブバー
     ----------------------------------- */
     header {
       position: fixed;
@@ -53,127 +53,100 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 24px;
-      z-index: 100;
-      background-color: rgba(11, 19, 43, 0.9);
+      padding: 0 32px;
+      z-index: 1000;
+      background-color: rgba(11, 19, 43, 0.95);
       backdrop-filter: blur(8px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
 
-    /* 英字ロゴ：Caveat (Ataro website) */
     .site-logo {
       color: var(--yellow);
       font-family: 'Caveat', cursive;
       font-weight: 700;
-      font-size: 28px;
+      font-size: 30px;
       letter-spacing: 1px;
     }
 
-    /* ハンバーガーボタン */
-    .menu-btn {
-      width: 30px;
-      height: 24px;
+    /* タブナビゲーション */
+    .tab-nav {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      cursor: pointer;
-      z-index: 102;
+      gap: 8px;
     }
 
-    .menu-btn span {
-      display: block;
-      width: 100%;
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--white);
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 10px 16px;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--yellow);
+    }
+
+    .tab-btn.active {
+      color: var(--yellow);
+      font-weight: 700;
+    }
+
+    /* アクティブタブのインジケーター（下線） */
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 16px;
+      right: 16px;
       height: 3px;
       background-color: var(--yellow);
-      border-radius: 3px;
-      transition: all 0.3s ease;
-    }
-
-    .menu-btn.open span:nth-child(1) {
-      transform: translateY(10.5px) rotate(45deg);
-    }
-    .menu-btn.open span:nth-child(2) {
-      opacity: 0;
-    }
-    .menu-btn.open span:nth-child(3) {
-      transform: translateY(-10.5px) rotate(-45deg);
-    }
-
-    /* スライド式ナビゲーション */
-    .nav-menu {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 300px;
-      height: 100vh;
-      background-color: var(--navy);
-      padding: 40px 30px;
-      display: flex;
-      flex-direction: column;
-      transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 101;
-      box-shadow: -5px 0 20px rgba(0,0,0,0.3);
-    }
-
-    .nav-menu.active {
-      right: 0;
-    }
-
-    .close-btn {
-      align-self: flex-end;
-      color: var(--yellow);
-      font-family: 'Zen Maru Gothic', sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 40px;
-      padding: 8px;
-      transition: opacity 0.3s ease;
-    }
-
-    .close-btn:hover {
-      opacity: 0.8;
-    }
-
-    .nav-links {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .nav-links a {
-      color: var(--yellow);
-      font-family: 'Zen Maru Gothic', sans-serif;
-      font-weight: 500;
-      text-decoration: none;
-      font-size: 20px;
-      transition: opacity 0.3s ease, transform 0.2s ease;
-    }
-
-    .nav-links a.en-link {
-      font-family: 'Caveat', cursive;
-      font-size: 26px;
-    }
-
-    .nav-links a:hover {
-      opacity: 0.75;
-      transform: translateX(4px);
+      border-radius: 2px;
     }
 
     /* -----------------------------------
-       ヒーローセクション (TOP)
+       コンテンツ表示エリア (タブ切り替え)
+    ----------------------------------- */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* -----------------------------------
+       共通セクションスタイル
+    ----------------------------------- */
+    .section-title {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 700;
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--navy);
+      position: relative;
+    }
+
+    .section-padding {
+      padding: 80px 40px;
+    }
+
+    /* -----------------------------------
+       TOPタブ：ヒーローセクション
     ----------------------------------- */
     .hero {
       display: flex;
-      min-height: 100vh;
-      padding-top: 70px;
+      min-height: calc(100vh - 70px);
+      background-color: var(--navy);
     }
 
     .hero-left {
       flex: 1;
-      background-color: var(--navy);
       color: var(--yellow);
       display: flex;
       flex-direction: column;
@@ -184,27 +157,23 @@
     }
 
     .hero-name {
-      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 64px;
       font-weight: 700;
-      font-size: 72px;
       line-height: 1.2;
       margin-bottom: 8px;
-      color: var(--yellow);
     }
 
     .hero-name-en {
       font-family: 'Caveat', cursive;
-      font-size: 48px;
-      color: var(--yellow);
+      font-size: 42px;
       letter-spacing: 2px;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
     }
 
-    /* SNSボタン (64px / アイコン40px / モノクロ) */
+    /* SNSリンク (雛形2) */
     .social-links {
       display: flex;
       gap: 20px;
-      justify-content: center;
     }
 
     .social-links a {
@@ -216,15 +185,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 40px;
+      font-size: 36px;
       text-decoration: none;
       transition: all 0.3s ease;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     }
 
     .social-links a svg {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       fill: var(--mono-icon);
       transition: fill 0.3s ease;
     }
@@ -241,7 +210,6 @@
 
     .hero-right {
       flex: 1;
-      background-color: #e0e0e0;
       position: relative;
       overflow: hidden;
     }
@@ -250,358 +218,511 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
 
     /* -----------------------------------
-       プロフィールセクション
+       TOPタブ：簡易プロフィール
     ----------------------------------- */
-    .profile-section {
+    .simple-profile {
       background-color: var(--yellow);
       color: var(--navy);
-      padding: 100px 40px;
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    .simple-profile-box {
+      max-width: 800px;
+      margin: 0 auto;
       display: flex;
-      justify-content: center;
       align-items: center;
+      gap: 30px;
+      text-align: left;
     }
 
-    .profile-container {
-      max-width: 1100px;
-      width: 100%;
-      display: flex;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .profile-image-wrap {
-      flex: 1;
-      max-width: 500px;
-    }
-
-    .profile-img {
-      width: 100%;
-      height: auto;
-      border-radius: 16px;
-      box-shadow: 0 12px 30px rgba(11, 19, 43, 0.2);
-      display: block;
-      object-fit: cover;
-    }
-
-    .profile-content {
-      flex: 1;
-    }
-
-    .profile-title {
-      font-family: 'Zen Maru Gothic', sans-serif;
-      font-weight: 700;
-      font-size: 40px;
-      margin-bottom: 24px;
-      color: var(--navy);
-      position: relative;
-    }
-
-    .profile-details {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      font-size: 16px;
-    }
-
-    .profile-detail-item {
-      display: flex;
-      border-bottom: 1px solid rgba(11, 19, 43, 0.2);
-      padding-bottom: 8px;
-    }
-
-    /* ラベル：細文字（400） */
-    .profile-detail-label {
-      font-weight: 400;
+    .simple-profile-img {
       width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 15px rgba(11, 19, 43, 0.2);
       flex-shrink: 0;
     }
 
-    /* 値（アイテム）：太文字（700） */
-    .profile-detail-value {
-      font-weight: 700;
-      flex: 1;
+    .simple-profile-text h3 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .simple-profile-text p {
+      font-size: 15px;
+      line-height: 1.6;
     }
 
     /* -----------------------------------
-       出演歴セクション (HISTORY)
+       TOPタブ：出演歴 (雛形2ベース 左右2カラム)
     ----------------------------------- */
     .history-section {
-      padding: 100px 40px;
       background-color: var(--navy);
+      color: var(--white);
     }
 
-    .history-header {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-
-    .history-title {
-      font-family: 'Zen Maru Gothic', sans-serif;
-      font-weight: 700;
-      font-size: 36px;
+    .history-section .section-title {
       color: var(--yellow);
-      position: relative;
-      display: inline-block;
     }
 
-    .history-title::after {
-      content: '';
-      display: block;
-      width: 50px;
-      height: 3px;
-      background-color: var(--yellow);
-      margin: 8px auto 0;
-      border-radius: 2px;
-    }
-
-    /* 左右2カラム構造（最大幅1200px） */
     .history-container {
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
       display: flex;
-      gap: 40px;
-      align-items: stretch;
+      gap: 30px;
     }
 
     .history-col {
       flex: 1;
-      padding: 40px 32px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      padding: 32px 24px;
+      border-radius: 16px;
     }
 
-    /* 左カラム：舞台（ネイビー背景 × イエロー文字） */
     .history-col.stage {
       background-color: var(--navy);
       color: var(--yellow);
       border: 2px solid var(--yellow);
     }
 
-    /* 右カラム：映像（イエロー背景 × ネイビー文字） */
     .history-col.screen {
       background-color: var(--yellow);
       color: var(--navy);
     }
 
-    /* 「舞台」「映像」タイトル */
     .col-title {
-      font-family: 'Zen Maru Gothic', sans-serif;
-      font-weight: 700;
-      font-size: 26px;
-      margin-bottom: 28px;
+      font-size: 22px;
+      margin-bottom: 20px;
       text-align: center;
-      padding-bottom: 12px;
+      padding-bottom: 8px;
       border-bottom: 2px solid;
     }
 
-    .stage .col-title {
+    .stage .col-title { border-color: var(--yellow); }
+    .screen .col-title { border-color: var(--navy); }
+
+    .history-item {
+      display: flex;
+      gap: 10px;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .history-month { font-weight: 700; min-width: 32px; }
+    .history-sep { opacity: 0.5; }
+
+    /* -----------------------------------
+       TOPタブ：お知らせ（最新を目立たせる）
+    ----------------------------------- */
+    .news-section {
+      background-color: var(--gray);
+    }
+
+    .news-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .news-card {
+      background-color: var(--white);
+      padding: 20px 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* 最新記事を目立たせるスタイル */
+    .news-card.featured {
+      border: 2px solid var(--yellow);
+      background-color: #FFFDF5;
+      position: relative;
+    }
+
+    .news-badge {
+      background-color: var(--navy);
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      flex-shrink: 0;
+    }
+
+    .news-card.featured .news-badge {
+      background-color: var(--yellow);
+      color: var(--navy);
+    }
+
+    .news-date {
+      font-family: 'Caveat', cursive;
+      font-size: 18px;
+      color: #666;
+      flex-shrink: 0;
+    }
+
+    .news-text {
+      font-size: 15px;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    /* -----------------------------------
+       TOPタブ：YouTube 動画 (1本)
+    ----------------------------------- */
+    .youtube-section {
+      background-color: var(--white);
+      text-align: center;
+    }
+
+    .youtube-container {
+      max-width: 800px;
+      margin: 0 auto;
+      aspect-ratio: 16 / 9;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .youtube-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* -----------------------------------
+       TOPタブ：お問い合わせフォーム
+    ----------------------------------- */
+    .contact-section {
+      background-color: var(--navy);
+      color: var(--white);
+    }
+
+    .contact-section .section-title {
+      color: var(--yellow);
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: left;
+    }
+
+    .form-group label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--yellow);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--white);
+      font-family: inherit;
+      font-size: 15px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
       border-color: var(--yellow);
     }
 
-    .screen .col-title {
-      border-color: var(--navy);
-    }
-
-    /* 年ごとのブロック */
-    .history-year-block {
-      margin-bottom: 24px;
-    }
-
-    .history-year-block:last-child {
-      margin-bottom: 0;
-    }
-
-    /* 年号（Caveat / 22px / 太字） */
-    .history-year {
-      font-family: 'Caveat', cursive;
-      font-size: 22px;
+    .submit-btn {
+      background-color: var(--yellow);
+      color: var(--navy);
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
       font-weight: 700;
-      line-height: 1;
-      margin-bottom: 12px;
-      padding-bottom: 4px;
-      border-bottom: 1px solid;
-      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      transition: opacity 0.3s;
+      margin-top: 10px;
     }
 
-    .stage .history-year {
-      border-color: rgba(255, 209, 102, 0.4);
+    .submit-btn:hover {
+      opacity: 0.9;
     }
 
-    .screen .history-year {
-      border-color: rgba(11, 19, 43, 0.3);
+    /* -----------------------------------
+       別タブ：詳細プロフィール (雛形2仕様)
+    ----------------------------------- */
+    .profile-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      gap: 50px;
+      align-items: center;
     }
 
-    /* 年ごとのリスト */
-    .history-list {
+    .profile-img-wrap {
+      flex: 1;
+      max-width: 400px;
+    }
+
+    .profile-img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .profile-details {
+      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
-    /* 月・作品名・役名・詳細を左詰目で詰めて並べる行 */
-    .history-item {
+    .profile-detail-item {
       display: flex;
-      align-items: baseline;
-      gap: 12px;
-      font-size: 13px;
-      font-weight: 400;
-      line-height: 1.5;
+      border-bottom: 1px solid rgba(11, 19, 43, 0.15);
+      padding-bottom: 8px;
     }
 
-    .history-month {
-      font-size: 13px;
-      font-weight: 400;
-      min-width: 32px;
-      flex-shrink: 0;
+    .profile-detail-label { font-weight: 400; width: 120px; }
+    .profile-detail-value { font-weight: 700; flex: 1; }
+
+    /* -----------------------------------
+       別タブ：ポートフォリオ / ブログ (ダミー表示)
+    ----------------------------------- */
+    .grid-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
     }
 
-    .history-work {
-      font-size: 13px;
-      font-weight: 400;
+    .dummy-card {
+      background-color: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
-    .history-role {
-      font-size: 13px;
-      font-weight: 400;
-      opacity: 0.85;
+    .dummy-card-img {
+      width: 100%;
+      height: 200px;
+      background-color: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
     }
 
-    .history-detail {
-      font-size: 13px;
-      font-weight: 400;
-      opacity: 0.85;
+    .dummy-card-body {
+      padding: 20px;
     }
 
-    /* 区切り（スラッシュなど） */
-    .history-sep {
-      opacity: 0.5;
-      font-size: 12px;
+    .dummy-card-title {
+      font-weight: 700;
+      margin-bottom: 8px;
     }
 
-    /* レスポンシブ対応 */
+    /* -----------------------------------
+       レスポンシブ対応
+    ----------------------------------- */
     @media (max-width: 768px) {
-      .hero {
-        flex-direction: column-reverse;
-      }
-      .hero-left {
-        padding: 40px 24px;
-      }
-      .hero-name {
-        font-size: 52px;
-      }
-      .hero-name-en {
-        font-size: 36px;
-      }
-      .hero-right {
-        min-height: 400px;
-      }
+      header { padding: 0 16px; }
+      .site-logo { font-size: 24px; }
+      .tab-btn { font-size: 14px; padding: 8px 10px; }
+      .tab-btn.active::after { left: 10px; right: 10px; }
 
-      .profile-section {
-        padding: 60px 24px;
-      }
-      .profile-container {
-        flex-direction: column;
-        gap: 40px;
-      }
-      .profile-image-wrap {
-        max-width: 100%;
-      }
-      .profile-title {
-        font-size: 32px;
-      }
+      .hero { flex-direction: column-reverse; }
+      .hero-right { min-height: 350px; }
+      .hero-name { font-size: 48px; }
 
-      .history-section {
-        padding: 60px 20px;
-      }
-      .history-container {
-        flex-direction: column;
-        gap: 30px;
-      }
-      .history-col.stage {
-        order: 1;
-      }
-      .history-col.screen {
-        order: 2;
-      }
-
-      .history-item {
-        flex-wrap: wrap;
-        gap: 6px 10px;
-      }
+      .simple-profile-box { flex-direction: column; text-align: center; }
+      .history-container { flex-direction: column; }
+      .profile-container { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ヘッダー＆ハンバーガーメニュー -->
+  <!-- 固定ヘッダー & 上部タブナビゲーション -->
   <header>
     <div class="site-logo">Ataro website</div>
-    <div class="menu-btn" id="menuBtn">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+    <nav class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('top')">TOP</button>
+      <button class="tab-btn" onclick="switchTab('profile')">詳細プロフィール</button>
+      <button class="tab-btn" onclick="switchTab('portfolio')">ポートフォリオ</button>
+      <button class="tab-btn" onclick="switchTab('blog')">ブログ</button>
+    </nav>
   </header>
 
-  <!-- ナビゲーションメニュー -->
-  <nav class="nav-menu" id="navMenu">
-    <div class="close-btn" id="closeBtn">
-      <span>閉じる</span> <i class="fa-solid fa-xmark"></i>
-    </div>
-    <div class="nav-links">
-      <a href="#hero" class="en-link">TOP</a>
-      <a href="#profile">プロフィール</a>
-      <a href="#history">出演歴</a>
-      <a href="#portfolio">ポートフォリオ</a>
-      <a href="#blog">ブログ</a>
-      <a href="#contact">お問い合わせ</a>
-    </div>
-  </nav>
-
-  <!-- メイン表示エリア (TOP) -->
-  <main class="hero" id="hero">
-    <div class="hero-left">
-      <h1 class="hero-name">高井 蛙太郎</h1>
-      <p class="hero-name-en">Takai Ataro</p>
-      
-      <!-- SNSリンク -->
-      <div class="social-links">
-        <a href="https://x.com/notakanon" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-          <i class="fa-brands fa-x-twitter"></i>
-        </a>
-        <a href="https://www.instagram.com/notakanon" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <i class="fa-brands fa-instagram"></i>
-        </a>
-        <a href="https://note.com/flaxenfrog" target="_blank" rel="noopener noreferrer" aria-label="note">
-          <svg viewBox="0 0 500 500" aria-hidden="true">
-            <path d="M105.251 215.151C90.5437 214.742 69.9529 215.559 55 215.559V292.039H76.4079V234.189C76.4079 234.189 95.4463 233.535 102.31 234.352C108.765 235.088 111.135 239.092 111.38 247.426C111.543 256.904 111.38 261.889 111.38 292.039H132.788C132.788 292.039 133.033 257.558 132.788 245.547C132.461 224.22 125.025 215.641 105.251 215.151Z" />
-            <path d="M204.283 214.906C183.121 214.906 165.88 232.228 165.88 253.554C165.88 274.881 183.121 292.203 204.283 292.203C225.446 292.203 242.687 274.881 242.687 253.554C242.687 232.228 225.446 214.906 204.283 214.906ZM204.283 273.737C193.171 273.737 184.183 264.667 184.183 253.473C184.183 242.278 193.171 233.209 204.283 233.209C215.396 233.209 224.384 242.278 224.384 253.473C224.384 264.749 215.396 273.737 204.283 273.737Z" />
-            <path d="M445 253.554C445 232.228 427.759 214.906 406.596 214.906C385.434 214.906 368.193 232.228 368.193 253.554C368.193 266.056 373.913 276.76 382.819 283.869C389.029 288.771 397.69 292.203 409.293 292.203C414.931 292.203 429.557 290.651 440.097 278.966L431.436 267.363C427.759 270.632 418.526 275.207 411.172 275.207C401.857 275.207 396.219 273.41 392.134 269.569C389.601 267.282 387.803 263.768 386.986 259.438H444.428C444.755 257.476 445 255.597 445 253.554ZM387.15 246.527C389.274 237.458 395.647 230.757 406.515 230.757C417.872 230.757 423.837 237.948 425.798 246.527H387.15Z" />
-            <path d="M315.408 207.797H295.39V229.287H274.799V248.08H295.39V270.387H315.408V248.08H335.999V229.287H315.408V207.797Z" />
-          </svg>
-        </a>
+  <!-- ===============================================
+       1. TOP タブ
+  ================================================ -->
+  <div id="tab-top" class="tab-content active">
+    
+    <!-- ヒーローセクション -->
+    <section class="hero">
+      <div class="hero-left">
+        <h1 class="hero-name">高井 蛙太郎</h1>
+        <p class="hero-name-en">Takai Ataro</p>
+        
+        <!-- SNSリンク (雛形2モノクロ仕様) -->
+        <div class="social-links">
+          <a href="https://x.com/notakanon" target="_blank" rel="noopener noreferrer" aria-label="X">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+          <a href="https://www.instagram.com/notakanon" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://note.com/flaxenfrog" target="_blank" rel="noopener noreferrer" aria-label="note">
+            <svg viewBox="0 0 500 500" aria-hidden="true">
+              <path d="M105.251 215.151C90.5437 214.742 69.9529 215.559 55 215.559V292.039H76.4079V234.189C76.4079 234.189 95.4463 233.535 102.31 234.352C108.765 235.088 111.135 239.092 111.38 247.426C111.543 256.904 111.38 261.889 111.38 292.039H132.788C132.788 292.039 133.033 257.558 132.788 245.547C132.461 224.22 125.025 215.641 105.251 215.151Z" />
+              <path d="M204.283 214.906C183.121 214.906 165.88 232.228 165.88 253.554C165.88 274.881 183.121 292.203 204.283 292.203C225.446 292.203 242.687 274.881 242.687 253.554C242.687 232.228 225.446 214.906 204.283 214.906ZM204.283 273.737C193.171 273.737 184.183 264.667 184.183 253.473C184.183 242.278 193.171 233.209 204.283 233.209C215.396 233.209 224.384 242.278 224.384 253.473C224.384 264.749 215.396 273.737 204.283 273.737Z" />
+              <path d="M445 253.554C445 232.228 427.759 214.906 406.596 214.906C385.434 214.906 368.193 232.228 368.193 253.554C368.193 266.056 373.913 276.76 382.819 283.869C389.029 288.771 397.69 292.203 409.293 292.203C414.931 292.203 429.557 290.651 440.097 278.966L431.436 267.363C427.759 270.632 418.526 275.207 411.172 275.207C401.857 275.207 396.219 273.41 392.134 269.569C389.601 267.282 387.803 263.768 386.986 259.438H444.428C444.755 257.476 445 255.597 445 253.554ZM387.15 246.527C389.274 237.458 395.647 230.757 406.515 230.757C417.872 230.757 423.837 237.948 425.798 246.527H387.15Z" />
+              <path d="M315.408 207.797H295.39V229.287H274.799V248.08H295.39V270.387H315.408V248.08H335.999V229.287H315.408V207.797Z" />
+            </svg>
+          </a>
+        </div>
       </div>
-    </div>
-
-    <div class="hero-right">
-      <img src="2406156648.jpg" alt="高井蛙太郎" class="hero-img">
-    </div>
-  </main>
-
-  <!-- プロフィールセクション (写真変更: 2406155326.jpg) -->
-  <section class="profile-section" id="profile">
-    <div class="profile-container">
-      <div class="profile-image-wrap">
-        <img src="2406155326.jpg" alt="高井蛙太郎 プロフィール写真" class="profile-img">
+      <div class="hero-right">
+        <img src="2406156648.jpg" alt="高井蛙太郎" class="hero-img">
       </div>
+    </section>
 
-      <div class="profile-content">
-        <h2 class="profile-title">プロフィール</h2>
+    <!-- 簡易プロフィール -->
+    <section class="simple-profile">
+      <div class="simple-profile-box">
+        <img src="2406155326.jpg" alt="高井蛙太郎" class="simple-profile-img">
+        <div class="simple-profile-text">
+          <h3>高井 蛙太郎（たかい あたろう）</h3>
+          <p>1997年2月4日生まれ、愛知県出身。舞台や映像作品を中心に活動中。詳しい経歴やプロフィール情報は「詳細プロフィール」タブをご覧ください。</p>
+        </div>
+      </div>
+    </section>
 
+    <!-- 出演歴 (雛形2ベース 2カラム) -->
+    <section class="history-section section-padding">
+      <h2 class="section-title">最新の出演歴</h2>
+      <div class="history-container">
+        <!-- 舞台 -->
+        <div class="history-col stage">
+          <h3 class="col-title">舞台</h3>
+          <div class="history-item">
+            <span class="history-month">2026.04</span>
+            <span class="history-work">舞台「作品タイトル」</span>
+            <span class="history-sep">/</span>
+            <span>役名</span>
+          </div>
+          <div class="history-item">
+            <span class="history-month">2026.01</span>
+            <span class="history-work">公演名タイトル</span>
+            <span class="history-sep">/</span>
+            <span>主演</span>
+          </div>
+        </div>
+
+        <!-- 映像 -->
+        <div class="history-col screen">
+          <h3 class="col-title">映像</h3>
+          <div class="history-item">
+            <span class="history-month">2026.05</span>
+            <span class="history-work">映画「作品タイトル」</span>
+            <span class="history-sep">/</span>
+            <span>役名</span>
+          </div>
+          <div class="history-item">
+            <span class="history-month">2025.10</span>
+            <span class="history-work">ドラマ「作品名」</span>
+            <span class="history-sep">/</span>
+            <span>ゲスト出演</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- お知らせ (最新を固定強調) -->
+    <section class="news-section section-padding">
+      <h2 class="section-title">お知らせ</h2>
+      <div class="news-list">
+        <!-- 最新記事 (目立たせる) -->
+        <div class="news-card featured">
+          <span class="news-badge">NEW</span>
+          <span class="news-date">2026.09.15</span>
+          <p class="news-text">最新の出演舞台「作品タイトル」のチケット先行予約が開始されました！</p>
+        </div>
+
+        <div class="news-card">
+          <span class="news-badge">INFO</span>
+          <span class="news-date">2026.08.01</span>
+          <p class="news-text">短編映画「作品名」の公開が決定いたしました。</p>
+        </div>
+
+        <div class="news-card">
+          <span class="news-badge">INFO</span>
+          <span class="news-date">2026.05.20</span>
+          <p class="news-text">オフィシャルサイトをリニューアルオープンしました。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- YouTube動画 (おすすめ1本) -->
+    <section class="youtube-section section-padding">
+      <h2 class="section-title">Featured Video</h2>
+      <div class="youtube-container">
+        <!-- サンプル用のダミー埋め込み (実際の動画URLに置き換え可能) -->
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- お問い合わせフォーム -->
+    <section class="contact-section section-padding">
+      <h2 class="section-title">お問い合わせ</h2>
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('送信機能は準備中です');">
+        <div class="form-group">
+          <label for="name">お名前</label>
+          <input type="text" id="name" placeholder="山田 太郎" required>
+        </div>
+        <div class="form-group">
+          <label for="email">メールアドレス</label>
+          <input type="email" id="email" placeholder="example@mail.com" required>
+        </div>
+        <div class="form-group">
+          <label for="message">メッセージ</label>
+          <textarea id="message" rows="5" placeholder="お問い合わせ内容をご記入ください" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">送信する</button>
+      </form>
+    </section>
+
+  </div>
+
+  <!-- ===============================================
+       2. 詳細プロフィール タブ (雛形2)
+  ================================================ -->
+  <div id="tab-profile" class="tab-content">
+    <section class="section-padding">
+      <h2 class="section-title">プロフィール</h2>
+      <div class="profile-container">
+        <div class="profile-img-wrap">
+          <img src="2406155326.jpg" alt="高井蛙太郎 プロフィール写真" class="profile-img">
+        </div>
         <div class="profile-details">
           <div class="profile-detail-item">
             <span class="profile-detail-label">名前</span>
@@ -637,138 +758,86 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
-  <!-- 出演歴セクション -->
-  <section class="history-section" id="history">
-    <div class="history-header">
-      <h2 class="history-title">出演歴</h2>
-    </div>
-
-    <div class="history-container">
-      
-      <!-- 左側：舞台 -->
-      <div class="history-col stage">
-        <h3 class="col-title">舞台</h3>
-
-        <!-- 2026年 -->
-        <div class="history-year-block">
-          <div class="history-year">2026</div>
-          <div class="history-list">
-            
-            <div class="history-item">
-              <span class="history-month">4月</span>
-              <span class="history-work">舞台「作品タイトル」</span>
-              <span class="history-sep">/</span>
-              <span class="history-role">役名</span>
-              <span class="history-sep">/</span>
-              <span class="history-detail">〇〇劇場</span>
-            </div>
-
-            <div class="history-item">
-              <span class="history-month">1月</span>
-              <span class="history-work">公演名タイトル</span>
-              <span class="history-sep">/</span>
-              <span class="history-role">主演・役名</span>
-              <span class="history-sep">/</span>
-              <span class="history-detail">〇〇ホール</span>
-            </div>
-
+  <!-- ===============================================
+       3. ポートフォリオ タブ
+  ================================================ -->
+  <div id="tab-portfolio" class="tab-content">
+    <section class="section-padding">
+      <h2 class="section-title">ポートフォリオ</h2>
+      <div class="grid-container">
+        <div class="dummy-card">
+          <div class="dummy-card-img">Photo 1</div>
+          <div class="dummy-card-body">
+            <div class="dummy-card-title">スナップ写真作品 #1</div>
+            <p style="font-size: 13px; color: #666;">作品の説明テキストが入ります。</p>
           </div>
         </div>
-
-        <!-- 2025年 -->
-        <div class="history-year-block">
-          <div class="history-year">2025</div>
-          <div class="history-list">
-            
-            <div class="history-item">
-              <span class="history-month">8月</span>
-              <span class="history-work">旗揚げ公演「作品名」</span>
-              <span class="history-sep">/</span>
-              <span class="history-role">演出・出演</span>
-              <span class="history-sep">/</span>
-              <span class="history-detail">〇〇スタジオ</span>
-            </div>
-
+        <div class="dummy-card">
+          <div class="dummy-card-img">Photo 2</div>
+          <div class="dummy-card-body">
+            <div class="dummy-card-title">舞台スチール</div>
+            <p style="font-size: 13px; color: #666;">作品の説明テキストが入ります。</p>
           </div>
         </div>
-
+        <div class="dummy-card">
+          <div class="dummy-card-img">Photo 3</div>
+          <div class="dummy-card-body">
+            <div class="dummy-card-title">ポートレート集</div>
+            <p style="font-size: 13px; color: #666;">作品の説明テキストが入ります。</p>
+          </div>
+        </div>
       </div>
+    </section>
+  </div>
 
-      <!-- 右側：映像 -->
-      <div class="history-col screen">
-        <h3 class="col-title">映像</h3>
-
-        <!-- 2026年 -->
-        <div class="history-year-block">
-          <div class="history-year">2026</div>
-          <div class="history-list">
-            
-            <div class="history-item">
-              <span class="history-month">5月</span>
-              <span class="history-work">映画「作品タイトル」</span>
-              <span class="history-sep">/</span>
-              <span class="history-role">役名</span>
-              <span class="history-sep">/</span>
-              <span class="history-detail">監督：〇〇</span>
-            </div>
-
+  <!-- ===============================================
+       4. ブログ タブ
+  ================================================ -->
+  <div id="tab-blog" class="tab-content">
+    <section class="section-padding">
+      <h2 class="section-title">ブログ</h2>
+      <div class="grid-container">
+        <div class="dummy-card">
+          <div class="dummy-card-img">Blog Image</div>
+          <div class="dummy-card-body">
+            <div class="dummy-card-title">【日常】最近撮影したスナップ写真たち</div>
+            <p style="font-size: 13px; color: #666; margin-bottom: 8px;">2026.09.10</p>
+            <p style="font-size: 14px;">ブログの本文プレビューがここに入ります...</p>
           </div>
         </div>
-
-        <!-- 2025年 -->
-        <div class="history-year-block">
-          <div class="history-year">2025</div>
-          <div class="history-list">
-            
-            <div class="history-item">
-              <span class="history-month">10月</span>
-              <span class="history-work">ドラマ「作品名」第〇話</span>
-              <span class="history-sep">/</span>
-              <span class="history-role">ゲスト出演</span>
-              <span class="history-sep">/</span>
-              <span class="history-detail">〇〇テレビ</span>
-            </div>
-
-            <div class="history-item">
-              <span class="history-month">3月</span>
-              <span class="history-work">短編映画「作品名」</span>
-              <span class="history-sep">/</span>
-              <span class="history-role">主演・役名</span>
-            </div>
-
+        <div class="dummy-card">
+          <div class="dummy-card-img">Blog Image</div>
+          <div class="dummy-card-body">
+            <div class="dummy-card-title">次回公演に向けての稽古が始まりました</div>
+            <p style="font-size: 13px; color: #666; margin-bottom: 8px;">2026.08.25</p>
+            <p style="font-size: 14px;">ブログの本文プレビューがここに入ります...</p>
           </div>
         </div>
-
       </div>
+    </section>
+  </div>
 
-    </div>
-  </section>
-
-  <!-- JavaScript -->
+  <!-- JavaScript (タブ切り替え処理) -->
   <script>
-    const menuBtn = document.getElementById('menuBtn');
-    const closeBtn = document.getElementById('closeBtn');
-    const navMenu = document.getElementById('navMenu');
+    function switchTab(tabName) {
+      // すべてのコンテンツを非表示にする
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
 
-    menuBtn.addEventListener('click', () => {
-      menuBtn.classList.add('open');
-      navMenu.classList.add('active');
-    });
+      // すべてのタブボタンのアクティブ状態を解除する
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
 
-    closeBtn.addEventListener('click', () => {
-      menuBtn.classList.remove('open');
-      navMenu.classList.remove('active');
-    });
+      // 選択されたタブのコンテンツとボタンを有効化する
+      document.getElementById('tab-' + tabName).classList.add('active');
+      event.currentTarget.classList.add('active');
 
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        menuBtn.classList.remove('open');
-        navMenu.classList.remove('active');
-      });
-    });
+      // ページ最上部へスクロール
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   </script>
 
 </body>
