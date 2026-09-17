@@ -228,7 +228,8 @@
 
 /* ★追加するグレーの線のスタイル */
     .hero-divider {
-      width: 60px; /* 線の長さ（お好みで調整してね） */
+      width: 100%;       /* 親要素の幅に対して最大まで広げるか、固定値にするなら文字幅に合わせるわね */
+      max-width: 220px;
       height: 1px;
       background-color: var(--gray-text); /* 既存のグレー変数を使用 */
       margin: 0 auto 20px auto; /* 中央揃えにして下側に余白を空ける */
@@ -683,7 +684,7 @@
 
   <!-- 固定ヘッダー & 上部タブナビゲーション -->
   <header>
-    <div class="site-logo">Ataro website</div>
+    <div class="site-logo">Ataro in the well</div>
     <nav class="tab-nav">
       <button class="tab-btn active" data-tab="top" onclick="switchTab('top')">TOP</button>
       <button class="tab-btn" data-tab="profile" onclick="switchTab('profile')">プロフィール</button>
