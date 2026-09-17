@@ -602,64 +602,65 @@
 /* -----------------------------------
        別タブ：プロフィール（黄色背景＆ネイビー文字）
     ----------------------------------- */
-
-    #tab-profile {
+#tab-profile {
       background-color: var(--yellow);
       color: var(--navy);
-      min-height: calc(100vh - 60px); /* 画面いっぱいに黄色を広げる設定よ */
+      min-height: calc(100vh - 60px);
     }
 
-    /* セクションタイトルの色をネイビーにする */
     #tab-profile .section-title {
       color: var(--navy);
     }
 
+    /* 上下に並べるため flex-direction: column に変更 */
     .profile-container {
-      max-width: 900px;
+      max-width: 700px; /* テキストが横に広がりすぎないよう中央に綺麗に収めるサイズよ */
       margin: 0 auto;
       display: flex;
-      gap: 40px;
-      align-items: flex-start; /* 上揃えにしてすっきり見せるわ */
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
     }
 
-    /* ★写真2枚を並べるエリア */
+    /* ★写真2枚を横並びにするエリア */
     .profile-img-wrap {
-      flex: 1;
-      max-width: 380px;
+      width: 100%;
       display: flex;
-      gap: 12px; /* 2枚の写真のすき間 */
+      justify-content: center;
+      gap: 16px; /* 2枚の写真のすき間 */
     }
 
     .profile-img {
-      width: 50%; /* 2枚で半分ずつ分けるわ */
+      width: 48%; /* 2枚が綺麗に並ぶ幅 */
+      max-width: 320px;
       height: auto;
       border-radius: 12px;
       object-fit: cover;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     }
 
+    /* ★真下に置くプロフィール詳細 */
     .profile-details {
-      flex: 1;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
-    /* ★区切り線やラベルの色をネイビーに調整 */
     .profile-detail-item {
       display: flex;
       border-bottom: 1px solid rgba(11, 19, 43, 0.2);
-      padding-bottom: 6px;
+      padding-bottom: 8px;
     }
 
     .profile-detail-label {
-      font-weight: 700;
-      width: 110px;
+      font-weight: 500;
+      width: 120px;
       color: var(--navy);
     }
 
     .profile-detail-value {
-      font-weight: 500;
+      font-weight: 700;
       color: var(--navy);
       flex: 1;
     }
@@ -957,14 +958,13 @@
         <h2 class="section-title">プロフィール</h2>
         <div class="profile-container">
           
-          <!-- ★写真2枚を横並びにするエリア -->
+          <!-- 上段：写真2枚の横並び -->
           <div class="profile-img-wrap">
             <img src="2406155326.jpg" alt="高井蛙太郎 プロフィール写真1" class="profile-img">
-            <!-- ↓追加する2枚目の画像（ファイル名は使いたい写真に変えてね） -->
-            <img src="2406156648.jpg" alt="高井蛙太郎 プロフィール写真2" class="profile-img">
+            <img src="2406155412.jpg" alt="高井蛙太郎 プロフィール写真2" class="profile-img">
           </div>
 
-          <!-- プロフィール詳細 -->
+          <!-- 下段：プロフィール詳細 -->
           <div class="profile-details">
             <div class="profile-detail-item">
               <span class="profile-detail-label">名前</span>
@@ -991,12 +991,20 @@
               <span class="profile-detail-value">58kg</span>
             </div>
             <div class="profile-detail-item">
+              <span class="profile-detail-label">サイズ</span>
+              <span class="profile-detail-value">B:88/W:74/H:84/靴:26.5</span>
+            </div>
+            <div class="profile-detail-item">
               <span class="profile-detail-label">趣味・特技</span>
               <span class="profile-detail-value">野球 / ゲーム / 詩作 / スナップ写真</span>
             </div>
             <div class="profile-detail-item">
               <span class="profile-detail-label">資格</span>
               <span class="profile-detail-value">準中型自動車運転免許(MT) / 漢字検定準1級</span>
+            </div>
+            <div class="profile-detail-item">
+              <span class="profile-detail-label">好きな言葉</span>
+              <span class="profile-detail-value">さよならだけが人生だ</span>
             </div>
           </div>
 
