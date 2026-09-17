@@ -642,14 +642,16 @@
     /* ★真下に置くプロフィール詳細 */
     .profile-details {
       width: 100%;
+      max-width: 450px;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       gap: 12px;
     }
 
     .profile-detail-item {
       display: flex;
+      justify-content: space-between; /* 両端揃えで綺麗に並べるわ */
       border-bottom: 1px solid rgba(11, 19, 43, 0.2);
       padding-bottom: 8px;
     }
