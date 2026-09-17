@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ataro website</title>
+  <title>Ataro in the well</title>
   
   <!-- FontAwesome (SNSアイコン用) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -226,6 +226,15 @@
       color: var(--yellow);
     }
 
+/* ★追加するグレーの線のスタイル */
+    .hero-divider {
+      width: 60px; /* 線の長さ（お好みで調整してね） */
+      height: 1px;
+      background-color: var(--gray-text); /* 既存のグレー変数を使用 */
+      margin: 0 auto 20px auto; /* 中央揃えにして下側に余白を空ける */
+      border: none;
+    }
+    
     /* 簡易プロフィールカード（サイズ拡大） */
     .hero-profile-card {
       display: flex;
@@ -705,6 +714,9 @@
           <h1 class="hero-name">高井 蛙太郎</h1>
         </div>
         <p class="hero-name-en">Takai Ataro</p>
+
+<!-- ★ここにグレーの線を追加 -->
+        <hr class="hero-divider">
         
         <!-- 簡易プロフィールカード（大きめサイズ） -->
         <div class="hero-profile-card" onclick="switchTab('profile')">
