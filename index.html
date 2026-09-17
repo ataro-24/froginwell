@@ -414,16 +414,17 @@
     .history-month { font-weight: 700; min-width: 60px; }
     .history-sep { opacity: 0.5; }
 
-/* ★舞台ボックスの外、左下に画像を配置するためのスタイル */
+/* ★舞台ボックスの外、左下に確実に配置するためのスタイル */
     .stage-outer-image {
+      width: 100%; /* 親カラムの幅一杯に広げて、横並びをブロックするわ */
       margin-top: 20px;
       text-align: left; /* 左側に寄せるわね */
-      padding-left: 4px; /* わずかに左の余白を合わせて微調整 */
+      padding-left: 4px;
     }
 
     .stage-outer-image img {
       width: 100%;
-      max-width: 220px; /* お好みの大きさに調整してね */
+      max-width: 200px; /* お好みの大きさに調整してね */
       height: auto;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -831,7 +832,7 @@
 
 <!-- ★ここに、舞台ボックスの枠外（左下）に配置する画像を追加 -->
             <div class="stage-outer-image">
-              <img src="chojuori.jpg" alt="舞台関連の写真">
+              <img src="chojuori.png" alt="舞台関連の写真">
             </div>
 
           </div>
