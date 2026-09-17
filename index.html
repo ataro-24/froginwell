@@ -599,26 +599,43 @@
       opacity: 0.9;
     }
 
-    /* -----------------------------------
-       別タブ：プロフィール
+/* -----------------------------------
+       別タブ：プロフィール（黄色背景＆ネイビー文字）
     ----------------------------------- */
+
+    #tab-profile {
+      background-color: var(--yellow);
+      color: var(--navy);
+      min-height: calc(100vh - 60px); /* 画面いっぱいに黄色を広げる設定よ */
+    }
+
+    /* セクションタイトルの色をネイビーにする */
+    #tab-profile .section-title {
+      color: var(--navy);
+    }
+
     .profile-container {
       max-width: 900px;
       margin: 0 auto;
       display: flex;
       gap: 40px;
-      align-items: center;
+      align-items: flex-start; /* 上揃えにしてすっきり見せるわ */
     }
 
+    /* ★写真2枚を並べるエリア */
     .profile-img-wrap {
       flex: 1;
-      max-width: 350px;
+      max-width: 380px;
+      display: flex;
+      gap: 12px; /* 2枚の写真のすき間 */
     }
 
     .profile-img {
-      width: 100%;
+      width: 50%; /* 2枚で半分ずつ分けるわ */
+      height: auto;
       border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      object-fit: cover;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     .profile-details {
@@ -628,14 +645,24 @@
       gap: 10px;
     }
 
+    /* ★区切り線やラベルの色をネイビーに調整 */
     .profile-detail-item {
       display: flex;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      border-bottom: 1px solid rgba(11, 19, 43, 0.2);
       padding-bottom: 6px;
     }
 
-    .profile-detail-label { font-weight: 400; width: 110px; color: var(--yellow); }
-    .profile-detail-value { font-weight: 700; flex: 1; }
+    .profile-detail-label {
+      font-weight: 700;
+      width: 110px;
+      color: var(--navy);
+    }
+
+    .profile-detail-value {
+      font-weight: 500;
+      color: var(--navy);
+      flex: 1;
+    }
 
     /* -----------------------------------
        別タブ：ポートフォリオ・ブログ・お知らせ
@@ -924,14 +951,20 @@
   <!-- ===============================================
         2. プロフィール タブ
   ================================================ -->
-  <div id="tab-profile" class="tab-content">
+<div id="tab-profile" class="tab-content">
     <section class="section-padding">
       <div class="container">
         <h2 class="section-title">プロフィール</h2>
         <div class="profile-container">
+          
+          <!-- ★写真2枚を横並びにするエリア -->
           <div class="profile-img-wrap">
-            <img src="2406155326.jpg" alt="高井蛙太郎 プロフィール写真" class="profile-img">
+            <img src="2406155326.jpg" alt="高井蛙太郎 プロフィール写真1" class="profile-img">
+            <!-- ↓追加する2枚目の画像（ファイル名は使いたい写真に変えてね） -->
+            <img src="2406156648.jpg" alt="高井蛙太郎 プロフィール写真2" class="profile-img">
           </div>
+
+          <!-- プロフィール詳細 -->
           <div class="profile-details">
             <div class="profile-detail-item">
               <span class="profile-detail-label">名前</span>
@@ -966,6 +999,7 @@
               <span class="profile-detail-value">準中型自動車運転免許(MT) / 漢字検定準1級</span>
             </div>
           </div>
+
         </div>
       </div>
     </section>
