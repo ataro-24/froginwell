@@ -229,7 +229,7 @@
 /* ★追加するグレーの線のスタイル */
     .hero-divider {
       width: 100%;       /* 親要素の幅に対して最大まで広げるか、固定値にするなら文字幅に合わせるわね */
-      max-width: 350px;
+      max-width: 340px;
       height: 1px;
       background-color: var(--gray-text); /* 既存のグレー変数を使用 */
       margin: 0 auto 20px auto; /* 中央揃えにして下側に余白を空ける */
@@ -414,6 +414,22 @@
     .history-month { font-weight: 700; min-width: 60px; }
     .history-sep { opacity: 0.5; }
 
+/* ★舞台ボックスの外、左下に画像を配置するためのスタイル */
+    .stage-outer-image {
+      margin-top: 20px;
+      text-align: left; /* 左側に寄せるわね */
+      padding-left: 4px; /* わずかに左の余白を合わせて微調整 */
+    }
+
+    .stage-outer-image img {
+      width: 100%;
+      max-width: 220px; /* お好みの大きさに調整してね */
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      object-fit: cover;
+    }
+    
     /* --- 映像（右カラム・上部） --- */
     .history-col.screen {
       background-color: var(--navy);
@@ -813,6 +829,13 @@
             </div>
           </div>
 
+<!-- ★ここに、舞台ボックスの枠外（左下）に配置する画像を追加 -->
+            <div class="stage-outer-image">
+              <img src="chojuori.jpg" alt="舞台関連の写真">
+            </div>
+
+          </div>
+          
           <!-- 右カラム：映像出演歴 ＋ デモリール ＋ お知らせ -->
           <div class="grid-col-right">
             
