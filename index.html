@@ -914,22 +914,25 @@
       </div>
     </section>
 
-    <!-- ご依頼・メッセージ フォーム -->
+<!-- ご依頼・メッセージ フォーム -->
     <section class="contact-section section-padding">
       <div class="container">
         <h2 class="section-title">ご依頼・メッセージ</h2>
-        <form class="contact-form" action="https://formspree.io/f/xljdeppn" method="POSt">
+        <form class="contact-form" action="https://formspree.io/f/xljdeppn" method="post">
           <div class="form-group">
             <label for="name">お名前</label>
-            <input type="text" id="name" placeholder="山田 太郎" required>
+            <!-- ★ name="name" を追加 -->
+            <input type="text" id="name" name="name" placeholder="山田 太郎" required>
           </div>
           <div class="form-group">
             <label for="email">メールアドレス</label>
-            <input type="email" id="email" placeholder="example@mail.com" required>
+            <!-- ★ name="email" または name="_replyto" を追加 -->
+            <input type="email" id="email" name="email" placeholder="example@mail.com" required>
           </div>
           <div class="form-group">
             <label for="message">メッセージ</label>
-            <textarea id="message" rows="4" placeholder="ご依頼やメッセージ内容をご記入ください" required></textarea>
+            <!-- ★ name="message" を追加 -->
+            <textarea id="message" name="message" rows="4" placeholder="ご依頼やメッセージ内容をご記入ください" required></textarea>
           </div>
           <button type="submit" class="submit-btn">送信する</button>
         </form>
