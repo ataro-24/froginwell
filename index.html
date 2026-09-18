@@ -139,26 +139,27 @@
     gap: 32px;
   }
 
-  .nav-menu a {
-    font-size: 20px;
-    color: var(--yellow);
-    text-decoration: none;
-    font-weight: 700;
-    position: relative;
-    padding-bottom: 4px; /* 下線との余白 */
-  }
+/* ナビゲーションメニューのリンク */
+.nav-menu a {
+  color: var(--yellow);
+  text-decoration: none;
+  font-weight: 700;
+  position: relative;
+  padding: 8px 0; /* 上下に少し余白をとって下線が見えるスペースを作るわ〜 */
+  display: inline-block;
+}
 
-/* 今いるタブ（.active）のメニューに下線を表示するわ〜 */
-  .nav-menu a.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--yellow); /* 下線の色 */
-    border-radius: 2px;
-  }
+/* 今いるタブ（.active）の下線指定 */
+.nav-menu a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;                     /* 太さを少し太くして見やすくしたわ〜 */
+  background-color: var(--yellow);  /* 下線の色 */
+  border-radius: 2px;
+}
 
   /* ハンバーガーボタンが「X」に変形するアニメーション */
   .hamburger-btn.active span:nth-child(1) {
@@ -909,7 +910,7 @@
     <!-- ★ ナビゲーションメニュー -->
     <nav class="nav-menu" id="navMenu">
       <ul>
-        <li><a href="#tab-top">TOP</a></li>
+        <li><a href="#tab-top" class="active">TOP</a></li>
         <li><a href="#tab-profile">プロフィール</a></li>
         <li><a href="#tab-gallery">ギャラリー</a></li>
         <li><a href="#tab-blog">ブログ</a></li>
