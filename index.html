@@ -748,17 +748,22 @@
   pointer-events: none;
 }
 
-
 /* ==========================================================================
    3. レスポンシブ対応（スマホ表示）
    ========================================================================== */
 @media (max-width: 768px) {
-  .profile-history-grid {
-    flex-direction: column;
+  /* 縦並びにして、高さを自動にする指定よ〜 */
+  .profile-history-grid,
+  .profile-history-section .profile-history-grid {
+    flex-direction: column !important;
   }
   
-  .profile-history-col {
-    width: 100%;
+  /* 左半分に縮まないよう、横幅100%を強制適用するわ〜 */
+  .profile-history-col,
+  .profile-history-section .profile-history-col {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 }
 
