@@ -754,15 +754,25 @@
 }
 
 /* -----------------------------------
-   3. ページ右下画像（画面固定表示）
+   映像セクション：枠外の下・右寄りに配置する画像
 ----------------------------------- */
-.page-corner-img {
-  position: abusolute;
-  bottom: 50px;      /* 下からの位置 */
-  right: 50px;       /* 右からの位置 */
-  width: 120px;      /* 画像のサイズ */
+/* 基準点を映像ボックスに設定 */
+.profile-history-col.screen {
+  position: relative;
+}
+
+/* 枠外の下・右寄りに配置 */
+.screen-outer-bottom-img {
+  position: absolute;
+  right: 0;           /* 右端に揃える（右寄り配置） */
+  
+  /* ★上下の位置調整（数値を変更して調整してね） */
+  top: 100%;          /* 枠のすぐ下に配置 */
+  margin-top: 16px;   /* 枠の下端からの距離（間隔） */
+
+  width: 100px;       /* 画像の幅（お好みで変更してね） */
   height: auto;
-  z-index: 999;      /* 他の要素より手前に表示 */
+  pointer-events: none; /* テキスト選択などの邪魔にならないようにする指定 */
 }
 
 /* レスポンシブ対応（スマホ表示時に1カラム化） */
@@ -1102,9 +1112,8 @@
                   <span class="history-work">【CM】UQmobile UQ応援割×AbemaTV「今日、好きになりました。」WebCM</span>
                 </div>
               </div>
+             <img src="chojuori.png" alt="飾り画像" class="screen-outer-bottom-img">
             </div>
-          <!-- ■ 3. ページ右下に画像を追加 -->
-<img src="chojuori.png" alt="ページ右下画像" class="page-corner-img">
           
   <!-- ===============================================
         3. ポートフォリオ タブ
