@@ -562,7 +562,7 @@
 
     /* ★真下に置くプロフィール詳細 */
     .profile-details {
-      max-width: 500px;
+      max-width: 450px;
       width: 100%;
       margin-left: auto;
       margin-right: auto;
@@ -666,6 +666,20 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+/* -----------------------------------
+   出演歴：コンテンツ量に合わせて枠のサイズを自動収縮させる
+----------------------------------- */
+/* カラム自体の高さを自動（fit-content）にして固定高さを解除 */
+.profile-history-col {
+  height: auto !important;
+  min-height: fit-content !important;
+}
+
+/* 2カラムの親要素で、左右の高さを互いに引き伸ばし合わないように設定 */
+.profile-history-grid {
+  align-items: flex-start !important; /* 高さを揃えず、それぞれのコンテンツ量に応じた高さにするわ */
 }
 
 /* -----------------------------------
