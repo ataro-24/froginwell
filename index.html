@@ -241,9 +241,9 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      background-color: var(--navy);
-      color: var(--yellow);
-      border-radius: 70px;
+      background-color: var(--yellow);
+      color: var(--navy);
+      border-radius: 60px;
       padding: 10px 28px 10px 10px; /* パディングを拡大 */
       margin-bottom: 28px;
       cursor: pointer;
@@ -261,13 +261,13 @@
       height: 56px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid var(--yellow);
+      border: 2px solid var(--navy);
     }
 
     .hero-profile-info {
       font-size: 18px; /* 15px -> 18px に拡大 */
       font-weight: 700;
-      color: var(--yellow);
+      color: var(--navy);
       letter-spacing: 0.5px;
     }
 
@@ -603,13 +603,13 @@
        別タブ：プロフィール（黄色背景＆ネイビー文字）
     ----------------------------------- */
 #tab-profile {
-      background-color: var(--navy);
-      color: var(--yellow);
+      background-color: var(--yellow);
+      color: var(--navy);
       min-height: calc(100vh - 60px);
     }
 
     #tab-profile .section-title {
-      color: var(--yellow);
+      color: var(--navy);
     }
 
     /* 上下に並べるため flex-direction: column に変更 */
@@ -659,99 +659,13 @@
     .profile-detail-label {
       font-weight: 500;
       width: 120px;
-      color: var(--yellow);
+      color: var(--navy);
     }
 
     .profile-detail-value {
       font-weight: 700;
-      color: var(--yellow);
-      flex: 1;
-    }
-
-    .grid-col-left, .grid-col-right {
-      flex: 1;
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
-
-    /* 出演歴エリアの共通大見出し */
-    .history-section-title {
-      grid-column: 1 / -1;
-      margin-bottom: 24px;
-    }
-
-    /* --- 舞台（左カラム・縦長） --- */
-    .history-col.stage {
-      background-color: var(--yellow);
       color: var(--navy);
-      padding: 24px;
-      border-radius: 12px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .stage .col-title {
-      border-bottom: 2px solid var(--navy);
-      color: var(--navy);
-      margin-bottom: 20px;
-    }
-
-    .history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .history-item {
-      display: flex;
-      gap: 8px;
-      font-size: 14px;
-      border-bottom: 1px dashed rgba(11, 19, 43, 0.2);
-      padding-bottom: 8px;
-    }
-
-    .history-item:last-child {
-      border-bottom: none;
-    }
-
-    .history-month { font-weight: 700; min-width: 60px; }
-    .history-sep { opacity: 0.5; }
-
-    .stage-outer-image img {
-      width: 100%;
-      max-width: 150px; /* お好みの大きさに調整してね */
-      height: auto;
-      border-radius: 8px;
-      object-fit: cover;
-    }
-    
-    /* --- 映像（右カラム・上部） --- */
-    .history-col.screen {
-      background-color: var(--navy);
-      color: var(--yellow);
-      border: 2px solid var(--yellow);
-      padding: 24px;
-      border-radius: 12px;
-    }
-
-    .screen .col-title {
-      border-bottom: 2px solid var(--yellow);
-      color: var(--yellow);
-      margin-bottom: 16px;
-    }
-
-    .screen .history-item {
-      border-bottom: 1px dashed rgba(255, 209, 102, 0.2);
-    }
-
-    /* ★舞台ボックスの外、左下に確実に配置するためのスタイル */
-    .stage-outer-image {
-      width: 100%; /* 親カラムの幅一杯に広げて、横並びをブロックするわ */
-      text-align: left; /* 左側に寄せるわね */
-      padding-left: 4px;
+      flex: 1;
     }
 
     /* -----------------------------------
@@ -889,10 +803,85 @@
     <section class="main-grid-section section-padding">
       <div class="container">
         
+        <!-- 「出演歴」大見出し -->
+        <h2 class="section-title history-section-title">出演歴</h2>
+
+        <div class="main-grid">
+          
           <!-- 左カラム：舞台 出演歴 -->
           <div class="grid-col-left">
+            <div class="history-col stage">
+              <h3 class="section-title col-title">舞台</h3>
+              <div class="history-list">
+                <div class="history-item">
+                  <span class="history-month">2026.08</span>
+                  <span class="history-work">近代古典塾 芯劇　夏期講習～岸田國士編～『命を弄ぶ男ふたり』@CLEO studio　包帯をした男 役</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2026.07</span>
+                  <span class="history-work">劇団FAX　馬駆ける天山の国 キルギス祭『みなもと』@神奈川県立青少年センター スタジオHIKARI　主演</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2026.02</span>
+                  <span class="history-work">劇団「治外法権」　第九回公演『死滅回遊』@シアター711　座長 役</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2025.07</span>
+                  <span class="history-work">近代古典塾 芯劇　旗揚げ公演『かもめ』@バルスタジオ　シャムラーエフ 役</span>
+                </div> 
+                <div class="history-item">
+                  <span class="history-month">2024.12</span>
+                  <span class="history-work">劇団FAX　第30回公演『すきとおる冒涜』@遊空間がざびぃ　戸塚研吾 役</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2024.02</span>
+                  <span class="history-work">劇団FAX　二本立て公演『てんとう』@プロト・シアター　主演</span>
+                </div>
+                  <div class="history-item">
+                  <span class="history-month">2023.09</span>
+                  <span class="history-work">TOKYO笹塚ボーイズ　『花瓶の中の海』@WESTEND STUDIO　真樹さとし 役</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2022.12</span>
+                  <span class="history-work">よるべ　2022年度WINGCUP参加公演『深呼吸』@ウイングフィールド　鈴木 役</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2020.10</span>
+                  <span class="history-work">劇団FAX　第17回公演『SANSO』@THEATRE E9 KYOTO　ワキタ 役</span>
+                </div>
+              </div>
+            </div>
 
-          <!-- 2. デモリール -->
+<!-- ★ここに、舞台ボックスの枠外（左下）に配置する画像を追加 -->
+            <div class="stage-outer-image">
+              <img src="chojuori.png" alt="舞台関連の写真">
+            </div>
+            
+          </div>
+          
+          <!-- 右カラム：映像出演歴 ＋ デモリール ＋ お知らせ -->
+          <div class="grid-col-right">
+            
+            <!-- 1. 映像 出演歴 -->
+            <div class="history-col screen">
+              <h3 class="section-title col-title">映像</h3>
+              <div class="history-list">
+                <div class="history-item">
+                  <span class="history-month">2026</span>
+                  <span class="history-work">【短編映画】のーくるー 福岡48時間映画祭 参加作品『天才陰陽師 園田』監督 福本直人</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2026</span>
+                  <span class="history-work">【CM】JRFU「NO SIDE SPIRIT | 男子ラグビーワールドカップ 2035 日本招致メッセージ決定」</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2022</span>
+                  <span class="history-work">【CM】UQmobile UQ応援割×AbemaTV「今日、好きになりました。」WebCM</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. デモリール -->
             <div class="demo-box-wrap">
               <h2 class="section-title">デモリール『微塵も』</h2>
               <div class="youtube-container">
@@ -903,9 +892,6 @@
                 脚本 高矢航志
               </div>
             </div>
-
-          <!-- 右カラム：映像出演歴 ＋ デモリール ＋ お知らせ -->
-          <div class="grid-col-right">
 
             <!-- 3. お知らせ（グレーの枠線付き） -->
             <div class="news-box-wrap">
@@ -1014,83 +1000,6 @@
             </div>
           </div>
 
-          <!-- 「出演歴」大見出し -->
-        <h2 class="section-title history-section-title">出演歴</h2>
-
-        <div class="main-grid">
-          
-          <!-- 左カラム：舞台 出演歴 -->
-          <div class="grid-col-left">
-            <div class="history-col stage">
-              <h3 class="section-title col-title">舞台</h3>
-              <div class="history-list">
-                <div class="history-item">
-                  <span class="history-month">2026.08</span>
-                  <span class="history-work">近代古典塾 芯劇　夏期講習～岸田國士編～『命を弄ぶ男ふたり』@CLEO studio　包帯をした男 役</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2026.07</span>
-                  <span class="history-work">劇団FAX　馬駆ける天山の国 キルギス祭『みなもと』@神奈川県立青少年センター スタジオHIKARI　主演</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2026.02</span>
-                  <span class="history-work">劇団「治外法権」　第九回公演『死滅回遊』@シアター711　座長 役</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2025.07</span>
-                  <span class="history-work">近代古典塾 芯劇　旗揚げ公演『かもめ』@バルスタジオ　シャムラーエフ 役</span>
-                </div> 
-                <div class="history-item">
-                  <span class="history-month">2024.12</span>
-                  <span class="history-work">劇団FAX　第30回公演『すきとおる冒涜』@遊空間がざびぃ　戸塚研吾 役</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2024.02</span>
-                  <span class="history-work">劇団FAX　二本立て公演『てんとう』@プロト・シアター　主演</span>
-                </div>
-                  <div class="history-item">
-                  <span class="history-month">2023.09</span>
-                  <span class="history-work">TOKYO笹塚ボーイズ　『花瓶の中の海』@WESTEND STUDIO　真樹さとし 役</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2022.12</span>
-                  <span class="history-work">よるべ　2022年度WINGCUP参加公演『深呼吸』@ウイングフィールド　鈴木 役</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2020.10</span>
-                  <span class="history-work">劇団FAX　第17回公演『SANSO』@THEATRE E9 KYOTO　ワキタ 役</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- 右カラム：映像出演歴 ＋ デモリール ＋ お知らせ -->
-          <div class="grid-col-right">
-            
-            <!-- 1. 映像 出演歴 -->
-            <div class="history-col screen">
-              <h3 class="section-title col-title">映像</h3>
-              <div class="history-list">
-                <div class="history-item">
-                  <span class="history-month">2026</span>
-                  <span class="history-work">【短編映画】のーくるー 福岡48時間映画祭 参加作品『天才陰陽師 園田』監督 福本直人</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2026</span>
-                  <span class="history-work">【CM】JRFU「NO SIDE SPIRIT | 男子ラグビーワールドカップ 2035 日本招致メッセージ決定」</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2022</span>
-                  <span class="history-work">【CM】UQmobile UQ応援割×AbemaTV「今日、好きになりました。」WebCM</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- ★ここに、舞台ボックスの枠外（左下）に配置する画像を追加 -->
-            <div class="stage-outer-image">
-              <img src="chojuori.png" alt="舞台関連の写真">
-            </div>
-          
         </div>
       </div>
     </section>
