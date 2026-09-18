@@ -589,6 +589,49 @@
     }
 
     /* -----------------------------------
+   プロフィールタブ：基本プロフィール項目の区切り線
+----------------------------------- */
+.profile-item {
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.2); /* 白の薄い破線 */
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.profile-item:last-child {
+  border-bottom: none; /* 最後の項目は線を消す */
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+
+/* -----------------------------------
+   プロフィールタブ：出演歴エリアの区切り線
+----------------------------------- */
+.profile-history-item {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.profile-history-item:last-child {
+  border-bottom: none; /* 最後の項目は線を消す */
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+/* --- 舞台（イエロー背景・ネイビー文字）用の破線 --- */
+.profile-history-col.stage .profile-history-item {
+  border-bottom: 1px dashed rgba(11, 19, 43, 0.25); /* ネイビーの薄い破線 */
+}
+
+/* --- 映像（ネイビー背景・イエロー文字）用の破線 --- */
+.profile-history-col.screen .profile-history-item {
+  border-bottom: 1px dashed rgba(255, 209, 102, 0.3); /* イエローの薄い破線 */
+}
+
+    /* -----------------------------------
    プロフィールタブ：出演歴エリア（2カラム構成）
 ----------------------------------- */
 .profile-history-section {
