@@ -638,19 +638,23 @@
   gap: 12px;
 }
 
-.profile-history-item {
+/* -----------------------------------
+   出演歴エリア：各アイテム間の波線
+----------------------------------- */
+.profile-history-list .history-item {
   display: flex;
   gap: 8px;
   font-size: 14px;
   padding-bottom: 10px;
   margin-bottom: 10px;
-  /* 下線の基本指定（太さ・スタイル） */
-  border-bottom-width: 1px; /* 波線は1pxだと見えづらいため2pxがおすすめよ〜 */
-  border-bottom-style: dashed !important; /* 波線（wavy）に指定 */
+  /* 下線の太さとスタイル（波線）を指定 */
+  border-bottom-width: 1px;
+  border-bottom-style: dashed !important;
 }
 
-.profile-history-item:last-child {
-  border-bottom: none !important; /* 一番最後の項目は線を消す */
+/* 一番最後の項目だけ波線を消す */
+.profile-history-list .history-item:last-child {
+  border-bottom: none !important;
   padding-bottom: 0;
   margin-bottom: 0;
 }
@@ -680,8 +684,9 @@
   margin-bottom: 20px;
 }
 
-.profile-history-col.stage .profile-history-item {
-  border-bottom-color: var(--navy) !important; /* 色のみを指定 */
+/* --- 舞台（左カラム：イエロー背景）の波線色（ネイビー） --- */
+.profile-history-col.stage .history-item {
+  border-bottom-color: var(--navy) !important;
 }
 
 /* --- 映像（右カラム：ネイビー背景・イエロー枠線） --- */
@@ -699,8 +704,9 @@
   margin-bottom: 16px;
 }
 
-.profile-history-col.screen .profile-history-item {
-  border-bottom-color: var(--yellow) !important; /* 色のみを指定 */
+/* --- 映像（右カラム：ネイビー背景）の波線色（イエロー） --- */
+.profile-history-col.screen .history-item {
+  border-bottom-color: var(--yellow) !important;
 }
 
 /* レスポンシブ対応（スマホ表示時に1カラム化） */
