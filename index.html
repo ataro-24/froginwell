@@ -519,125 +519,110 @@
   }
 }
 
-/* -----------------------------------
-       別タブ：プロフィール（黄色背景＆ネイビー文字）
-    ----------------------------------- */
+/* ==========================================================================
+   1. プロフィール基本エリア（#tab-profile / 上部）
+   ========================================================================== */
+
+/* 全体設定 */
 #tab-profile {
-      background-color: var(--navy);
-      color: var(--yellow);
-      min-height: calc(100vh - 60px);
-    }
+  background-color: var(--navy);
+  color: var(--yellow);
+  min-height: calc(100vh - 60px);
+}
 
-    #tab-profile .section-title {
-      color: var(--yellow);
-    }
+#tab-profile .section-title {
+  color: var(--yellow);
+}
 
-    /* 上下に並べるため flex-direction: column に変更 */
-    .profile-container {
-      max-width: 1100px; /* テキストが横に広がりすぎないよう中央に綺麗に収めるサイズよ */
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 32px;
-    }
+.profile-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
 
-    /* ★写真2枚を横並びにするエリア */
-    .profile-img-wrap {
-      max-width: 700px;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      gap: 16px; /* 2枚の写真のすき間 */
-    }
+/* 写真2枚並び */
+.profile-img-wrap {
+  max-width: 700px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
 
-    .profile-img {
-      width: 48%; /* 2枚が綺麗に並ぶ幅 */
-      max-width: 320px;
-      height: auto;
-      border-radius: 12px;
-      object-fit: cover;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-    }
+.profile-img {
+  width: 48%;
+  max-width: 320px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
 
-    /* ★真下に置くプロフィール詳細 */
-    .profile-details {
-      max-width: 450px;
-      width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+/* プロフィール詳細リスト */
+.profile-details {
+  max-width: 450px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
-    .profile-detail-item {
-      display: flex;
-      justify-content: space-between; /* 両端揃えで綺麗に並べるわ */
-      border-bottom: 1px solid rgba(11, 19, 43, 0.2);
-      padding-bottom: 8px;
-    }
+.profile-detail-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(11, 19, 43, 0.2);
+  padding-bottom: 8px;
+}
 
-    .profile-detail-label {
-      font-weight: 500;
-      width: 120px;
-      color: var(--yellow);
-    }
+.profile-detail-label {
+  font-weight: 500;
+  width: 120px;
+  color: var(--yellow);
+}
 
-    .profile-detail-value {
-      font-weight: 700;
-      color: var(--yellow);
-      flex: 1;
-    }
+.profile-detail-value {
+  font-weight: 700;
+  color: var(--yellow);
+  flex: 1;
+}
 
-/* 基本プロフィールの各項目の下にイエローの破線を入れる */
-    .profile-block dl,
-    .profile-block .profile-item,
-    .profile-details > div {
-      border-bottom: 1px solid var(--yellow) !important;
-      padding-bottom: 12px;
-      margin-bottom: 12px;
-    }
+/* プロフィール各項目の区切り線（イエロー実線） */
+.profile-block dl,
+.profile-block .profile-item,
+.profile-details > div {
+  border-bottom: 1px solid var(--yellow) !important;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
 
-/* 一番最後の項目だけ破線を消す */
-    .profile-block dl:last-child,
-    .profile-block .profile-item:last-child,
-    .profile-details > div:last-child {
-     border-bottom: none !important;
-     padding-bottom: 0;
-     margin-bottom: 0;
-    }
-    
-/* -----------------------------------
-   プロフィールタブ：出演歴エリア（2カラム構成）
------------------------------------ */
+/* 一番最後の区切り線を消す */
+.profile-block dl:last-child,
+.profile-block .profile-item:last-child,
+.profile-details > div:last-child {
+  border-bottom: none !important;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+
+/* ==========================================================================
+   2. 出演歴エリア（profile-history-section / 下部）
+   ========================================================================== */
+
+/* セクション全体・コンテナ（ワイド表示設定） */
 .profile-history-section {
   background-color: var(--navy);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   padding: 40px 0;
-}
-
-.profile-history-title {
-  margin-bottom: 24px;
-}
-
-/* -----------------------------------
-   出演歴：カラムタイトルの中央揃え
------------------------------------ */
-.profile-history-col .col-title {
-  text-align: center;
-}
-
-/* -----------------------------------
-   出演歴セクション：強制的に幅を1.5倍（ワイド化）
------------------------------------ */
-/* 1. 外側の親要素による幅制限を解除する */
-.profile-history-section {
   width: 100%;
   max-width: 100%;
 }
 
-/* 2. セクション内のコンテナを画面いっぱいに広げる */
 .profile-history-section .container {
   width: 100%;
   max-width: 100%;
@@ -647,56 +632,50 @@
   padding-right: 0;
 }
 
-/* 3. 舞台・映像の並び（グリッド）を親の幅いっぱいに使う */
+.profile-history-title {
+  margin-bottom: 24px;
+}
+
+/* 2カラムレイアウト（グリッド） */
+.profile-history-grid,
 .profile-history-section .profile-history-grid {
   display: flex;
   width: 100%;
   gap: 30px;
+  align-items: flex-start !important; /* コンテンツ量に合わせて高さを自動にする指定 */
 }
 
-/* 4. 舞台・映像それぞれのカラムを半々に均等拡大 */
+/* 左右のカラム共通設定 */
+.profile-history-col,
 .profile-history-section .profile-history-col {
   flex: 1 1 50%;
   width: 50%;
   box-sizing: border-box;
+  height: auto !important;
+  min-height: fit-content !important;
 }
 
-/* リスト共通部分 */
+.profile-history-col .col-title {
+  text-align: center;
+}
+
 .profile-history-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-/* -----------------------------------
-   出演歴：コンテンツ量に合わせて枠のサイズを自動収縮させる
------------------------------------ */
-/* カラム自体の高さを自動（fit-content）にして固定高さを解除 */
-.profile-history-col {
-  height: auto !important;
-  min-height: fit-content !important;
-}
-
-/* 2カラムの親要素で、左右の高さを互いに引き伸ばし合わないように設定 */
-.profile-history-grid {
-  align-items: flex-start !important; /* 高さを揃えず、それぞれのコンテンツ量に応じた高さにするわ */
-}
-
-/* -----------------------------------
-   出演歴エリア：各アイテム間の波線
------------------------------------ */
+/* 各アイテムの区切り線（波線） */
 .profile-history-list .history-item {
   display: flex;
   gap: 8px;
   font-size: 14px;
   padding-bottom: 10px;
   margin-bottom: 10px;
-  /* 下線の太さとスタイル（波線）を指定 */
   border-bottom-width: 1px;
   border-bottom-style: dashed !important;
 }
 
-/* 一番最後の項目だけ波線を消す */
 .profile-history-list .history-item:last-child {
   border-bottom: none !important;
   padding-bottom: 0;
@@ -712,7 +691,10 @@
   opacity: 0.5;
 }
 
-/* --- 舞台（左カラム：イエロー背景） --- */
+
+/* --------------------------------------------------------------------------
+   2-1. 舞台（左カラム：イエロー背景）
+   -------------------------------------------------------------------------- */
 .profile-history-col.stage {
   background-color: var(--yellow);
   color: var(--navy);
@@ -728,13 +710,16 @@
   margin-bottom: 20px;
 }
 
-/* --- 舞台（左カラム：イエロー背景）の波線色（ネイビー） --- */
 .profile-history-col.stage .history-item {
   border-bottom-color: var(--navy) !important;
 }
 
-/* --- 映像（右カラム：ネイビー背景・イエロー枠線） --- */
+
+/* --------------------------------------------------------------------------
+   2-2. 映像（右カラム：ネイビー背景・イエロー枠線）
+   -------------------------------------------------------------------------- */
 .profile-history-col.screen {
+  position: relative; /* 枠外画像の基準点 */
   background-color: var(--navy);
   color: var(--yellow);
   border: 2px solid var(--yellow);
@@ -748,34 +733,25 @@
   margin-bottom: 16px;
 }
 
-/* --- 映像（右カラム：ネイビー背景）の波線色（イエロー） --- */
 .profile-history-col.screen .history-item {
   border-bottom-color: var(--yellow) !important;
 }
 
-/* -----------------------------------
-   映像セクション：枠外の下・右寄りに配置する画像
------------------------------------ */
-/* 基準点を映像ボックスに設定 */
-.profile-history-col.screen {
-  position: relative;
-}
-
-/* 枠外の下・右寄りに配置 */
+/* 枠外の下・右寄りに配置する画像 */
 .screen-outer-bottom-img {
   position: absolute;
-  right: 0;           /* 右端に揃える（右寄り配置） */
-  
-  /* ★上下の位置調整（数値を変更して調整してね） */
-  top: 100%;          /* 枠のすぐ下に配置 */
-  margin-top: 320px;   /* 枠の下端からの距離（間隔） */
-
-  width: 100px;       /* 画像の幅（お好みで変更してね） */
+  right: 0;
+  top: 100%;
+  margin-top: 320px;
+  width: 100px;
   height: auto;
-  pointer-events: none; /* テキスト選択などの邪魔にならないようにする指定 */
+  pointer-events: none;
 }
 
-/* レスポンシブ対応（スマホ表示時に1カラム化） */
+
+/* ==========================================================================
+   3. レスポンシブ対応（スマホ表示）
+   ========================================================================== */
 @media (max-width: 768px) {
   .profile-history-grid {
     flex-direction: column;
