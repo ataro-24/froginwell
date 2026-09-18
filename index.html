@@ -753,6 +753,18 @@
   border-bottom-color: var(--yellow) !important;
 }
 
+/* -----------------------------------
+   3. ページ右下画像（画面固定表示）
+----------------------------------- */
+.page-corner-img {
+  position: fixed;
+  bottom: 24px;      /* 下からの位置 */
+  right: 24px;       /* 右からの位置 */
+  width: 120px;      /* 画像のサイズ */
+  height: auto;
+  z-index: 999;      /* 他の要素より手前に表示 */
+}
+
 /* レスポンシブ対応（スマホ表示時に1カラム化） */
 @media (max-width: 768px) {
   .profile-history-grid {
@@ -1091,6 +1103,8 @@
                 </div>
               </div>
             </div>
+          <!-- ■ 3. ページ右下に画像を追加 -->
+<img src="your-image-3.png" alt="ページ右下画像" class="page-corner-img">
           
   <!-- ===============================================
         3. ポートフォリオ タブ
