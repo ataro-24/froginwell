@@ -226,16 +226,17 @@
       color: var(--yellow);
     }
 
+/* ★追加するグレーの線のスタイル */
     .hero-divider {
-      width: 100%;
+      width: 100%;       /* 親要素の幅に対して最大まで広げるか、固定値にするなら文字幅に合わせるわね */
       max-width: 340px;
       height: 1px;
-      background-color: var(--gray-text);
-      margin: 0 auto 20px auto;
+      background-color: var(--gray-text); /* 既存のグレー変数を使用 */
+      margin: 0 auto 20px auto; /* 中央揃えにして下側に余白を空ける */
       border: none;
     }
     
-    /* 簡易プロフィールカード */
+    /* 簡易プロフィールカード（サイズ拡大） */
     .hero-profile-card {
       display: flex;
       align-items: center;
@@ -243,7 +244,7 @@
       background-color: var(--yellow);
       color: var(--navy);
       border-radius: 60px;
-      padding: 10px 28px 10px 10px;
+      padding: 10px 28px 10px 10px; /* パディングを拡大 */
       margin-bottom: 28px;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -256,7 +257,7 @@
     }
 
     .hero-profile-thumb {
-      width: 56px;
+      width: 56px; /* 44px -> 56px に拡大 */
       height: 56px;
       border-radius: 50%;
       object-fit: cover;
@@ -264,13 +265,13 @@
     }
 
     .hero-profile-info {
-      font-size: 18px;
+      font-size: 18px; /* 15px -> 18px に拡大 */
       font-weight: 700;
       color: var(--navy);
       letter-spacing: 0.5px;
     }
 
-    /* SNSボックス */
+    /* SNSボックス（白丸背景＋黒ロゴ） */
     .sns-box {
       background-color: transparent;
       border: 1px solid var(--gray-text);
@@ -299,12 +300,13 @@
       align-items: center;
     }
 
+    /* 白で塗りつぶした丸ボタン */
     .social-links a {
       width: 44px;
       height: 44px;
-      background-color: var(--white);
+      background-color: var(--white); /* 背景を白で塗りつぶし */
       border-radius: 50%;
-      color: #000000;
+      color: #000000; /* アイコンロゴを黒/ネイビーに */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -314,6 +316,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
 
+    /* noteアイコンサイズ調整 (白丸内で大きめ表示) */
     .social-links a svg {
       width: 26px;
       height: 26px;
@@ -322,14 +325,15 @@
       transition: fill 0.3s ease;
     }
 
+/* ★ホバー時に白黒を反転させる設定 */
     .social-links a:hover {
-      background-color: #000000;
-      color: var(--white);
+      background-color: #000000; /* ホバーで背景が黒に */
+      color: var(--white);        /* ホバーでフォント（XやInstagram）が白に */
       transform: translateY(-2px);
     }
 
     .social-links a:hover svg {
-      fill: var(--white);
+      fill: var(--white);         /* ホバーでnoteのロゴも白に */
     }
 
     .hero-right {
@@ -345,7 +349,7 @@
     }
 
     /* -----------------------------------
-       TOPタブ：メインコンテンツエリア
+       TOPタブ：メインコンテンツエリア（2カラム構成）
     ----------------------------------- */
     .main-grid-section {
       background-color: var(--navy);
@@ -358,21 +362,93 @@
       align-items: flex-start;
     }
 
-.grid-col-left, .grid-col-right {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
+    .grid-col-left, .grid-col-right {
+      flex: 1;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
 
-.grid-col-left {
-  flex: 6; /* お知らせ（6割） */
-}
+    /* 出演歴エリアの共通大見出し */
+    .history-section-title {
+      grid-column: 1 / -1;
+      margin-bottom: 24px;
+    }
 
-.grid-col-right {
-  flex: 4; /* デモリール（4割） */
-}
+    /* --- 舞台（左カラム・縦長） --- */
+    .history-col.stage {
+      background-color: var(--yellow);
+      color: var(--navy);
+      padding: 24px;
+      border-radius: 12px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
 
-    /* --- デモリール --- */
+    .stage .col-title {
+      border-bottom: 2px solid var(--navy);
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .history-item {
+      display: flex;
+      gap: 8px;
+      font-size: 14px;
+      border-bottom: 1px dashed rgba(11, 19, 43, 0.2);
+      padding-bottom: 8px;
+    }
+
+    .history-item:last-child {
+      border-bottom: none;
+    }
+
+    .history-month { font-weight: 700; min-width: 60px; }
+    .history-sep { opacity: 0.5; }
+
+/* ★舞台ボックスの外、左下に確実に配置するためのスタイル */
+    .stage-outer-image {
+      width: 100%; /* 親カラムの幅一杯に広げて、横並びをブロックするわ */
+      text-align: left; /* 左側に寄せるわね */
+      padding-left: 4px;
+    }
+
+    .stage-outer-image img {
+      width: 100%;
+      max-width: 150px; /* お好みの大きさに調整してね */
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    
+    /* --- 映像（右カラム・上部） --- */
+    .history-col.screen {
+      background-color: var(--navy);
+      color: var(--yellow);
+      border: 2px solid var(--yellow);
+      padding: 24px;
+      border-radius: 12px;
+    }
+
+    .screen .col-title {
+      border-bottom: 2px solid var(--yellow);
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .screen .history-item {
+      border-bottom: 1px dashed rgba(255, 209, 102, 0.2);
+    }
+
+    /* --- デモリール（右カラム・中央） --- */
     .youtube-container {
       width: 100%;
       aspect-ratio: 16 / 9;
@@ -389,6 +465,7 @@
       border: none;
     }
 
+    /* デモリール クレジット（右端揃え） */
     .demo-credits {
       font-size: 13px;
       color: var(--yellow);
@@ -396,7 +473,7 @@
       line-height: 1.6;
     }
 
-    /* --- お知らせ --- */
+    /* --- お知らせ（全体をグレーの枠線で囲む） --- */
     .news-box-wrap {
       display: flex;
       flex-direction: column;
@@ -522,21 +599,22 @@
       opacity: 0.9;
     }
 
-    /* -----------------------------------
+/* -----------------------------------
        別タブ：プロフィール（黄色背景＆ネイビー文字）
     ----------------------------------- */
-    #tab-profile {
-      background-color: var(--navy);
-      color: var(--yellow);
+#tab-profile {
+      background-color: var(--yellow);
+      color: var(--navy);
       min-height: calc(100vh - 60px);
     }
 
     #tab-profile .section-title {
-      color: var(--yellow);
+      color: var(--navy);
     }
 
+    /* 上下に並べるため flex-direction: column に変更 */
     .profile-container {
-      max-width: 700px;
+      max-width: 700px; /* テキストが横に広がりすぎないよう中央に綺麗に収めるサイズよ */
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -544,15 +622,16 @@
       gap: 32px;
     }
 
+    /* ★写真2枚を横並びにするエリア */
     .profile-img-wrap {
       width: 100%;
       display: flex;
       justify-content: center;
-      gap: 16px;
+      gap: 16px; /* 2枚の写真のすき間 */
     }
 
     .profile-img {
-      width: 48%;
+      width: 48%; /* 2枚が綺麗に並ぶ幅 */
       max-width: 320px;
       height: auto;
       border-radius: 12px;
@@ -560,6 +639,7 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     }
 
+    /* ★真下に置くプロフィール詳細 */
     .profile-details {
       width: 100%;
       max-width: 450px;
@@ -571,7 +651,7 @@
 
     .profile-detail-item {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-between; /* 両端揃えで綺麗に並べるわ */
       border-bottom: 1px solid rgba(11, 19, 43, 0.2);
       padding-bottom: 8px;
     }
@@ -579,104 +659,13 @@
     .profile-detail-label {
       font-weight: 500;
       width: 120px;
-      color: var(--yellow);
+      color: var(--navy);
     }
 
     .profile-detail-value {
       font-weight: 700;
-      color: var(--yellow);
-      flex: 1;
-    }
-
-    .main-grid-section {
-      background-color: var(--navy);
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .main-grid {
-      display: flex;
-      gap: 32px;
-      align-items: flex-start;
-    }
-
-    .grid-col-left, .grid-col-right {
-      flex: 1;
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
-
-    /* 出演歴エリアの共通スタイル */
-    .history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .history-item {
-      display: flex;
-      gap: 8px;
-      font-size: 14px;
-      border-bottom: 1px dashed rgba(11, 19, 43, 0.2);
-      padding-bottom: 8px;
-    }
-
-    .history-item:last-child {
-      border-bottom: none;
-    }
-
-    .history-month { font-weight: 700; min-width: 60px; }
-
-    /* --- 舞台 --- */
-    .history-col.stage {
-      background-color: var(--yellow);
       color: var(--navy);
-      border: 2px solid var(--navy);
-      padding: 24px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    .stage .col-title {
-      border-bottom: 2px solid var(--navy);
-      color: var(--navy);
-      margin-bottom: 20px;
-    }
-    
-    /* --- 映像 --- */
-    .history-col.screen {
-      background-color: var(--navy);
-      color: var(--yellow);
-      border: 2px solid var(--yellow);
-      background-color: rgba(11, 19, 43, 0.05);
-      padding: 24px;
-      border-radius: 12px;
-    }
-
-    .screen .col-title {
-      border-bottom: 2px solid var(--yellow);
-      color: var(--ywllow);
-      margin-bottom: 16px;
-    }
-
-    .screen .history-item {
-      border-bottom: 1px dashed rgba(11, 19, 43, 0.2);
-      color: var(--ywllow);
-    }
-
-        .stage-outer-image {
-      width: 100%;
-      text-align: left;
-      padding-left: 4px;
-    }
-
-    .stage-outer-image img {
-      width: 100%;
-      max-width: 150px;
-      height: auto;
-      border-radius: 8px;
-      object-fit: cover;
+      flex: 1;
     }
 
     /* -----------------------------------
@@ -760,7 +749,7 @@
     <div class="announcement-banner">
       <span class="banner-badge">NEXT STAGE</span>
       <div class="banner-text">
-        ◎近代古典塾 芯劇 第2回公演「十二夜」2026年12月17日(木)〜20日(日)＠劇場HOPE
+        ◎近代古典塾 芯劇　第2回公演「十二夜」2026年12月17日(木)〜20日(日)＠劇場HOPE
       </div>
     </div>
 
@@ -773,9 +762,10 @@
         </div>
         <p class="hero-name-en">Takai Ataro</p>
 
+<!-- ★ここにグレーの線を追加 -->
         <hr class="hero-divider">
         
-        <!-- 簡易プロフィールカード -->
+        <!-- 簡易プロフィールカード（大きめサイズ） -->
         <div class="hero-profile-card" onclick="switchTab('profile')">
           <img src="2406155326.jpg" alt="高井蛙太郎" class="hero-profile-thumb">
           <div class="hero-profile-info">
@@ -783,7 +773,7 @@
           </div>
         </div>
 
-        <!-- SNSボックス -->
+        <!-- SNSボックス（白丸背景＋黒ロゴ） -->
         <div class="sns-box">
           <span class="sns-title">SNS</span>
           <div class="social-links">
@@ -809,59 +799,139 @@
       </div>
     </section>
 
-    <!-- メインコンテンツ エリア -->
+    <!-- メインコンテンツ 2カラムエリア -->
     <section class="main-grid-section section-padding">
       <div class="container">
-<div class="main-grid">
-  <!-- 左列：お知らせ（6の割合） -->
-  <div class="grid-col-left">
-    <div class="news-box-wrap">
-      <h2 class="section-title">お知らせ</h2>
-      <div class="news-list">
-        <div class="news-card">
-          <span class="news-badge">NEW</span>
-          <span class="news-date">2026.09.20</span>
-          <p class="news-text">蛙太郎ウェブサイトをオープンしました！</p>
-        </div>
-      </div>
-      <div class="news-more-link">
-        <a onclick="switchTab('news')">more &raquo;</a>
-      </div>
-    </div>
-  </div>
+        
+        <!-- 「出演歴」大見出し -->
+        <h2 class="section-title history-section-title">出演歴</h2>
 
-  <!-- 右列：デモリール（4の割合） -->
-  <div class="grid-col-right">
-    <div class="demo-box-wrap">
-      <h2 class="section-title">デモリール『微塵も』</h2>
-      <div class="youtube-container">
-        <iframe src="https://www.youtube.com/embed/bARXUG0cnck" title="デモリール『微塵も』" allowfullscreen></iframe>
-      </div>
-      <div class="demo-credits">
-        監督 植松蒼介<br>
-        脚本 高矢航志
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="main-grid">
+          
+          <!-- 左カラム：舞台 出演歴 -->
+          <div class="grid-col-left">
+            <div class="history-col stage">
+              <h3 class="section-title col-title">舞台</h3>
+              <div class="history-list">
+                <div class="history-item">
+                  <span class="history-month">2026.08</span>
+                  <span class="history-work">近代古典塾 芯劇　夏期講習～岸田國士編～『命を弄ぶ男ふたり』@CLEO studio　包帯をした男 役</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2026.07</span>
+                  <span class="history-work">劇団FAX　馬駆ける天山の国 キルギス祭『みなもと』@神奈川県立青少年センター スタジオHIKARI　主演</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2026.02</span>
+                  <span class="history-work">劇団「治外法権」　第九回公演『死滅回遊』@シアター711　座長 役</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2025.07</span>
+                  <span class="history-work">近代古典塾 芯劇　旗揚げ公演『かもめ』@バルスタジオ　シャムラーエフ 役</span>
+                </div> 
+                <div class="history-item">
+                  <span class="history-month">2024.12</span>
+                  <span class="history-work">劇団FAX　第30回公演『すきとおる冒涜』@遊空間がざびぃ　戸塚研吾 役</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2024.02</span>
+                  <span class="history-work">劇団FAX　二本立て公演『てんとう』@プロト・シアター　主演</span>
+                </div>
+                  <div class="history-item">
+                  <span class="history-month">2023.09</span>
+                  <span class="history-work">TOKYO笹塚ボーイズ　『花瓶の中の海』@WESTEND STUDIO　真樹さとし 役</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2022.12</span>
+                  <span class="history-work">よるべ　2022年度WINGCUP参加公演『深呼吸』@ウイングフィールド　鈴木 役</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2020.10</span>
+                  <span class="history-work">劇団FAX　第17回公演『SANSO』@THEATRE E9 KYOTO　ワキタ 役</span>
+                </div>
+              </div>
+            </div>
+
+<!-- ★ここに、舞台ボックスの枠外（左下）に配置する画像を追加 -->
+            <div class="stage-outer-image">
+              <img src="chojuori.png" alt="舞台関連の写真">
+            </div>
+            
+          </div>
+          
+          <!-- 右カラム：映像出演歴 ＋ デモリール ＋ お知らせ -->
+          <div class="grid-col-right">
+            
+            <!-- 1. 映像 出演歴 -->
+            <div class="history-col screen">
+              <h3 class="section-title col-title">映像</h3>
+              <div class="history-list">
+                <div class="history-item">
+                  <span class="history-month">2026</span>
+                  <span class="history-work">【短編映画】のーくるー 福岡48時間映画祭 参加作品『天才陰陽師 園田』監督 福本直人</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2026</span>
+                  <span class="history-work">【CM】JRFU「NO SIDE SPIRIT | 男子ラグビーワールドカップ 2035 日本招致メッセージ決定」</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2022</span>
+                  <span class="history-work">【CM】UQmobile UQ応援割×AbemaTV「今日、好きになりました。」WebCM</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. デモリール -->
+            <div class="demo-box-wrap">
+              <h2 class="section-title">デモリール『微塵も』</h2>
+              <div class="youtube-container">
+                <iframe src="https://www.youtube.com/embed/bARXUG0cnck" title="デモリール『微塵も』" allowfullscreen></iframe>
+              </div>
+              <div class="demo-credits">
+                監督 植松蒼介<br>
+                脚本 高矢航志
+              </div>
+            </div>
+
+            <!-- 3. お知らせ（グレーの枠線付き） -->
+            <div class="news-box-wrap">
+              <h2 class="section-title">お知らせ</h2>
+              <div class="news-list">
+                <div class="news-card">
+                  <span class="news-badge">NEW</span>
+                  <span class="news-date">2026.09.20</span>
+                  <p class="news-text">蛙太郎ウェブサイトをオープンしました！</p>
+                </div>
+              </div>
+              <div class="news-more-link">
+                <a onclick="switchTab('news')">more &raquo;</a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
       </div>
     </section>
 
-    <!-- ご依頼・メッセージ フォーム -->
+<!-- ご依頼・メッセージ フォーム -->
     <section class="contact-section section-padding">
       <div class="container">
         <h2 class="section-title">ご依頼・メッセージ</h2>
         <form class="contact-form" action="https://formspree.io/f/xljdeppn" method="post">
           <div class="form-group">
             <label for="name">お名前</label>
+            <!-- ★ name="name" を追加 -->
             <input type="text" id="name" name="name" placeholder="山田 太郎" required>
           </div>
           <div class="form-group">
             <label for="email">メールアドレス</label>
+            <!-- ★ name="email" または name="_replyto" を追加 -->
             <input type="email" id="email" name="email" placeholder="example@mail.com" required>
           </div>
           <div class="form-group">
             <label for="message">メッセージ</label>
+            <!-- ★ name="message" を追加 -->
             <textarea id="message" name="message" rows="4" placeholder="ご依頼やメッセージ内容をご記入ください" required></textarea>
           </div>
           <button type="submit" class="submit-btn">送信する</button>
@@ -874,7 +944,7 @@
   <!-- ===============================================
         2. プロフィール タブ
   ================================================ -->
-  <div id="tab-profile" class="tab-content">
+<div id="tab-profile" class="tab-content">
     <section class="section-padding">
       <div class="container">
         <h2 class="section-title">プロフィール</h2>
@@ -927,88 +997,6 @@
             <div class="profile-detail-item">
               <span class="profile-detail-label">好きな言葉</span>
               <span class="profile-detail-value">さよならだけが人生だ</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- 移動した「出演歴」セクション（2カラム構成） -->
-    <section class="section-padding profile-history-section">
-      <div class="container">
-        <h2 class="section-title">出演歴</h2>
-
-        <div class="main-grid">
-          
-          <!-- 左カラム：舞台 出演歴 -->
-          <div class="grid-col-left">
-            <div class="history-col stage">
-              <h3 class="section-title col-title">舞台</h3>
-              <div class="history-list">
-                <div class="history-item">
-                  <span class="history-month">2026.08</span>
-                  <span class="history-work">近代古典塾 芯劇 夏期講習～岸田國士編～『命を弄ぶ男ふたり』@CLEO studio 包帯をした男 役</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2026.07</span>
-                  <span class="history-work">劇団FAX 馬駆ける天山の国 キルギス祭『みなもと』@神奈川県立青少年センター スタジオHIKARI 主演</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2026.02</span>
-                  <span class="history-work">劇団「治外法権」 第九回公演『死滅回遊』@シアター711 座長 役</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2025.07</span>
-                  <span class="history-work">近代古典塾 芯劇 旗揚げ公演『かもめ』@バルスタジオ シャムラーエフ 役</span>
-                </div> 
-                <div class="history-item">
-                  <span class="history-month">2024.12</span>
-                  <span class="history-work">劇団FAX 第30回公演『すきとおる冒涜』@遊空間がざびぃ 戸塚研吾 役</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2024.02</span>
-                  <span class="history-work">劇団FAX 二本立て公演『てんとう』@プロト・シアター 主演</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2023.09</span>
-                  <span class="history-work">TOKYO笹塚ボーイズ 『花瓶の中の海』@WESTEND STUDIO 真樹さとし 役</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2022.12</span>
-                  <span class="history-work">よるべ 2022年度WINGCUP参加公演『深呼吸』@ウイングフィールド 鈴木 役</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2020.10</span>
-                  <span class="history-work">劇団FAX 第17回公演『SANSO』@THEATRE E9 KYOTO ワキタ 役</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- 舞台ボックスの枠外（左下）に配置する画像 -->
-            <div class="stage-outer-image">
-              <img src="chojuori.png" alt="舞台関連の写真">
-            </div>
-          </div>
-          
-          <!-- 右カラム：映像出演歴 -->
-          <div class="grid-col-right">
-            <div class="history-col screen">
-              <h3 class="section-title col-title">映像</h3>
-              <div class="history-list">
-                <div class="history-item">
-                  <span class="history-month">2026</span>
-                  <span class="history-work">【短編映画】のーくるー 福岡48時間映画祭 参加作品『天才陰陽師 園田』監督 福本直人</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2026</span>
-                  <span class="history-work">【CM】JRFU「NO SIDE SPIRIT | 男子ラグビーワールドカップ 2035 日本招致メッセージ決定」</span>
-                </div>
-                <div class="history-item">
-                  <span class="history-month">2022</span>
-                  <span class="history-work">【CM】UQmobile UQ応援割×AbemaTV「今日、好きになりました。」WebCM</span>
-                </div>
-              </div>
             </div>
           </div>
 
