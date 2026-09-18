@@ -1250,45 +1250,57 @@
     </section>
   </div>
 
-  <!-- JavaScript (タブ切り替え処理) -->
-  <script>
-    function switchTab(tabName) {
-      const contents = document.querySelectorAll('.tab-content');
-      contents.forEach(content => content.classList.remove('active'));
+<!-- JavaScript (タブ切り替え ＆ ハンバーガーメニュー処理) -->
+<script>
+  // 1. タブ切り替え用の関数（既存のコードそのままよ〜）
+  function switchTab(tabName) {
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => content.classList.remove('active'));
 
-      const buttons = document.querySelectorAll('.tab-btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
 
-      const targetContent = document.getElementById('tab-' + tabName);
-      if (targetContent) {
-        targetContent.classList.add('active');
-      }
-
-      const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
-      if (targetBtn) {
-        targetBtn.classList.add('active');
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    const targetContent = document.getElementById('tab-' + tabName);
+    if (targetContent) {
+      targetContent.classList.add('active');
     }
-  </script>
-  <script>
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const navMenu = document.getElementById('navMenu');
 
-   // ボタンをクリックした時の開閉切り替え
+    const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+    if (targetBtn) {
+      targetBtn.classList.add('active');
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // 2. ハンバーガーメニューの開閉処理
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const navMenu = document.getElementById('navMenu');
+
+  if (hamburgerBtn && navMenu) {
     hamburgerBtn.addEventListener('click', () => {
-    hamburgerBtn.classList.toggle('active');
-    navMenu.classList.toggle('active');
+      hamburgerBtn.classList.toggle('active');
+      navMenu.classList.toggle('active');
     });
+  }
 
-   // メニュー内のリンクを押したら自動でメニューを閉じる処理
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-    hamburgerBtn.classList.remove('active');
-    navMenu.classList.remove('active');
+  // 3. ナビゲーションメニューのリンクを押した時の処理（ここを追加したわ〜！）
+  document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault(); // 通常のページジャンプをキャンセル
+
+      // href="#tab-profile" から "profile" の部分だけを取り出すわ〜
+      const href = link.getAttribute('href');
+      const tabName = href.replace('#tab-', '').replace('#', '');
+
+      // 既存の switchTab 関数を実行！
+      switchTab(tabName);
+
+      // スマホ用にメニューを閉じる
+      if (hamburgerBtn && navMenu) {
+        hamburgerBtn.classList.remove('active');
+        navMenu.classList.remove('active');
+      }
     });
-   });
-  </script>
-</body>
-</html>
+  });
+</script>
