@@ -413,21 +413,6 @@
 
     .history-month { font-weight: 700; min-width: 60px; }
     .history-sep { opacity: 0.5; }
-
-/* ★舞台ボックスの外、左下に確実に配置するためのスタイル */
-    .stage-outer-image {
-      width: 100%; /* 親カラムの幅一杯に広げて、横並びをブロックするわ */
-      text-align: left; /* 左側に寄せるわね */
-      padding-left: 4px;
-    }
-
-    .stage-outer-image img {
-      width: 100%;
-      max-width: 150px; /* お好みの大きさに調整してね */
-      height: auto;
-      border-radius: 8px;
-      object-fit: cover;
-    }
     
     /* --- 映像（右カラム・上部） --- */
     .history-col.screen {
@@ -667,6 +652,108 @@
       color: var(--yellow);
       flex: 1;
     }
+
+    /* -----------------------------------
+   プロフィールタブ：出演歴エリア（2カラム構成）
+----------------------------------- */
+.profile-history-section {
+  background-color: var(--navy);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 40px 0;
+}
+
+.profile-history-title {
+  margin-bottom: 24px;
+}
+
+/* 2カラムグリッド配置 */
+.profile-history-grid {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.profile-history-col {
+  flex: 1;
+  width: 50%;
+}
+
+/* リスト共通部分 */
+.profile-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-history-item {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  padding-bottom: 8px;
+}
+
+.profile-history-item:last-child {
+  border-bottom: none;
+}
+
+.profile-history-month {
+  font-weight: 700;
+  min-width: 60px;
+}
+
+.profile-history-sep {
+  opacity: 0.5;
+}
+
+/* --- 舞台（左カラム：イエロー背景） --- */
+.profile-history-col.stage {
+  background-color: var(--yellow);
+  color: var(--navy);
+  padding: 24px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-history-col.stage .col-title {
+  border-bottom: 2px solid var(--navy);
+  color: var(--navy);
+  margin-bottom: 20px;
+}
+
+.profile-history-col.stage .profile-history-item {
+  border-bottom: 1px dashed rgba(11, 19, 43, 0.2);
+}
+
+/* --- 映像（右カラム：ネイビー背景・イエロー枠線） --- */
+.profile-history-col.screen {
+  background-color: var(--navy);
+  color: var(--yellow);
+  border: 2px solid var(--yellow);
+  padding: 24px;
+  border-radius: 12px;
+}
+
+.profile-history-col.screen .col-title {
+  border-bottom: 2px solid var(--yellow);
+  color: var(--yellow);
+  margin-bottom: 16px;
+}
+
+.profile-history-col.screen .profile-history-item {
+  border-bottom: 1px dashed rgba(255, 209, 102, 0.2);
+}
+
+/* レスポンシブ対応（スマホ表示時に1カラム化） */
+@media (max-width: 768px) {
+  .profile-history-grid {
+    flex-direction: column;
+  }
+  
+  .profile-history-col {
+    width: 100%;
+  }
+}
 
     /* -----------------------------------
        別タブ：ポートフォリオ・ブログ・お知らせ
@@ -1000,11 +1087,78 @@
             </div>
           </div>
 
+      <!-- 出演歴セクション（プロフィールタブ用） -->
+    <section class="profile-history-section">
+      <div class="container">
+        <!-- セクションタイトル -->
+        <div class="section-header profile-history-title">
+          <h2 class="section-title">出演歴</h2>
         </div>
-      </div>
-    </section>
-  </div>
 
+        <!-- 2カラムレイアウト -->
+        <div class="profile-history-grid">
+          <!-- 舞台セクション（左カラム） -->
+          <div class="profile-history-col stage">
+            <h3 class="col-title">舞台</h3>
+            <div class="profile-history-list">
+                <div class="history-item">
+                  <span class="history-month">2026.08</span>
+                  <span class="history-work">近代古典塾 芯劇　夏期講習～岸田國士編～『命を弄ぶ男ふたり』@CLEO studio　包帯をした男 役</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2026.07</span>
+                  <span class="history-work">劇団FAX　馬駆ける天山の国 キルギス祭『みなもと』@神奈川県立青少年センター スタジオHIKARI　主演</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2026.02</span>
+                  <span class="history-work">劇団「治外法権」　第九回公演『死滅回遊』@シアター711　座長 役</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2025.07</span>
+                  <span class="history-work">近代古典塾 芯劇　旗揚げ公演『かもめ』@バルスタジオ　シャムラーエフ 役</span>
+                </div> 
+                <div class="history-item">
+                  <span class="history-month">2024.12</span>
+                  <span class="history-work">劇団FAX　第30回公演『すきとおる冒涜』@遊空間がざびぃ　戸塚研吾 役</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2024.02</span>
+                  <span class="history-work">劇団FAX　二本立て公演『てんとう』@プロト・シアター　主演</span>
+                </div>
+                  <div class="history-item">
+                  <span class="history-month">2023.09</span>
+                  <span class="history-work">TOKYO笹塚ボーイズ　『花瓶の中の海』@WESTEND STUDIO　真樹さとし 役</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2022.12</span>
+                  <span class="history-work">よるべ　2022年度WINGCUP参加公演『深呼吸』@ウイングフィールド　鈴木 役</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2020.10</span>
+                  <span class="history-work">劇団FAX　第17回公演『SANSO』@THEATRE E9 KYOTO　ワキタ 役</span>
+                </div>
+              </div>
+            </div>
+
+          <!-- 映像セクション（右カラム） -->
+          <div class="profile-history-col screen">
+            <h3 class="col-title">映像</h3>
+            <div class="profile-history-list">
+                <div class="history-item">
+                  <span class="history-month">2026</span>
+                  <span class="history-work">【短編映画】のーくるー 福岡48時間映画祭 参加作品『天才陰陽師 園田』監督 福本直人</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2026</span>
+                  <span class="history-work">【CM】JRFU「NO SIDE SPIRIT | 男子ラグビーワールドカップ 2035 日本招致メッセージ決定」</span>
+                </div>
+                <div class="history-item">
+                  <span class="history-month">2022</span>
+                  <span class="history-work">【CM】UQmobile UQ応援割×AbemaTV「今日、好きになりました。」WebCM</span>
+                </div>
+              </div>
+            </div>
+          
   <!-- ===============================================
         3. ポートフォリオ タブ
   ================================================ -->
