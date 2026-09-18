@@ -534,7 +534,7 @@
 
     /* 上下に並べるため flex-direction: column に変更 */
     .profile-container {
-      max-width: 700px; /* テキストが横に広がりすぎないよう中央に綺麗に収めるサイズよ */
+      max-width: 1100px; /* テキストが横に広がりすぎないよう中央に綺麗に収めるサイズよ */
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -544,6 +544,7 @@
 
     /* ★写真2枚を横並びにするエリア */
     .profile-img-wrap {
+      max-width: 700px;
       width: 100%;
       display: flex;
       justify-content: center;
@@ -561,9 +562,10 @@
 
     /* ★真下に置くプロフィール詳細 */
     .profile-details {
+      max-width: 700px;
       width: 100%;
-      max-width: 450px;
-      margin: 0 auto;
+      margin-left: auto;
+      margin-right: auto;
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -624,32 +626,32 @@
 ----------------------------------- */
 /* 1. 外側の親要素による幅制限を解除する */
 .profile-history-section {
-  width: 100% !important;
-  max-width: 100% !important;
+  width: 100%;
+  max-width: 100%;
 }
 
 /* 2. セクション内のコンテナを画面いっぱいに広げる */
 .profile-history-section .container {
-  width: 95% !important;
-  max-width: 1400px !important; /* 元の幅より大幅に広く設定 */
-  margin-left: auto !important;
-  margin-right: auto !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* 3. 舞台・映像の並び（グリッド）を親の幅いっぱいに使う */
 .profile-history-section .profile-history-grid {
-  display: flex !important;
-  width: 100% !important;
-  gap: 30px !important;
+  display: flex;
+  width: 100%;
+  gap: 30px;
 }
 
 /* 4. 舞台・映像それぞれのカラムを半々に均等拡大 */
 .profile-history-section .profile-history-col {
-  flex: 1 1 50% !important;
-  width: 50% !important;
-  box-sizing: border-box !important;
+  flex: 1 1 50%;
+  width: 50%;
+  box-sizing: border-box;
 }
 
 /* リスト共通部分 */
