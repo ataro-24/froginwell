@@ -592,7 +592,7 @@
     .profile-block dl,
     .profile-block .profile-item,
     .profile-details > div {
-      border-bottom: 1px dashed var(--yellow) !important;
+      border-bottom: 1px solid var(--yellow) !important;
       padding-bottom: 12px;
       margin-bottom: 12px;
     }
@@ -642,11 +642,16 @@
   display: flex;
   gap: 8px;
   font-size: 14px;
-  padding-bottom: 8px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom-width: 1px;
+  border-bottom-style: wavy !important; /* 波線に指定 */
 }
 
 .profile-history-item:last-child {
-  border-bottom: none;
+  border-bottom: none !important; /* 一番最後の項目は線を消す */
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .profile-history-month {
@@ -675,7 +680,7 @@
 }
 
 .profile-history-col.stage .profile-history-item {
-  border-bottom: 1px dashed rgba(11, 19, 43, 0.2);
+  border-bottom: 1px dashed var(--navy);
 }
 
 /* --- 映像（右カラム：ネイビー背景・イエロー枠線） --- */
@@ -694,7 +699,7 @@
 }
 
 .profile-history-col.screen .profile-history-item {
-  border-bottom: 1px dashed rgba(255, 209, 102, 0.2);
+  border-bottom: 1px dashed var(--yellow);
 }
 
 /* レスポンシブ対応（スマホ表示時に1カラム化） */
