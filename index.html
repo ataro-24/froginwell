@@ -358,84 +358,19 @@
       align-items: flex-start;
     }
 
-    .grid-col-left, .grid-col-right {
-      flex: 1;
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
+.grid-col-left, .grid-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
 
-    /* 出演歴エリアの共通スタイル */
-    .history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+.grid-col-left {
+  flex: 6; /* お知らせ（6割） */
+}
 
-    .history-item {
-      display: flex;
-      gap: 8px;
-      font-size: 14px;
-      border-bottom: 1px dashed rgba(11, 19, 43, 0.2);
-      padding-bottom: 8px;
-    }
-
-    .history-item:last-child {
-      border-bottom: none;
-    }
-
-    .history-month { font-weight: 700; min-width: 60px; }
-
-    /* --- 舞台 --- */
-    .history-col.stage {
-      background-color: var(--white);
-      color: var(--navy);
-      padding: 24px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    .stage .col-title {
-      border-bottom: 2px solid var(--navy);
-      color: var(--navy);
-      margin-bottom: 20px;
-    }
-
-    .stage-outer-image {
-      width: 100%;
-      text-align: left;
-      padding-left: 4px;
-    }
-
-    .stage-outer-image img {
-      width: 100%;
-      max-width: 150px;
-      height: auto;
-      border-radius: 8px;
-      object-fit: cover;
-    }
-    
-    /* --- 映像 --- */
-    .history-col.screen {
-      background-color: var(--navy);
-      color: var(--yellow);
-      border: 2px solid var(--navy);
-      background-color: rgba(11, 19, 43, 0.05);
-      padding: 24px;
-      border-radius: 12px;
-    }
-
-    .screen .col-title {
-      border-bottom: 2px solid var(--navy);
-      color: var(--navy);
-      margin-bottom: 16px;
-    }
-
-    .screen .history-item {
-      border-bottom: 1px dashed rgba(11, 19, 43, 0.2);
-      color: var(--navy);
-    }
+.grid-col-right {
+  flex: 4; /* デモリール（4割） */
+}
 
     /* --- デモリール --- */
     .youtube-container {
@@ -653,10 +588,118 @@
       flex: 1;
     }
 
-    /* プロフィールタブ内の出演歴セクション */
-    .profile-history-section {
-      border-top: 1px solid rgba(11, 19, 43, 0.15);
-      margin-top: 20px;
+    .main-grid-section {
+      background-color: var(--navy);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .main-grid {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    .grid-col-left, .grid-col-right {
+      flex: 1;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* 出演歴エリアの共通スタイル */
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .history-item {
+      display: flex;
+      gap: 8px;
+      font-size: 14px;
+      border-bottom: 1px dashed rgba(11, 19, 43, 0.2);
+      padding-bottom: 8px;
+    }
+
+    .history-item:last-child {
+      border-bottom: none;
+    }
+
+    .history-month { font-weight: 700; min-width: 60px; }
+
+    /* --- 舞台 --- */
+    .history-col.stage {
+      background-color: var(--white);
+      color: var(--navy);
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .stage .col-title {
+      border-bottom: 2px solid var(--navy);
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+
+    .stage-outer-image {
+      width: 100%;
+      text-align: left;
+      padding-left: 4px;
+    }
+
+    .stage-outer-image img {
+      width: 100%;
+      max-width: 150px;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    
+    /* --- 映像 --- */
+    .history-col.screen {
+      background-color: var(--navy);
+      color: var(--yellow);
+      border: 2px solid var(--navy);
+      background-color: rgba(11, 19, 43, 0.05);
+      padding: 24px;
+      border-radius: 12px;
+    }
+
+    .screen .col-title {
+      border-bottom: 2px solid var(--navy);
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    .screen .history-item {
+      border-bottom: 1px dashed rgba(11, 19, 43, 0.2);
+      color: var(--navy);
+    }
+
+    /* --- デモリール --- */
+    .youtube-container {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 209, 102, 0.3);
+      margin-bottom: 8px;
+    }
+
+    .youtube-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .demo-credits {
+      font-size: 13px;
+      color: var(--yellow);
+      text-align: right;
+      line-height: 1.6;
     }
 
     /* -----------------------------------
@@ -792,41 +835,38 @@
     <!-- メインコンテンツ エリア -->
     <section class="main-grid-section section-padding">
       <div class="container">
-        <div class="main-grid">
-          
-          <!-- デモリール＆お知らせエリア -->
-          <div class="grid-col-right" style="width: 100%;">
-            
-            <!-- デモリール -->
-            <div class="demo-box-wrap">
-              <h2 class="section-title">デモリール『微塵も』</h2>
-              <div class="youtube-container">
-                <iframe src="https://www.youtube.com/embed/bARXUG0cnck" title="デモリール『微塵も』" allowfullscreen></iframe>
-              </div>
-              <div class="demo-credits">
-                監督 植松蒼介<br>
-                脚本 高矢航志
-              </div>
-            </div>
-
-            <!-- お知らせ（グレーの枠線付き） -->
-            <div class="news-box-wrap">
-              <h2 class="section-title">お知らせ</h2>
-              <div class="news-list">
-                <div class="news-card">
-                  <span class="news-badge">NEW</span>
-                  <span class="news-date">2026.09.20</span>
-                  <p class="news-text">蛙太郎ウェブサイトをオープンしました！</p>
-                </div>
-              </div>
-              <div class="news-more-link">
-                <a onclick="switchTab('news')">more &raquo;</a>
-              </div>
-            </div>
-
-          </div>
-
+<div class="main-grid">
+  <!-- 左列：お知らせ（6の割合） -->
+  <div class="grid-col-left">
+    <div class="news-box-wrap">
+      <h2 class="section-title">お知らせ</h2>
+      <div class="news-list">
+        <div class="news-card">
+          <span class="news-badge">NEW</span>
+          <span class="news-date">2026.09.20</span>
+          <p class="news-text">蛙太郎ウェブサイトをオープンしました！</p>
         </div>
+      </div>
+      <div class="news-more-link">
+        <a onclick="switchTab('news')">more &raquo;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右列：デモリール（4の割合） -->
+  <div class="grid-col-right">
+    <div class="demo-box-wrap">
+      <h2 class="section-title">デモリール『微塵も』</h2>
+      <div class="youtube-container">
+        <iframe src="https://www.youtube.com/embed/bARXUG0cnck" title="デモリール『微塵も』" allowfullscreen></iframe>
+      </div>
+      <div class="demo-credits">
+        監督 植松蒼介<br>
+        脚本 高矢航志
+      </div>
+    </div>
+  </div>
+</div>
       </div>
     </section>
 
