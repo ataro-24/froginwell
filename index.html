@@ -606,7 +606,7 @@
      margin-bottom: 0;
     }
     
-    /* -----------------------------------
+/* -----------------------------------
    プロフィールタブ：出演歴エリア（2カラム構成）
 ----------------------------------- */
 .profile-history-section {
@@ -644,8 +644,9 @@
   font-size: 14px;
   padding-bottom: 10px;
   margin-bottom: 10px;
-  border-bottom-width: 1px;
-  border-bottom-style: dashed !important; /* 波線に指定 */
+  /* 下線の基本指定（太さ・スタイル） */
+  border-bottom-width: 1px; /* 波線は1pxだと見えづらいため2pxがおすすめよ〜 */
+  border-bottom-style: dashed !important; /* 波線（wavy）に指定 */
 }
 
 .profile-history-item:last-child {
@@ -680,7 +681,7 @@
 }
 
 .profile-history-col.stage .profile-history-item {
-  border-bottom-color: 1px dashed var(--navy);
+  border-bottom-color: var(--navy) !important; /* 色のみを指定 */
 }
 
 /* --- 映像（右カラム：ネイビー背景・イエロー枠線） --- */
@@ -699,7 +700,7 @@
 }
 
 .profile-history-col.screen .profile-history-item {
-  border-bottom-color: 1px dashed var(--yellow);
+  border-bottom-color: var(--yellow) !important; /* 色のみを指定 */
 }
 
 /* レスポンシブ対応（スマホ表示時に1カラム化） */
