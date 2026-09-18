@@ -620,25 +620,34 @@
 }
 
 /* -----------------------------------
-   出演歴セクション：横幅を1.5倍に広げる（最優先）
+   出演歴セクション：強制的に幅を1.5倍（ワイド化）
 ----------------------------------- */
-/* セクション内のコンテナの幅制限を解除して大きく広げる */
-.profile-history-section .container {
-  max-width: 1400px !important; /* 十分な広さを確保 */
-  width: 95% !important;        /* 画面幅いっぱいに使う */
-  margin: 0 auto !important;
+/* 1. 外側の親要素による幅制限を解除する */
+.profile-history-section {
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
-/* 2カラムグリッドの配置設定 */
-.profile-history-grid {
+/* 2. セクション内のコンテナを画面いっぱいに広げる */
+.profile-history-section .container {
+  width: 95% !important;
+  max-width: 1400px !important; /* 元の幅より大幅に広く設定 */
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* 3. 舞台・映像の並び（グリッド）を親の幅いっぱいに使う */
+.profile-history-section .profile-history-grid {
   display: flex !important;
   width: 100% !important;
-  gap: 40px !important;        /* カラム間のすき間 */
+  gap: 30px !important;
 }
 
-/* 舞台・映像それぞれのボックスを均等に横幅いっぱい広げる */
-.profile-history-col {
-  flex: 1 1 50% !important;    /* 左右半分ずつ均等に大きく */
+/* 4. 舞台・映像それぞれのカラムを半々に均等拡大 */
+.profile-history-section .profile-history-col {
+  flex: 1 1 50% !important;
   width: 50% !important;
   box-sizing: border-box !important;
 }
