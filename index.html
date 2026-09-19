@@ -210,7 +210,7 @@
 .footer-nav a {
   color: #0B132B;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 12px;
   transition: opacity 0.3s;
 }
 
@@ -479,11 +479,26 @@
   gap: 120px; /* ★ここを大きめ（50px〜80px程度）に設定すると間隔が空くわ〜 */
 }
 
-/* スマホ表示の時は縦並びになるから間隔を少し調整 */
+/* スマホ画面向けの幅調整（画面幅 768px 以下のとき） */
 @media (max-width: 768px) {
+  /* 親要素の左右余白をギリギリまで小さくして外側に広げる */
+  .main-grid-section .container {
+    padding-left: 10px;  /* 画面端との隙間を最小限（10px）に縮めるわ */
+    padding-right: 10px;
+    width: 100%;
+  }
+
+  /* 2カラムを1カラム（縦並び）にして、幅いっぱいに使う */
   .top-main-grid {
-    grid-template-columns: 1fr;
-    gap: 40px; /* スマホでの上下の間隔 */
+    grid-template-columns: 1fr; /* 1列で幅いっぱいに広げる */
+    gap: 40px;                  /* お知らせとデモリールの上下の間隔 */
+  }
+
+  /* 各カードや要素の幅も100%に広げる */
+  .news-list,
+  .demoreel-container {
+    width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -973,7 +988,7 @@
 <header class="header">
   <div class="header-container">
   <a href="#tab-profile" class="logo">
-    高井蛙太郎 Ataro Takai　<span class="font-caveat">website</span>
+    高井蛙太郎 Ataro Takai <span class="font-caveat">website</span>
   </a>
 
     <!-- ★ ハンバーガーボタン（スマホ用） -->
