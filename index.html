@@ -905,10 +905,10 @@
   position: absolute;
   
   /* ▼上下の位置調整（舞台・映像の長い方の底面からの距離） */
-  bottom: -45px; /* 数値を大きく（例: -80px）すると下へ、小さく（例: -30px）すると上へ動くわ〜 */
+  bottom: -100px; /* 数値を大きく（例: -80px）すると下へ、小さく（例: -30px）すると上へ動くわ〜 */
   
   /* ▼左右の位置調整 */
-  right: 10px;   /* 「0px」で右端ピッタリ。「20px」などで内側、「-20px」でさらに右の外側へ動くわ〜 */
+  right: 15px;   /* 「0px」で右端ピッタリ。「20px」などで内側、「-20px」でさらに右の外側へ動くわ〜 */
   /* left: auto; */
 
   width: 100px; /* 画像の大きさ */
@@ -1031,14 +1031,14 @@
 
 .detail-img-item {
   width: 100%;
-  aspect-ratio: 9/ 16; /* 正方形で綺麗に並べる */
+  aspect-ratio: 3/ 2; /* 正方形で綺麗に並べる */
   object-fit: cover;
   border-radius: 6px;
-  background-color: #b0b5c0;
+  background-color: var(--gray-dark);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #444;
+  color: var(--text-dark);
 }
 
 
