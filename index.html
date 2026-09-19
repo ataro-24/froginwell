@@ -180,8 +180,8 @@
 
 /* フッターエリア */
 .footer {
-  background-color: #333;
-  color: #fff;
+  background-color: #DCDFE5;
+  color: #0B132B;
   padding: 40px 20px;
   text-align: center;
   margin-top: 60px;
@@ -208,7 +208,7 @@
 }
 
 .footer-nav a {
-  color: #fff;
+  color: #0B132B;
   text-decoration: none;
   font-size: 14px;
   transition: opacity 0.3s;
@@ -221,7 +221,7 @@
 /* コピーライト */
 .footer-copyright {
   font-size: 12px;
-  color: #aaa;
+  color: #0B132B;
 }
     
     /* -----------------------------------
@@ -457,10 +457,19 @@
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* PC表示時のお知らせとデモリールの間隔（gap）を広げる */
 .top-main-grid {
-  display: flex;
-  gap: 32px;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2カラム表示 */
+  gap: 60px; /* ★ここを大きめ（50px〜80px程度）に設定すると間隔が空くわ〜 */
+}
+
+/* スマホ表示の時は縦並びになるから間隔を少し調整 */
+@media (max-width: 768px) {
+  .top-main-grid {
+    grid-template-columns: 1fr;
+    gap: 40px; /* スマホでの上下の間隔 */
+  }
 }
 
 /* 左カラム：お知らせ (比率 6) */
@@ -949,7 +958,7 @@
 <header class="header">
   <div class="header-container">
   <a href="#tab-profile" class="logo">
-    高井蛙太郎Ataro Takai <span class="font-caveat">website</span>
+    高井蛙太郎 Ataro Takai　<span class="font-caveat">website</span>
   </a>
 
     <!-- ★ ハンバーガーボタン（スマホ用） -->
