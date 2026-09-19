@@ -776,7 +776,7 @@
   background-color: var(--navy);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   padding-top: 40px;
-  padding-bottom: 50px; /* ★枠外に出た画像がフッターに被らないよう、下に十分な隙間を作るわ */
+  padding-bottom: 100px; /* ★枠外に出た画像がフッターに被らないよう、下に十分な隙間を作るわ */
   width: 100%;
   max-width: 100%;
 }
@@ -797,6 +797,7 @@
 /* 2カラムレイアウト（グリッド） */
 .profile-history-grid,
 .profile-history-section .profile-history-grid {
+  position: relative;
   display: flex;
   width: 100%;
   gap: 30px;
@@ -895,41 +896,37 @@
   border-bottom-color: var(--yellow) !important;
 }
 
-/* 枠外の下・右寄りに配置する画像（PC表示） */
+/* --------------------------------------------------------------------------
+   枠外画像（数字を変えて位置調整OK！）
+   -------------------------------------------------------------------------- */
+
+/* 【PC表示】 */
 .screen-outer-bottom-img {
   position: absolute;
-  right: 0;
-  bottom: -300px; /* ★映像枠のすぐ右下にぴったり配置 */
-  width: 100px;
+  
+  /* ▼上下の位置調整（舞台・映像の長い方の底面からの距離） */
+  bottom: -60px; /* 数値を大きく（例: -80px）すると下へ、小さく（例: -30px）すると上へ動くわ〜 */
+  
+  /* ▼左右の位置調整 */
+  right: 0px;   /* 「0px」で右端ピッタリ。「20px」などで内側、「-20px」でさらに右の外側へ動くわ〜 */
+  /* left: auto; */
+
+  width: 100px; /* 画像の大きさ */
   height: auto;
   pointer-events: none;
 }
 
 
-/* ==========================================================================
-   3. レスポンシブ対応（スマホ表示）
-   ========================================================================== */
+/* 【スマホ表示（幅768px以下）】 */
 @media (max-width: 768px) {
-  /* 縦並びにして、高さを自動にする指定 */
-  .profile-history-grid,
-  .profile-history-section .profile-history-grid {
-    flex-direction: column !important;
-  }
-  
-  /* 横幅100%を強制適用 */
-  .profile-history-col,
-  .profile-history-section .profile-history-col {
-    flex: 1 1 100% !important;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  /* ★スマホでも枠外右下に浮かせる指定（少しサイズを小さく調整） */
   .screen-outer-bottom-img {
     position: absolute !important;
-    right: 0;
-    bottom: -150px;
-    width: 80px; /* スマホ用にサイズを少しコンパクトに調整したわ〜 */
+    
+    /* ▼スマホ用の上下・左右調整 */
+    bottom: -50px; /* スマホ表示での上下位置 */
+    right: 10px;   /* スマホ表示での左右位置 */
+    
+    width: 80px;   /* スマホ用に少し小さめ */
     height: auto;
   }
 }
@@ -1299,9 +1296,8 @@
                 <span class="history-work">【CM】UQmobile UQ応援割×AbemaTV「今日、好きになりました。」WebCM</span>
               </div>
             </div>
-            <img src="chojuori.png" alt="飾り画像" class="screen-outer-bottom-img">
           </div>
-
+            <img src="chojuori.png" alt="飾り画像" class="screen-outer-bottom-img">
         </div><!-- /.profile-history-grid -->
       </div><!-- /.container -->
     </section>
