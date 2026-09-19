@@ -1443,10 +1443,30 @@
           
           <!-- カード 1 -->
           <div class="gallery-card" onclick="openGalleryDetail('project-1')">
-            <div class="card-img">'みなもと１.jpg'</div>
-            <div class="card-body">
-              <div class="card-title">劇団FAX『みなもと』</div>
-              <p style="font-size: 13px; color: var(--text-dark);">神奈川県立青少年センター スタジオHIKARI</p>
+            <div class="dummy-card-img">Photo 1</div>
+            <div class="dummy-card-body">
+              <div class="dummy-card-title">劇団FAX『みなもと』</div>
+              <p style="font-size: 13px; color: #444;">神奈川県立青少年センター スタジオHIKARI</p>
+            </div>
+          </div>
+
+          <!-- カード 2 -->
+          <div class="gallery-card" onclick="openGalleryDetail('project-2')">
+            <div class="dummy-card-img">
+             <img src="みなもと３.jpg" alt="スナップ写真サムネイル" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="dummy-card-body">
+              <div class="dummy-card-title">舞台スチール</div>
+              <p style="font-size: 13px; color: #444;">作品の説明テキストが入ります。</p>
+            </div>
+          </div>
+
+          <!-- カード 3 -->
+          <div class="gallery-card" onclick="openGalleryDetail('project-3')">
+            <div class="dummy-card-img">Photo 3</div>
+            <div class="dummy-card-body">
+              <div class="dummy-card-title">ポートレート集</div>
+              <p style="font-size: 13px; color: #444;">作品の説明テキストが入ります。</p>
             </div>
           </div>
 
@@ -1634,8 +1654,8 @@
       title: '劇団FAX『みなもと』',
       credit: '撮影：横井 宏武',
       caption: '2026年7月に出演した劇団FAX『みなもと』の舞台写真です。神奈川県立青少年センター スタジオHIKARIにて。',
-      images: ['みなもと３.jpg''みなもと１.jpg''みなもと２.jpg''みなもと４.jpg''みなもと５.jpg''みなもと６.jpg''みなもと７jpg']
-    }
+      images: ['みなもと３.jpg', 'みなもと１.jpg', 'みなもと２.jpg', 'みなもと４.jpg', 'みなもと５.jpg', 'みなもと６.jpg','みなもと７.jpg']
+    },
   };
 
   // 詳細画面を開く関数
@@ -1652,18 +1672,18 @@
     const gridContainer = document.getElementById('detail-image-grid');
     gridContainer.innerHTML = ''; // 一旦クリア
 
-    data.images.forEach(imgSrc => {
-      const imgDiv = document.createElement('div');
-      imgDiv.className = 'detail-img-item';
-      
-      // 実際に画像を表示するための img タグ作成
-      const imgEl = document.createElement('img');
-      imgEl.src = imgSrc; // 画像のパス（URL）
-      imgEl.alt = 'ギャラリー画像';
-      
-      imgDiv.appendChild(imgEl);
-      gridContainer.appendChild(imgDiv);
-    });
+// 画像を画面に生成するループ処理の中で、ちゃんと <img> タグを作るように指定するわよ〜
+data.images.forEach(imgSrc => {
+  const imgDiv = document.createElement('div');
+  imgDiv.className = 'detail-img-item';
+
+  const imgEl = document.createElement('img');
+  imgEl.src = imgSrc; // ここで画像のパスがセットされるわ！
+  imgEl.alt = data.title;
+
+  imgDiv.appendChild(imgEl);
+  gridContainer.appendChild(imgDiv);
+});
 
     // 画面切り替え
     document.getElementById('gallery-list-view').style.display = 'none';
