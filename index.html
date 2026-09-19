@@ -18,6 +18,7 @@
       --navy: #0B132B;
       --yellow: #FFD166;
       --white: #FFFFFF;
+      --gray-light: #CCD2DD; /* 明るめのグレー */
       --gray-dark: #DCDFE5; /* 濃いめのグレー */
       --gray-text: #A0AAB8; /* テキスト・枠線用グレー */
       --text-dark: #1C2541;
@@ -555,7 +556,7 @@
 }
 
 .news-card {
-  background-color: var(--gray-dark);
+  background-color: var(--gray-light);
   color: var(--text-dark);
   padding: 12px 16px;
   border-radius: 8px;
@@ -635,7 +636,7 @@
   padding: 10px 14px;
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  background-color: var(--gray-dark);
+  background-color: var(--gray-light);
   color: var(--text-dark);
   font-family: inherit;
   font-size: 14px;
@@ -855,8 +856,8 @@
    2-1. 舞台（左カラム：イエロー背景）
    -------------------------------------------------------------------------- */
 .profile-history-col.stage {
-  background-color: var(--yellow);
-  color: var(--navy);
+  background-color: var(--gray-light);
+  color: var(--text-dark);
   padding: 24px;
   border-radius: 12px;
   display: flex;
@@ -865,12 +866,12 @@
 
 .profile-history-col.stage .col-title {
   border-bottom: 2px solid var(--navy);
-  color: var(--navy);
+  color: var(--text-dark);
   margin-bottom: 20px;
 }
 
 .profile-history-col.stage .history-item {
-  border-bottom-color: var(--navy) !important;
+  border-bottom-color: var(--text-dark) !important;
 }
 
 
@@ -879,21 +880,21 @@
    -------------------------------------------------------------------------- */
 .profile-history-col.screen {
   position: relative; /* 枠外画像の基準点 */
-  background-color: var(--navy);
-  color: var(--yellow);
-  border: 2px solid var(--yellow);
+  background-color: var(--gray-light);
+  color: var(--text-dark);
+  border: 2px solid var(--gray-light);
   padding: 24px;
   border-radius: 12px;
 }
 
 .profile-history-col.screen .col-title {
   border-bottom: 2px solid var(--yellow);
-  color: var(--yellow);
+  color: var(--text-dark);
   margin-bottom: 16px;
 }
 
 .profile-history-col.screen .history-item {
-  border-bottom-color: var(--yellow) !important;
+  border-bottom-color: var(--text-dark) !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -962,7 +963,7 @@
 }
 
 .gallery-card {
-  background-color: var(--gray-text);
+  background-color: var(--gray-light);
   color: var(--text-dark);
   border-radius: 8px;
   overflow: hidden;
@@ -998,7 +999,7 @@
 
 /* 情報セクション */
 .detail-info-section {
-  background-color: var(--gray-text);
+  background-color: var(--gray-light);
   color: var(--text-dark);
   padding: 20px;
   border-radius: 8px;
@@ -1034,7 +1035,7 @@
   aspect-ratio: 3/ 2; /* 正方形で綺麗に並べる */
   object-fit: cover;
   border-radius: 6px;
-  background-color: var(--gray-dark);
+  background-color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
