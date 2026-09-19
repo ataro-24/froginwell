@@ -452,7 +452,22 @@
 /* -----------------------------------
    TOPタブ：メインコンテンツエリア（お知らせ6 : デモリール4）
 ----------------------------------- */
-.main-grid-section {
+/* お知らせ・デモリールセクションの横幅を外側に広げる */
+.main-grid-section .container {
+  max-width: 1200px; /* ★元が 1000px や 900px なら、1200px〜1400px などに広げると左右にワイドになるわ〜 */
+  width: 100%;
+  padding-left: 60px;  /* 画面端との最低限の隙間 */
+  padding-right: 60px;
+}
+
+/* 2カラムのグリッド設定 */
+.top-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 左右均等に1:1で広がるわ */
+  gap: 60px; /* 先ほど設定した左右の間隔 */
+}
+    
+  .main-grid-section {
   background-color: var(--navy);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
