@@ -59,7 +59,7 @@
 }
 
 /* ヘッダーのタイトル（ロゴ）のスタイル指定よ〜 */
-.header .logo {
+.header {
   color: var(--yellow);            /* 文字色をメインカラーに統一 */
   font-family: inherit;              /* ページ全体と同じフォントを継承 */
   font-size: 20px;                  /* お好みの大きさに調整してね〜 */
@@ -67,12 +67,22 @@
   text-decoration: none;           /* 下線を消す */
 }
 
-/* ★ 「website」部分をCaveatフォントにするための指定を追加したわ〜 */
-.font-caveat {
-  font-family: 'Caveat', cursive;
-  font-size: 1.2em;
+/* ロゴ全体のFlexbox配置 */
+.logo {
+  display: flex;
+  flex-direction: column;    /* 縦並びにするわ */
+  align-items: center;        /* 横方向の中央揃え */
+  text-align: center;         /* テキスト自体の中央揃え */
+  text-decoration: none;      /* 下線を消す */
+  color: inherit;            /* 親の文字色を継承 */
 }
 
+/* website部分の調整 */
+.logo .font-caveat {
+  display: block;             /* ブロック要素化して確実に改行＆位置指定を効かせる */
+  margin-top: 2px;            /* 上の名前との隙間調整（お好みで数字変えてね） */
+}
+    
 /* 通常のナビゲーションメニュー（PC・共通） */
 .nav-menu ul {
   display: flex;
@@ -1055,6 +1065,14 @@
   object-fit: contain;
 }
 
+/* -----------------------------------
+   レスポンシブ対応 (スマホ表示)
+----------------------------------- */
+@media (max-width: 768px) {
+  .gallery-card-grid {
+    grid-template-columns: 1fr; /* スマホでは1列 */
+  }
+
     /* -----------------------------------
        別タブ：ブログ・お知らせ
     ----------------------------------- */
@@ -1119,7 +1137,8 @@
 <header class="header">
   <div class="header-container">
   <a href="#tab-profile" class="logo">
-    高井蛙太郎 Ataro Takai<br><span class="font-caveat">website</span>
+  高井蛙太郎 Ataro Takai
+  <span class="font-caveat">website</span>
   </a>
 
     <!-- ★ ハンバーガーボタン（スマホ用） -->
@@ -1688,4 +1707,3 @@
   
 </body>
 </html>
-
