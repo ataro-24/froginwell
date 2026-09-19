@@ -692,7 +692,7 @@
 }
 
 .profile-container {
-  position:: relative;
+  position: relative; /* ★タイポ修正（:: → :） */
   max-width: 1100px;
   margin: 0 auto;
   display: flex;
@@ -800,7 +800,7 @@
   display: flex;
   width: 100%;
   gap: 30px;
-  align-items: flex-start !important; /* コンテンツ量に合わせて高さを自動にする指定 */
+  align-items: flex-start !important;
 }
 
 /* 左右のカラム共通設定 */
@@ -895,26 +895,41 @@
   border-bottom-color: var(--yellow) !important;
 }
 
-/* 枠外の下・右寄りに配置する画像 */
+/* 枠外の下・右寄りに配置する画像（PC表示） */
 .screen-outer-bottom-img {
   position: absolute;
   right: 0;
-  top: 100%;
-  margin-top: 300px;
+  bottom: -40px; /* ★ margin-top: 300px をやめて、枠のすぐ下（-40px付近）に配置 */
   width: 100px;
   height: auto;
   pointer-events: none;
 }
 
-/* スマホ画面（幅768px以下）での画像の配置調整 */
+
+/* ==========================================================================
+   3. レスポンシブ対応（スマホ表示）
+   ========================================================================== */
 @media (max-width: 768px) {
-  /* 右下に浮かせている画像をスマホの時だけ絶対配置解除して下に並べる */
-  #tab-profile .profile-image-right-bottom, /* ※お使いの画像クラス名に合わせてね */
-  #tab-profile img.decoration-img {
-    position: static;    /* 浮遊を解除して通常の流れに戻すわ */
+  /* 縦並びにして、高さを自動にする指定 */
+  .profile-history-grid,
+  .profile-history-section .profile-history-grid {
+    flex-direction: column !important;
+  }
+  
+  /* 横幅100%を強制適用 */
+  .profile-history-col,
+  .profile-history-section .profile-history-col {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* ★ スマホの時は画像の絶対配置を解除して枠の下に綺麗に並べる */
+  .screen-outer-bottom-img {
+    position: static !important;
     display: block;
-    margin: 20px auto 0; /* 中央寄せにして上に少し余白を作る */
-    max-width: 100%;     /* スマホ幅からはみ出さないように */
+    margin: 16px auto 0; /* 中央寄せにして上に少し余白を作る */
+    max-width: 100px;
     height: auto;
   }
 }
