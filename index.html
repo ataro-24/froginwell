@@ -767,16 +767,16 @@
   margin-bottom: 0;
 }
 
-
 /* ==========================================================================
    2. 出演歴エリア（profile-history-section / 下部）
    ========================================================================== */
 
-/* セクション全体・コンテナ（ワイド表示設定） */
+/* セクション全体（下に画像が飛び出すための余白を作るわ〜） */
 .profile-history-section {
   background-color: var(--navy);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 40px 0;
+  padding-top: 40px;
+  padding-bottom: 80px; /* ★枠外に出た画像がフッターに被らないよう、下に十分な隙間を作るわ */
   width: 100%;
   max-width: 100%;
 }
@@ -899,7 +899,7 @@
 .screen-outer-bottom-img {
   position: absolute;
   right: 0;
-  bottom: 250px; 
+  bottom: -50px; /* ★映像枠のすぐ右下にぴったり配置 */
   width: 100px;
   height: auto;
   pointer-events: none;
@@ -924,16 +924,16 @@
     max-width: 100% !important;
   }
 
-  /* ★ スマホの時は画像の絶対配置を解除して枠の下に綺麗に並べる */
+  /* ★スマホでも枠外右下に浮かせる指定（少しサイズを小さく調整） */
   .screen-outer-bottom-img {
-    position: static !important;
-    display: block;
-    margin: 5px auto 0; /* 中央寄せにして上に少し余白を作る */
-    max-width: 100px;
+    position: absolute !important;
+    right: 0;
+    bottom: -45px;
+    width: 80px; /* スマホ用にサイズを少しコンパクトに調整したわ〜 */
     height: auto;
   }
 }
-
+    
 /* ==========================================================================
    3. レスポンシブ対応（スマホ表示）
    ========================================================================== */
