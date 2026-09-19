@@ -178,6 +178,52 @@
   }
 }
 
+/* フッターエリア */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+  margin-top: 60px;
+}
+
+.footer-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* フッターメニュー */
+.footer-nav {
+  margin-bottom: 20px;
+}
+
+.footer-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: opacity 0.3s;
+}
+
+.footer-nav a:hover {
+  opacity: 0.7;
+}
+
+/* コピーライト */
+.footer-copyright {
+  font-size: 12px;
+  color: #aaa;
+}
+    
     /* -----------------------------------
        コンテンツ表示エリア (タブ切り替え)
     ----------------------------------- */
@@ -419,13 +465,13 @@
 
 /* 左カラム：お知らせ (比率 6) */
 .top-col-news {
-  flex: 6;
+  flex: 5;
   min-width: 0; /* フレックスアイテムの破綻防止 */
 }
 
 /* 右カラム：デモリール (比率 4) */
 .top-col-demo {
-  flex: 4;
+  flex: 5;
   min-width: 0;
 }
 
@@ -903,7 +949,7 @@
 <header class="header">
   <div class="header-container">
   <a href="#tab-profile" class="logo">
-    高井蛙太郎 Takai Ataro <span class="font-caveat">website</span>
+    高井蛙太郎Ataro Takai <span class="font-caveat">website</span>
   </a>
 
     <!-- ★ ハンバーガーボタン（スマホ用） -->
@@ -1199,7 +1245,7 @@
   <div id="tab-gallery" class="tab-content">
     <section class="section-padding">
       <div class="container">
-        <h2 class="section-title">ポートフォリオ</h2>
+        <h2 class="section-title">ギャラリー</h2>
         <div class="grid-container">
           <div class="dummy-card">
             <div class="dummy-card-img">Photo 1</div>
@@ -1274,6 +1320,45 @@
     </section>
   </div>
 
+<!-- ===============================================
+        5. お知らせ タブ
+  ================================================ -->
+  <div id="tab-news" class="tab-content">
+    <section class="section-padding">
+      <div class="container">
+        <h2 class="section-title">お知らせ一覧</h2>
+        <div class="news-list" style="max-width: 800px; margin: 0 auto;">
+          <div class="news-card">
+            <span class="news-badge">NEW</span>
+            <span class="news-date">2026.09.20</span>
+            <p class="news-text">蛙太郎ウェブサイトをオープンしました！</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ★ 全タブ共通 フッターエリア ★ -->
+  <footer class="footer">
+    <div class="footer-container">
+      <nav class="footer-nav">
+        <ul>
+          <li><a href="#tab-top" onclick="switchTab('top')">TOP</a></li>
+          <li><a href="#tab-profile" onclick="switchTab('profile')">プロフィール</a></li>
+          <li><a href="#tab-gallery" onclick="switchTab('gallery')">ギャラリー</a></li>
+          <li><a href="#tab-blog" onclick="switchTab('blog')">ブログ</a></li>
+          <li><a href="#tab-news" onclick="switchTab('news')">お知らせ</a></li>
+        </ul>
+      </nav>
+      <p class="footer-copyright">&copy; 2026　高井蛙太郎</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // 省略（先ほどのJSコードのまま）
+  </script>
+  
 <!-- JavaScript (タブ切り替え ＆ ハンバーガーメニュー処理) -->
 <script>
   // 1. タブ切り替え関数
