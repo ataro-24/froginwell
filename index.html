@@ -950,8 +950,114 @@
   }
 }
 
+/* -----------------------------------
+   ギャラリー一覧 (2列レイアウト)
+----------------------------------- */
+.gallery-card-grid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* PC時は2列固定 */
+  gap: 20px;
+}
+
+.gallery-card {
+  background-color: var(--gray-dark);
+  color: var(--text-dark);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gallery-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* -----------------------------------
+   詳細画面スタイル
+----------------------------------- */
+/* 戻るボタン */
+.back-btn {
+  background: none;
+  border: 1px solid var(--text-dark, #333);
+  color: var(--text-dark, #333);
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 24px;
+  transition: opacity 0.2s;
+}
+
+.back-btn:hover {
+  opacity: 0.7;
+}
+
+/* 情報セクション */
+.detail-info-section {
+  background-color: var(--gray-dark);
+  color: var(--text-dark);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.detail-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.detail-credit {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
+
+.detail-caption {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* 3列の画像グリッド */
+.detail-image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* PC時は3列 */
+  gap: 16px;
+}
+
+.detail-img-item {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* 正方形で綺麗に並べる */
+  object-fit: cover;
+  border-radius: 6px;
+  background-color: #b0b5c0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #444;
+}
+
+
+/* -----------------------------------
+   レスポンシブ対応 (スマホ表示)
+----------------------------------- */
+@media (max-width: 768px) {
+  .gallery-card-grid {
+    grid-template-columns: 1fr; /* スマホでは1列 */
+  }
+
+  .detail-image-grid {
+    grid-template-columns: repeat(2, 1fr); /* スマホでは2列に見やすく調整 */
+    gap: 10px;
+  }
+}
+
     /* -----------------------------------
-       別タブ：ポートフォリオ・ブログ・お知らせ
+       別タブ：ブログ・お知らせ
     ----------------------------------- */
     .grid-container {
       max-width: 900px;
@@ -1306,37 +1412,70 @@
   <!-- ===============================================
         3. ポートフォリオ タブ
   ================================================ -->
-  <div id="tab-gallery" class="tab-content">
-    <section class="section-padding">
-      <div class="container">
-        <h2 class="section-title">ギャラリー</h2>
-        <div class="grid-container">
-          <div class="dummy-card">
+<div id="tab-gallery" class="tab-content">
+  <section class="section-padding">
+    <div class="container">
+      <h2 class="section-title">ギャラリー</h2>
+
+      <!-- ▼ 1. 大項目カード一覧画面 (2列) -->
+      <div id="gallery-list-view">
+        <div class="gallery-card-grid">
+          
+          <!-- カード 1 -->
+          <div class="gallery-card" onclick="openGalleryDetail('project-1')">
             <div class="dummy-card-img">Photo 1</div>
             <div class="dummy-card-body">
               <div class="dummy-card-title">スナップ写真作品 #1</div>
               <p style="font-size: 13px; color: #444;">作品の説明テキストが入ります。</p>
             </div>
           </div>
-          <div class="dummy-card">
+
+          <!-- カード 2 -->
+          <div class="gallery-card" onclick="openGalleryDetail('project-2')">
             <div class="dummy-card-img">Photo 2</div>
             <div class="dummy-card-body">
               <div class="dummy-card-title">舞台スチール</div>
               <p style="font-size: 13px; color: #444;">作品の説明テキストが入ります。</p>
             </div>
           </div>
-          <div class="dummy-card">
+
+          <!-- カード 3 -->
+          <div class="gallery-card" onclick="openGalleryDetail('project-3')">
             <div class="dummy-card-img">Photo 3</div>
             <div class="dummy-card-body">
               <div class="dummy-card-title">ポートレート集</div>
               <p style="font-size: 13px; color: #444;">作品の説明テキストが入ります。</p>
             </div>
           </div>
+
         </div>
       </div>
-    </section>
-  </div>
 
+
+      <!-- ▼ 2. 詳細画面 (デフォルトは非表示) -->
+      <div id="gallery-detail-view" style="display: none;">
+        
+        <!-- 一覧に戻るボタン -->
+        <button class="back-btn" onclick="closeGalleryDetail()">← ギャラリー一覧に戻る</button>
+
+        <!-- 情報セクション (写真の上部に配置) -->
+        <div class="detail-info-section">
+          <h3 id="detail-title" class="detail-title">プロジェクト名</h3>
+          <p id="detail-credit" class="detail-credit">撮影：○○ ○○ / 衣装：△△ △△</p>
+          <p id="detail-caption" class="detail-caption">ここにプロジェクト全体の説明文やキャプションが入ります。</p>
+        </div>
+
+        <!-- 3列の画像グリッド -->
+        <div id="detail-image-grid" class="detail-image-grid">
+          <!-- JSで選択したプロジェクトの画像が自動挿入されます -->
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+</div>
+  
   <!-- ===============================================
         4. ブログ タブ
   ================================================ -->
@@ -1485,6 +1624,66 @@
     });
   });
 </script>
+
+<script>
+  // 各プロジェクトの詳細データ（画像やテキストを設定）
+  const galleryData = {
+    'project-1': {
+      title: 'スナップ写真作品 #1',
+      credit: '撮影：山田 太郎',
+      caption: '日常の何気ない瞬間を切り取ったスナップ写真集です。街並みや光の表情を中心に撮影しました。',
+      images: ['Photo 1-1', 'Photo 1-2', 'Photo 1-3', 'Photo 1-4', 'Photo 1-5', 'Photo 1-6']
+    },
+    'project-2': {
+      title: '舞台スチール',
+      credit: '撮影：佐藤 花子 / 演出：鈴木 一郎',
+      caption: '2026年春公演『タイトル名』の舞台裏および本番中のパフォーマンス写真です。',
+      images: ['Photo 2-1', 'Photo 2-2', 'Photo 2-3', 'Photo 2-4', 'Photo 2-5']
+    },
+    'project-3': {
+      title: 'ポートレート集',
+      credit: '撮影：田中 次郎',
+      caption: 'スタジオおよびロケーションで撮影したポートレート作品をまとめています。',
+      images: ['Photo 3-1', 'Photo 3-2', 'Photo 3-3', 'Photo 3-4', 'Photo 3-5', 'Photo 3-6', 'Photo 3-7']
+    }
+  };
+
+  // 詳細画面を開く関数
+  function openGalleryDetail(projectId) {
+    const data = galleryData[projectId];
+    if (!data) return;
+
+    // テキスト挿入
+    document.getElementById('detail-title').innerText = data.title;
+    document.getElementById('detail-credit').innerText = data.credit;
+    document.getElementById('detail-caption').innerText = data.caption;
+
+    // 画像グリッドの生成
+    const gridContainer = document.getElementById('detail-image-grid');
+    gridContainer.innerHTML = ''; // 一旦クリア
+
+    data.images.forEach(imgText => {
+      const imgDiv = document.createElement('div');
+      imgDiv.className = 'detail-img-item';
+      
+      // ※ 実際に画像を入れる場合は <img src="URL"> に差し替えてね！
+      imgDiv.innerText = imgText; 
+      
+      gridContainer.appendChild(imgDiv);
+    });
+
+    // 画面切り替え
+    document.getElementById('gallery-list-view').style.display = 'none';
+    document.getElementById('gallery-detail-view').style.display = 'block';
+  }
+
+  // 一覧画面に戻る関数
+  function closeGalleryDetail() {
+    document.getElementById('gallery-detail-view').style.display = 'none';
+    document.getElementById('gallery-list-view').style.display = 'block';
+  }
+</script>
+  
 </body>
 </html>
 
