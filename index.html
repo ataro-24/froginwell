@@ -1023,38 +1023,36 @@
   line-height: 1.6;
 }
 
-/* 3列の画像グリッド */
+/* -----------------------------------
+   詳細画面：1列の画像リスト
+----------------------------------- */
+/* PC・スマホ共通で1列にするわよ〜 */
 .detail-image-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* PC時は3列 */
-  gap: 16px;
+  display: flex;
+  flex-direction: column; /* 1列（縦並び）に配置 */
+  gap: 24px;              /* 写真と写真の間の余白 */
+  max-width: 800px;       /* 1列にした時に大きくなりすぎないよう中央寄せ調整 */
+  margin: 0 auto;
 }
 
+/* 画像を包む枠 */
 .detail-img-item {
   width: 100%;
-  aspect-ratio: 3/ 2; /* 正方形で綺麗に並べる */
-  object-fit: cover;
-  border-radius: 6px;
-  background-color: var(--white);
+  height: auto;           /* 高さを自動にして縦長・横長に対応させるわ */
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--gray-dark);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-dark);
 }
 
-
-/* -----------------------------------
-   レスポンシブ対応 (スマホ表示)
------------------------------------ */
-@media (max-width: 768px) {
-  .gallery-card-grid {
-    grid-template-columns: 1fr; /* スマホでは1列 */
-  }
-
-  .detail-image-grid {
-    grid-template-columns: repeat(2, 1fr); /* スマホでは2列に見やすく調整 */
-    gap: 10px;
-  }
+/* 実際に表示される画像（縦横比を維持して表示） */
+.detail-img-item img {
+  width: 100%;
+  height: auto;           /* 写真の向き（縦横）に合わせてそのまま伸縮するわ */
+  display: block;
+  object-fit: contain;
 }
 
     /* -----------------------------------
@@ -1659,17 +1657,20 @@
     document.getElementById('detail-credit').innerText = data.credit;
     document.getElementById('detail-caption').innerText = data.caption;
 
-    // 画像グリッドの生成
+// 画像グリッドの生成
     const gridContainer = document.getElementById('detail-image-grid');
     gridContainer.innerHTML = ''; // 一旦クリア
 
-    data.images.forEach(imgText => {
+    data.images.forEach(imgSrc => {
       const imgDiv = document.createElement('div');
       imgDiv.className = 'detail-img-item';
       
-      // ※ 実際に画像を入れる場合は <img src="URL"> に差し替えてね！
-      imgDiv.innerText = imgText; 
+      // 実際に画像を表示するための img タグ作成
+      const imgEl = document.createElement('img');
+      imgEl.src = imgSrc; // 画像のパス（URL）
+      imgEl.alt = 'ギャラリー画像';
       
+      imgDiv.appendChild(imgEl);
       gridContainer.appendChild(imgDiv);
     });
 
