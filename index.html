@@ -52,7 +52,7 @@
 .header-container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 16px 20px;
+  padding: 8px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -62,7 +62,7 @@
 .header {
   color: var(--yellow);            /* 文字色をメインカラーに統一 */
   font-family: inherit;              /* ページ全体と同じフォントを継承 */
-  font-size: 20px;                  /* お好みの大きさに調整してね〜 */
+  font-size: 18px;                  /* お好みの大きさに調整してね〜 */
   font-weight: 700;                /* 太字 */
   text-decoration: none;           /* 下線を消す */
 }
@@ -1160,6 +1160,7 @@
         <li><a href="#tab-gallery">ギャラリー</a></li>
         <li><a href="#tab-blog">ブログ</a></li>
         <li><a href="#tab-news">お知らせ</a></li>
+        <li><a href="#contact" class="nav-link" onclick="scrollToContact(event)">お問い合わせ</a></li>
       </ul>
     </nav>
   </div>
@@ -1264,7 +1265,7 @@
 </section>
 
 <!-- ご依頼・メッセージ フォーム -->
-    <section class="contact-section section-padding">
+    <section id="contact" class="contact-section section-padding">
       <div class="container">
         <h2 class="section-title">ご依頼・メッセージ</h2>
         <form class="contact-form" action="https://formspree.io/f/xljdeppn" method="post">
@@ -1450,7 +1451,7 @@
             </div>
             <div class="dummy-card-body">
               <div class="dummy-card-title">劇団FAX『みなもと』</div>
-              <p style="font-size: 13px; color: var(--text-dark);">神奈川県立青少年センター スタジオHIKARI</p>
+              <p style="font-size: 13px; color: var(--text-dark);">撮影 : 横井宏武</p>
             </div>
           </div>
 
@@ -1557,6 +1558,7 @@
           <li><a href="#tab-gallery" onclick="switchTab('gallery')">ギャラリー</a></li>
           <li><a href="#tab-blog" onclick="switchTab('blog')">ブログ</a></li>
           <li><a href="#tab-news" onclick="switchTab('news')">お知らせ</a></li>
+          <li><a href="#contact" class="nav-link" onclick="scrollToContact(event)">お問い合わせ</a></li>
         </ul>
       </nav>
       <p class="footer-copyright">&copy; 2026 高井蛙太郎</p>
@@ -1580,6 +1582,31 @@
     if (targetContent) {
       targetContent.classList.add('active');
     }
+
+   function scrollToContact(event) {
+     // デフォルトのページジャンプを止めるわ
+    if (event) event.preventDefault();
+
+  // 1. トップタブ（#tab-top またはお使いのトップタブのID）をアクティブに切り替えるわよ〜
+  // ※既存のタブ切り替え関数（例: switchTab や openTab など）があれば、それを呼び出してもOKよ！
+    const topTabBtn = document.querySelector('[data-tab="tab-top"]'); // またはトップタブのボタン
+    if (topTabBtn) {
+      topTabBtn.click(); // トップタブをクリックした挙動を再現
+    } else {
+    // ボタンのclickで動かない場合のフォールバック（直接表示切り替え）
+      document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+    const topTab = document.getElementById('tab-top');
+    if (topTab) topTab.style.display = 'block';
+    }
+
+  // 2. 「ご依頼・メッセージ」セクションまでスムーズにスクロールさせるわ♪
+  setTimeout(() => {
+    const contactSection = document.getElementById('contact'); // ご依頼セクションのID
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, 100); // タブが切り替わるのを少しだけ待ってからスクロールするわね
+}
 
     // ページ内ボタン（もしあれば）のactive切り替え
     const buttons = document.querySelectorAll('.tab-btn');
