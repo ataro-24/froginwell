@@ -967,6 +967,9 @@
 /* -----------------------------------
    ギャラリー一覧 (2列レイアウト)
 ----------------------------------- */
+/* -----------------------------------
+   ギャラリーカードのサイズ固定化
+----------------------------------- */
 .gallery-card-grid {
   max-width: 900px;
   margin: 0 auto;
@@ -983,6 +986,10 @@
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-align: center;
+  
+  /* ▼ カードの高さを揃えるためのFlex設定 */
+  display: flex;
+  flex-direction: column;
 }
 
 .gallery-card:hover {
@@ -990,6 +997,27 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* ★ サムネイル画像の枠（ここで比率や高さを固定するわよ〜） */
+.gallery-card-img {
+  width: 100%;
+  aspect-ratio: 16 / 9; /* 横長に揃える場合（4 / 3 や 1 / 1 でもOKよ♪） */
+  overflow: hidden;
+  background-color: var(--gray-dark); /* 画像読み込み前の背景色 */
+}
+
+/* ★ 実際の画像（トリミングして枠いっぱいに表示） */
+.gallery-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;    /* 枠に合わせて自動で縦横比を維持しつつトリミングするわ */
+  display: block;
+}
+
+/* テキスト情報エリア */
+.gallery-card-body {
+  padding: 16px;
+  flex-grow: 1;         /* 文字数が違ってもカード全体の高さを綺麗に揃えるわ */
+}
 
 /* -----------------------------------
    詳細画面スタイル
@@ -1447,21 +1475,21 @@
           
           <!-- カード 1 -->
           <div class="gallery-card" onclick="openGalleryDetail('project-1')">
-            <div class="dummy-card-img">
+            <div class="gallery-card-img">
              <img src="みなもと３.jpg" alt="スナップ写真サムネイル" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
-            <div class="dummy-card-body">
-              <div class="dummy-card-title">劇団FAX『みなもと』</div>
+            <div class="gallery-card-body">
+              <div class="gallery-card-title">劇団FAX『みなもと』</div>
               <p style="font-size: 13px; color: var(--text-dark);">撮影 : 横井宏武</p>
             </div>
           </div>
 
           <div class="gallery-card" onclick="openGalleryDetail('project-2')">
-            <div class="dummy-card-img">
+            <div class="gallery-card-img">
              <img src="miuraout1.jpg" alt="スナップ写真サムネイル" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
-            <div class="dummy-card-body">
-              <div class="dummy-card-title">夏の日ポートレート</div>
+            <div class="gallery-card-body">
+              <div class="gallery-card-title">夏の日ポートレート</div>
               <p style="font-size: 13px; color: var(--text-dark);">撮影 : Miura Erika</p>
             </div>
           </div> 
@@ -1684,7 +1712,7 @@
       title: '夏の日ポートレート',
       credit: '撮影：Miura Erika',
       caption: '夏の日、ノーカラーシャツ',
-      images: ['miuraout1.jpg', 'miuraout2.jpg', 'miuraout3.jpg', 'miuraout4.jpg', 'miuraout5.jpg', 'miuraouto6.jpg']
+      images: ['miuraout1.jpg', 'miuraout2.jpg', 'miuraout3.jpg', 'miuraout4.jpg', 'miuraout5.jpg', 'miuraout6.jpg']
     },
   };
 
