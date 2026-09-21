@@ -1584,31 +1584,6 @@
       targetContent.classList.add('active');
     }
 
-   function scrollToContact(event) {
-     // デフォルトのページジャンプを止めるわ
-    if (event) event.preventDefault();
-
-  // 1. トップタブ（#tab-top またはお使いのトップタブのID）をアクティブに切り替えるわよ〜
-  // ※既存のタブ切り替え関数（例: switchTab や openTab など）があれば、それを呼び出してもOKよ！
-    const topTabBtn = document.querySelector('[data-tab="tab-top"]'); // またはトップタブのボタン
-    if (topTabBtn) {
-      topTabBtn.click(); // トップタブをクリックした挙動を再現
-    } else {
-    // ボタンのclickで動かない場合のフォールバック（直接表示切り替え）
-      document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
-    const topTab = document.getElementById('tab-top');
-    if (topTab) topTab.style.display = 'block';
-    }
-
-  // 2. 「ご依頼・メッセージ」セクションまでスムーズにスクロールさせるわ♪
-  setTimeout(() => {
-    const contactSection = document.getElementById('contact'); // ご依頼セクションのID
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, 100); // タブが切り替わるのを少しだけ待ってからスクロールするわね
-}
-
     // ページ内ボタン（もしあれば）のactive切り替え
     const buttons = document.querySelectorAll('.tab-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
@@ -1617,7 +1592,7 @@
       targetBtn.classList.add('active');
     }
 
-    // ★ ヘッダーメニューの下線（active）切り替えを追加したわ〜！
+    // ヘッダーメニューの下線（active）切り替え
     const menuLinks = document.querySelectorAll('.nav-menu a');
     menuLinks.forEach(link => {
       link.classList.remove('active');
@@ -1630,7 +1605,31 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // 2. ハンバーガーボタンの開閉
+  // ★ 2. お問い合わせ（ご依頼・メッセージ）へのスクロール関数（switchTabの外に出したわよ〜♪）
+  function scrollToContact(event) {
+    if (event) event.preventDefault();
+
+    // トップタブ（例: 'top' や 'profile' など、トップ画面のタブIDに合わせてね）に切り替えるわ
+    switchTab('top');
+
+    // ハンバーガーメニューが開いていたら閉じる処理も入れておいたわね♪
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
+    if (hamburgerBtn && navMenu) {
+      hamburgerBtn.classList.remove('active');
+      navMenu.classList.remove('active');
+    }
+
+    // タブが切り替わって要素が表示された後にスクロールさせるわね
+    setTimeout(() => {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 150);
+  }
+
+  // 3. ハンバーガーボタンの開閉
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const navMenu = document.getElementById('navMenu');
 
@@ -1641,9 +1640,12 @@
     });
   }
 
-  // 3. ナビゲーションメニュー押下時の処理
+  // 4. ナビゲーションメニュー押下時の処理
   document.querySelectorAll('.nav-menu a').forEach(link => {
     link.addEventListener('click', (e) => {
+      // ★ もし「お問い合わせ」リンク（onclick属性があるリンク）なら、この共通処理をスキップするわ
+      if (link.getAttribute('onclick')) return;
+
       e.preventDefault();
 
       const href = link.getAttribute('href');
