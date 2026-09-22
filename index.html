@@ -1106,108 +1106,8 @@
     grid-template-columns: 1fr; /* スマホでは1列 */
   }
 
-  /* ===============================================
-   ブログタブ（BLOG）用スタイル
-   =============================================== */
-.blog-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-/* 1列で並ぶブログカード */
-.blog-card {
-  background-color: var(--gray-light);
-  color: var(--text-dark);
-  border-radius: 12px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.blog-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-}
-
-/* アイキャッチ画像枠（16:9比率） */
-.blog-card-img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background-color: #e5e7eb;
-}
-
-.blog-card-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* ブログ情報テキストエリア */
-.blog-card-content {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.blog-date {
-  font-family: 'Caveat', cursive;
-  font-size: 18px;
-  color: #555;
-}
-
-.blog-title {
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.4;
-  margin: 0;
-  color: var(--text-dark);
-}
-
-.blog-excerpt {
-  font-size: 13px;
-  line-height: 1.6;
-  color: #666;
-  margin: 0;
-  /* 3行で自動的に「…」と省略表示させるわ */
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* PC等でカードを横並びレイアウト（画像左・テキスト右）にしたい場合はスマホ以上でレスポンシブにもできるわよ♪ */
-@media (min-width: 640px) {
-  .blog-card {
-    flex-direction: row;
-  }
-  .blog-card-img {
-    width: 280px;
-    flex-shrink: 0;
-    aspect-ratio: auto;
-  }
-  .blog-card-content {
-    flex: 1;
-  }
-}
-
-.blog-loading {
-  text-align: center;
-  color: var(--gray-text);
-  font-size: 14px;
-  padding: 40px 0;
-}
-
     /* -----------------------------------
-    お知らせ
+       別タブ：ブログ・お知らせ
     ----------------------------------- */
     .grid-container {
       max-width: 900px;
@@ -1625,19 +1525,31 @@
   <!-- ===============================================
         4. ブログ タブ
   ================================================ -->
-<div id="tab-blog" class="tab-content">
-  <section class="section-padding">
-    <div class="container">
-      <h2 class="section-title">BLOG</h2>
-      
-      <!-- noteの記事がここに1列で流し込まれるわよ〜♪ -->
-      <div id="blog-list" class="blog-list">
-        <p class="blog-loading">記事を読み込み中...</p>
+  <div id="tab-blog" class="tab-content">
+    <section class="section-padding">
+      <div class="container">
+        <h2 class="section-title">ブログ</h2>
+        <div class="grid-container">
+          <div class="dummy-card">
+            <div class="dummy-card-img">Blog Image</div>
+            <div class="dummy-card-body">
+              <div class="dummy-card-title">【日常】最近撮影したスナップ写真たち</div>
+              <p style="font-size: 12px; color: #555; margin-bottom: 6px;">2026.09.10</p>
+              <p style="font-size: 13px;">ブログの本文プレビューがここに入ります...</p>
+            </div>
+          </div>
+          <div class="dummy-card">
+            <div class="dummy-card-img">Blog Image</div>
+            <div class="dummy-card-body">
+              <div class="dummy-card-title">次回公演に向けての稽古が始まりました</div>
+              <p style="font-size: 12px; color: #555; margin-bottom: 6px;">2026.08.25</p>
+              <p style="font-size: 13px;">ブログの本文プレビューがここに入ります...</p>
+            </div>
+          </div>
+        </div>
       </div>
-
-    </div>
-  </section>
-</div>
+    </section>
+  </div>
 
   <!-- ===============================================
         5. お知らせ タブ
@@ -1841,83 +1753,6 @@ data.images.forEach(imgSrc => {
     document.getElementById('gallery-detail-view').style.display = 'none';
     document.getElementById('gallery-list-view').style.display = 'block';
   }
-
-// ==========================================================================
-// BLOG タブ：note RSS 自動取得＆表示スクリプト
-// ==========================================================================
-
-// ★ あなたの note ユーザーID を設定してね！
-  const noteId = 'YOUR_NOTE_ID';
-
-  function fetchNoteBlog() {
-    const blogContainer = document.getElementById('blog-list');
-    if (!blogContainer) return;
-
-    const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://note.com/${noteId}/rss`;
-
-    fetch(rssUrl)
-      .then(res => res.json())
-      .then(data => {
-        if (!data.items || data.items.length === 0) {
-          blogContainer.innerHTML = '<p class="blog-loading">まだ記事がありません。</p>';
-          return;
-        }
-
-        blogContainer.innerHTML = ''; // 読み込み中表示をクリア
-
-        data.items.forEach(item => {
-          // 日付のフォーマット整形（YYYY.MM.DD）
-          const d = new Date(item.pubDate);
-          const formattedDate = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
-
-          // 本文からHTMLタグを除去してプレビュー用のテキストを生成
-          const tempDiv = document.createElement('div');
-          tempDiv.innerHTML = item.description || item.content || '';
-          const plainText = tempDiv.textContent || tempDiv.innerText || '';
-          const excerpt = plainText.trim().substring(0, 120) + '...';
-
-          // アイキャッチ画像の取得（thumbnail または description内の最初のimg）
-          let thumbnail = item.thumbnail;
-          if (!thumbnail) {
-            const imgMatch = (item.description || '').match(/<img[^>]+src=["']([^"']+)["']/);
-            if (imgMatch) {
-              thumbnail = imgMatch[1];
-            } else {
-              // 画像がない場合のプレースホルダー（必要に応じて画像パスを変更してね）
-              thumbnail = 'https://via.placeholder.com/600x338?text=No+Image';
-            }
-          }
-
-          // ブログカードHTMLの作成
-          const card = document.createElement('a');
-          card.href = item.link;
-          card.target = '_blank';
-          card.rel = 'noopener noreferrer';
-          card.className = 'blog-card';
-
-          card.innerHTML = `
-            <div class="blog-card-img">
-              <img src="${thumbnail}" alt="${item.title}">
-            </div>
-            <div class="blog-card-content">
-              <span class="blog-date">${formattedDate}</span>
-              <h3 class="blog-title">${item.title}</h3>
-              <p class="blog-excerpt">${excerpt}</p>
-            </div>
-          `;
-
-          blogContainer.appendChild(card);
-        });
-      })
-      .catch(err => {
-        console.error('noteの取得に失敗しました:', err);
-        blogContainer.innerHTML = '<p class="blog-loading">記事の読み込みに失敗しました。</p>';
-      });
-  }
-
-  // ページ読み込み完了時に実行
-  document.addEventListener('DOMContentLoaded', fetchNoteBlog);
-  
 </script>
   
 </body>
