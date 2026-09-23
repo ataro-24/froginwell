@@ -1109,111 +1109,124 @@
 /* ===============================================
    ブログタブ（BLOG）用スタイル
    =============================================== */
+
+/* カードを縦1列に並べるコンテナ */
 .blog-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  max-width: 800px;
+  gap: 16px; /* カード同士の間隔 */
+  max-width: 800px; /* カード全体の最大幅 */
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* 1列で並ぶブログカード */
+/* 横長ブログカード本体 */
 .blog-card {
-  background-color: var(--gray-light);
-  color: var(--text-dark);
+  background-color: var(--gray-light, #f9fafb);
+  color: var(--text-dark, #333);
   border-radius: 12px;
   overflow: hidden;
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* 常に左画像・右テキストの横並び */
+  align-items: center;
   text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
 }
 
 .blog-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* アイキャッチ画像枠（スマホ表示：縦並び時の高さ設定） */
+/* 左側：小さめのアイキャッチ画像枠 */
 .blog-card-img {
-  width: 100%;
-  height: 200px;
+  width: 160px;  /* 画像エリアの幅（お好みで140px〜180px程度に調整OK） */
+  height: 120px; /* 画像エリアの高さ */
+  flex-shrink: 0; /* 画像が潰れるのを防ぐ */
   overflow: hidden;
   background-color: #e5e7eb;
-  flex-shrink: 0;
 }
 
 .blog-card-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* 枠に合わせて綺麗にトリミング */
   display: block;
 }
 
-/* ブログ情報テキストエリア */
+/* 右側：テキストエリア（タイトル、日付、プレビュー） */
 .blog-card-content {
-  padding: 20px;
+  padding: 16px 20px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
+  flex: 1; /* 余った横幅をすべて使う */
+  min-width: 0; /* テキスト溢れ防止 */
 }
 
-.blog-date {
-  font-family: 'Caveat', cursive;
-  font-size: 18px;
-  color: #555;
-}
-
+/* タイトル */
 .blog-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.4;
   margin: 0;
-  color: var(--text-dark);
-}
-
-.blog-excerpt {
-  font-size: 13px;
-  line-height: 1.6;
-  color: #666;
-  margin: 0;
+  color: var(--text-dark, #111827);
+  /* 2行を超えたら省略記号(...)にする */
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* ★ スマホサイズ（640px未満）：note埋め込み枠の設定 ★ */
-@media (max-width: 640px) {
-  .note-embed-wrapper iframe {
-    height: 140px; /* スマホでは少しコンパクトに */
-  }
+/* 日付 */
+.blog-date {
+  font-size: 13px;
+  color: #6b7280;
 }
 
-/* ★ PCサイズ（640px以上）：自作カード横並びの設定 ★ */
-@media (min-width: 640px) {
-  .blog-card {
-    flex-direction: row;
-    align-items: stretch;
-  }
-  
-  .blog-card-img {
-    width: 260px;
-    height: auto;
-    min-height: 160px;
-  }
-  
-  .blog-card-content {
-    flex: 1;
-  }
+/* 本文プレビュー */
+.blog-excerpt {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #4b5563;
+  margin: 0;
+  /* 2行を超えたら省略記号(...)にする */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
+/* ローディング表示 */
 .blog-loading {
   text-align: center;
-  color: var(--gray-text);
+  color: var(--gray-text, #6b7280);
   font-size: 14px;
   padding: 40px 0;
+}
+
+/* ★ スマホ（画面幅が狭い時）の微調整 ★ */
+@media (max-width: 480px) {
+  .blog-card-img {
+    width: 110px; /* スマホでは画像サイズを少しだけコンパクトに */
+    height: 100px;
+  }
+
+  .blog-card-content {
+    padding: 12px;
+    gap: 4px;
+  }
+
+  .blog-title {
+    font-size: 14px;
+  }
+
+  .blog-excerpt {
+    display: none; /* スマホで縦長になりすぎる場合は本文を隠す（表示したい場合はこの行を削除してね） */
+  }
 }
   
     /* -----------------------------------
