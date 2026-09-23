@@ -606,6 +606,7 @@
 .news-more-link {
   text-align: right;
   margin-top: 12px;
+  text-decoration: none;
 }
 
 .news-more-link a {
@@ -1853,7 +1854,8 @@ function fetchNoteBlog() {
   const blogContainer = document.getElementById('blog-list');
   if (!blogContainer) return;
 
-const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://note.com/${noteId}/rss`;
+// URLの末尾に「?t=今の時間」を付けることで、APIに最新のデータを毎回取りに行かせるのよ♪
+const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteId}/rss?t=${new Date().getTime()}`)}`;
 
   fetch(rssUrl)
     .then(res => res.json())
@@ -2011,7 +2013,7 @@ function renderNewsCards(container, newsArray) {
     const formattedDate = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
 
     // 一番最初（最新）の1件だけ「NEW」、それ以外はカテゴリ名を表示
-    const badgeText = (index === 0) ? 'NEW' : (news.category || 'INFO');
+    const badgeText = (index === 0) ? 'NEW' ;
 
     // 既存のCSSクラス構造通りに生成
     const card = document.createElement('a');
