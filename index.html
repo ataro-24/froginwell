@@ -578,6 +578,16 @@
   gap: 12px;
 }
 
+.news-badge {
+  background-color: var(--yellow);
+  color: var(--navy);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
 .news-date {
   font-family: 'Caveat', cursive;
   font-size: 16px;
@@ -1253,26 +1263,6 @@
       margin-bottom: 6px;
     }
 
-    /* カードにNEWバッジを重ねるための設定 */
-.dummy-card {
-  position: relative; /* バッジの位置基準 */
-}
-
-/* NEWバッジの見た目 */
-.new-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: var(--yellow); /* 目立つ赤色 */
-  color: var(--navy);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  z-index: 10;
-}
-
     /* -----------------------------------
        レスポンシブ対応
     ----------------------------------- */
@@ -1392,8 +1382,13 @@
       <div class="top-col-news">
         <div class="news-box-wrap">
           <h2 class="section-title">お知らせ</h2>
-          <div id="news-list">
+          <div class="news-list">
             <div class="news-card">
+              <span class="news-badge">NEW</span>
+              <span class="news-date">2026.09.20</span>
+              <p class="news-text">蛙太郎ウェブサイトをオープンしました！</p>
+            </div>
+          </div>
           <div class="news-more-link">
             <a onclick="switchTab('news')">more &raquo;</a>
           </div>
@@ -1653,7 +1648,7 @@
 <div id="tab-blog" class="tab-content">
   <section class="section-padding">
     <div class="container">
-      <h2 class="section-title">ブログ</h2>
+      <h2 class="section-title">BLOG</h2>
       
       <!-- noteの記事がここに1列で流し込まれるわよ〜♪ -->
       <div id="blog-list" class="blog-list">
@@ -1663,6 +1658,42 @@
     </div>
   </section>
 </div>
+
+  <!-- ===============================================
+        5. お知らせ タブ
+  ================================================ -->
+  <div id="tab-news" class="tab-content">
+    <section class="section-padding">
+      <div class="container">
+        <h2 class="section-title">お知らせ一覧</h2>
+        <div class="news-list" style="max-width: 800px; margin: 0 auto;">
+          <div class="news-card">
+            <span class="news-badge">NEW</span>
+            <span class="news-date">2026.09.20</span>
+            <p class="news-text">蛙太郎ウェブサイトをオープンしました！</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+<!-- ===============================================
+        5. お知らせ タブ
+  ================================================ -->
+  <div id="tab-news" class="tab-content">
+    <section class="section-padding">
+      <div class="container">
+        <h2 class="section-title">お知らせ一覧</h2>
+        <div class="news-list" style="max-width: 800px; margin: 0 auto;">
+          <div class="news-card">
+            <span class="news-badge">NEW</span>
+            <span class="news-date">2026.09.20</span>
+            <p class="news-text">蛙太郎ウェブサイトをオープンしました！</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <!-- ★ 全タブ共通 フッターエリア ★ -->
   <footer class="footer">
@@ -1913,105 +1944,6 @@ function fetchNoteBlog() {
 }
 
 document.addEventListener('DOMContentLoaded', fetchNoteBlog);
-
-  // ==========================================================================
-// お知らせ（NEWS）自動生成 ＆ 手動追加 ＆ NEWバッジ付与スクリプト
-// ==========================================================================
-
-const noteUserId = 'notakanonoryet'; // noteのID
-
-// ★ 手動でお知らせを書き足したい時はここにデータを追加してね！
-const manualNews = [
-  {
-    title: 'ポートフォリオサイトを開設しました！',
-    date: '2026-09-22', // YYYY-MM-DD形式
-    link: '#', // 遷移先URL（無ければ '#' でOK）
-    image: '',  // 画像URL（空ならデフォルトのグレー枠になるわ）
-    category: 'お知らせ'
-  }
-];
-
-function fetchNews() {
-  const newsContainer = document.getElementById('news-list');
-  if (!newsContainer) return;
-
-  const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://note.com/${noteUserId}/rss`;
-
-  fetch(rssUrl)
-    .then(res => res.json())
-    .then(data => {
-      let combinedNews = [];
-
-      // 1. note記事をフォーマットを揃えて配列に追加
-      if (data.items) {
-        data.items.forEach(item => {
-          combinedNews.push({
-            title: item.title,
-            date: item.pubDate,
-            link: item.link,
-            category: 'Blog'
-          });
-        });
-      }
-
-      // 2. 手動お知らせを合体させるわ
-      combinedNews = combinedNews.concat(manualNews);
-
-      // 3. 日付が新しい順（降順）にソート（並べ替え）
-      combinedNews.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-      // 4. 最新の「3件」だけを抽出
-      const top3News = combinedNews.slice(0, 3);
-
-      if (top3News.length === 0) {
-        newsContainer.innerHTML = '<p>お知らせはありません。</p>';
-        return;
-      }
-
-      newsContainer.innerHTML = ''; // 読み込み中をクリア
-
-      // 5. カードを生成（index === 0 の「一番最新のもの」だけにNEWバッジを付けるのよ♪）
-      top3News.forEach((news, index) => {
-        const card = document.createElement('div');
-        card.className = 'dummy-card';
-
-        // 日付フォーマットの整形 (YYYY.MM.DD)
-        const d = new Date(news.date);
-        const formattedDate = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
-
-        // 一番最新の1件だけに「NEW」をつけるわ！
-        const isNew = index === 0;
-        const newBadgeHtml = isNew ? '<span class="new-badge">NEW</span>' : '';
-
-        // 画像のフォールバック
-        const bgStyle = news.image ? `background-image: url('${news.image}'); background-size: cover;` : '';
-
-        card.innerHTML = `
-          ${newBadgeHtml}
-          <div class="dummy-card-img" style="${bgStyle}">
-            ${!news.image ? 'No Image' : ''}
-          </div>
-          <div class="dummy-card-body">
-            <div style="font-size: 12px; color: #888; margin-bottom: 4px;">${formattedDate}</div>
-            <div class="dummy-card-title">${news.title}</div>
-          </div>
-        `;
-
-        // クリックしたらリンクに飛ぶ処理
-        if (news.link && news.link !== '#') {
-          card.style.cursor = 'pointer';
-          card.onclick = () => window.open(news.link, '_blank');
-        }
-
-        newsContainer.appendChild(card);
-      });
-    })
-    .catch(err => {
-      console.error('お知らせの取得に失敗しました:', err);
-    });
-}
-
-document.addEventListener('DOMContentLoaded', fetchNews);
   
 </script>
   
