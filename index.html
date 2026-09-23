@@ -1390,7 +1390,7 @@
 
     <!-- お知らせタブへ飛ばす「VIEW MORE」などのリンク -->
     <div class="news-more-link">
-      <a onclick="switchTab('news')">MORE &raquo;</a>
+      <a onclick="switchTab('news')">more &raquo;</a>
     </div>
 
   </div>
@@ -1853,8 +1853,7 @@ function fetchNoteBlog() {
   const blogContainer = document.getElementById('blog-list');
   if (!blogContainer) return;
 
-// URLの末尾に「?t=今の時間」を付けることで、APIに最新のデータを毎回取りに行かせるのよ♪
-const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteId}/rss?t=${new Date().getTime()}`)}`;
+const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://note.com/${noteId}/rss`;
 
   fetch(rssUrl)
     .then(res => res.json())
