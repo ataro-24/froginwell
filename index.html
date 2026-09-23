@@ -114,7 +114,7 @@
   left: 0;
   width: 100%;
   height: 3px;                      /* 太さを少し太くして見やすくしたわ〜 */
-  background-color: var(--yellow);  /* 下線の色 */
+  background-color: var(--gray-text);  /* 下線の色 */
   border-radius: 2px;
 }
 
@@ -155,7 +155,7 @@
     position: fixed;
     top: 0;
     right: -100%; /* 初期状態は画面の外（右）に隠す */
-    width: 100%;
+    width: 33%;
     height: 100vh;
     background-color: var(--navy);
     display: flex;
@@ -194,8 +194,8 @@
 
 /* フッターエリア */
 .footer {
-  background-color: #A0AAB8;
-  color: #0B132B;
+  background-color: var(--gray-text);
+  color: var(--text-dark);
   padding: 40px 20px;
   text-align: center;
   margin-top: 60px;
@@ -222,7 +222,7 @@
 }
 
 .footer-nav a {
-  color: #0B132B;
+  color: var(text-dark);
   text-decoration: none;
   font-size: 12px;
   transition: opacity 0.3s;
@@ -235,7 +235,7 @@
 /* コピーライト */
 .footer-copyright {
   font-size: 12px;
-  color: #0B132B;
+  color: var(--text-dark);
 }
     
     /* -----------------------------------
@@ -464,7 +464,7 @@
     }
 
 /* -----------------------------------
-   TOPタブ：メインコンテンツエリア（お知らせ6 : デモリール4）
+   TOPタブ：メインコンテンツエリア
 ----------------------------------- */
 /* お知らせ・デモリールセクションの横幅を外側に広げる */
 .main-grid-section .container {
@@ -516,13 +516,13 @@
   }
 }
 
-/* 左カラム：お知らせ (比率 6) */
+/* 左カラム：お知らせ (比率 5) */
 .top-col-news {
   flex: 5;
   min-width: 0; /* フレックスアイテムの破綻防止 */
 }
 
-/* 右カラム：デモリール (比率 4) */
+/* 右カラム：デモリール (比率 5) */
 .top-col-demo {
   flex: 5;
   min-width: 0;
@@ -591,7 +591,7 @@
 .news-date {
   font-family: 'Caveat', cursive;
   font-size: 16px;
-  color: #555;
+  color: var(--text-dark);
   flex-shrink: 0;
 }
 
