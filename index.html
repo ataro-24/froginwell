@@ -1845,7 +1845,7 @@ data.images.forEach(imgSrc => {
   }
 
 // ==========================================================================
-// BLOG タブ：note RSS + Microlink API（アイキャッチ画像完全取得版）
+// BLOG タブ：note RSS + Microlink API（アイキャッチ画像取得版）
 // ==========================================================================
 
 const noteId = 'notakanonoryet';
@@ -1854,8 +1854,7 @@ function fetchNoteBlog() {
   const blogContainer = document.getElementById('blog-list');
   if (!blogContainer) return;
 
-// URLの末尾に「?t=今の時間」を付けることで、APIに最新のデータを毎回取りに行かせるのよ♪
-const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteId}/rss?t=${new Date().getTime()}`)}`;
+  const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteId}/rss`)}`;
 
   fetch(rssUrl)
     .then(res => res.json())
@@ -1901,7 +1900,7 @@ const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponen
 
         blogContainer.appendChild(card);
 
-        // ★ Microlink API を使ってnoteのアイキャッチ画像URLを取得するわよ〜♪
+        // Microlink API を使ってnoteのアイキャッチ画像URLを取得
         const microlinkUrl = `https://api.microlink.io?url=${encodeURIComponent(item.link)}`;
 
         fetch(microlinkUrl)
@@ -1928,8 +1927,9 @@ const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponen
 
 document.addEventListener('DOMContentLoaded', fetchNoteBlog);
 
-  // ==========================================================================
-// NEWS（お知らせ）統合管理スクリプト
+
+// ==========================================================================
+// . NEWS（お知らせ）統合管理スクリプト
 // ・TOPタブ：最新3件を表示（#news-list）
 // ・お知らせタブ：全件を表示（#all-news-list）
 // ==========================================================================
@@ -1941,7 +1941,7 @@ const manualNews = [
   {
     title: 'ポートフォリオサイトを開設しました！',
     date: '2026-09-22', // YYYY-MM-DD形式
-    link: '#',           // 遷移先URL（無ければ '#')
+    link: '#'           // 遷移先URL（無ければ '#'）
   }
 ];
 
@@ -1949,11 +1949,9 @@ function initNewsSystem() {
   const topNewsContainer = document.getElementById('news-list');       // TOPタブの枠
   const allNewsContainer = document.getElementById('all-news-list');   // お知らせタブの枠
 
-  // どちらの要素も存在しない場合は処理をスキップ
   if (!topNewsContainer && !allNewsContainer) return;
 
-  // note RSS取得（キャッシュ回避用タイムスタンプ付き）
-  const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteUserId}/rss?t=${new Date().getTime()}`)}`;
+  const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteUserId}/rss`)}`;
 
   fetch(rssUrl)
     .then(res => res.json())
@@ -1966,7 +1964,7 @@ function initNewsSystem() {
           combinedNews.push({
             title: item.title,
             date: item.pubDate,
-            link: item.link,
+            link: item.link
           });
         });
       }
@@ -1996,26 +1994,22 @@ function initNewsSystem() {
     });
 }
 
-// --------------------------------------------------------------------------
-// カード生成共通関数（既存のCSSクラス名をそのまま使用）
-// --------------------------------------------------------------------------
+// カード生成共通関数（最新1件のみ「NEW」を付与）
 function renderNewsCards(container, newsArray) {
   if (newsArray.length === 0) {
     container.innerHTML = '<p class="news-text">お知らせはありません。</p>';
     return;
   }
 
-  container.innerHTML = ''; // ローディング等のクリア
+  container.innerHTML = '';
 
   newsArray.forEach((news, index) => {
-    // 日付フォーマット整形 (YYYY.MM.DD)
     const d = new Date(news.date);
     const formattedDate = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
 
-    // 一番最初（最新）の1件だけ「NEW」、それ以外はカテゴリ名を表示
-    const badgeText = (index === 0) ? 'NEW' ;
+    // 最新（index === 0）だけNEWタグを作り、それ以外は何も表示しないわ♪
+    const badgeHtml = (index === 0) ? '<span class="news-badge">NEW</span>' : '';
 
-    // 既存のCSSクラス構造通りに生成
     const card = document.createElement('a');
     card.className = 'news-card';
     card.href = news.link || '#';
@@ -2026,7 +2020,7 @@ function renderNewsCards(container, newsArray) {
     }
 
     card.innerHTML = `
-      <span class="news-badge">${badgeText}</span>
+      ${badgeHtml}
       <span class="news-date">${formattedDate}</span>
       <span class="news-text">${news.title}</span>
     `;
@@ -2035,7 +2029,6 @@ function renderNewsCards(container, newsArray) {
   });
 }
 
-// ページ読み込み完了時に実行
 document.addEventListener('DOMContentLoaded', initNewsSystem);
   
 </script>
