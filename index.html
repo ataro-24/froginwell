@@ -1854,7 +1854,7 @@ function fetchNoteBlog() {
   const blogContainer = document.getElementById('blog-list');
   if (!blogContainer) return;
 
-  const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteId}/rss`)}`;
+const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteId}/rss?t=${new Date().getTime()}`)}`;
 
   fetch(rssUrl)
     .then(res => res.json())
@@ -1951,7 +1951,7 @@ function initNewsSystem() {
 
   if (!topNewsContainer && !allNewsContainer) return;
 
-  const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteUserId}/rss`)}`;
+const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteUserId}/rss?t=${new Date().getTime()}`)}`;
 
   fetch(rssUrl)
     .then(res => res.json())
