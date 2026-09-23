@@ -464,7 +464,7 @@
     }
 
 /* -----------------------------------
-   TOPタブ：メインコンテンツエリア（お知らせ6 : デモリール4）
+   TOPタブ：メインコンテンツエリア（お知らせ : デモリール）
 ----------------------------------- */
 /* お知らせ・デモリールセクションの横幅を外側に広げる */
 .main-grid-section .container {
@@ -1378,22 +1378,22 @@
   <div class="container">
     <div class="top-main-grid">
       
-      <!-- 左カラム：お知らせ（比率 6） -->
-      <div class="top-col-news">
-        <div class="news-box-wrap">
-          <h2 class="section-title">お知らせ</h2>
-          <div class="news-list">
-            <div class="news-card">
-              <span class="news-badge">NEW</span>
-              <span class="news-date">2026.09.20</span>
-              <p class="news-text">蛙太郎ウェブサイトをオープンしました！</p>
-            </div>
-          </div>
-          <div class="news-more-link">
-            <a onclick="switchTab('news')">more &raquo;</a>
-          </div>
-        </div>
-      </div>
+<!-- TOPタブ：お知らせセクション -->
+<div class="top-col-news">
+  <div class="news-box-wrap">
+    
+    <!-- ★ここに id="news-list" を指定するわ！ -->
+    <div class="news-list" id="news-list">
+      <p class="news-text" style="color: var(--gray-text);">お知らせを読み込み中...</p>
+    </div>
+
+    <!-- お知らせタブへ飛ばす「VIEW MORE」などのリンク -->
+    <div class="news-more-link">
+      <a onclick="switchTab('news')">MORE &raquo;</a>
+    </div>
+
+  </div>
+</div>
 
       <!-- 右カラム：デモリール（比率 4） -->
       <div class="top-col-demo">
@@ -1648,7 +1648,7 @@
 <div id="tab-blog" class="tab-content">
   <section class="section-padding">
     <div class="container">
-      <h2 class="section-title">BLOG</h2>
+      <h2 class="section-title">ブログ</h2>
       
       <!-- noteの記事がここに1列で流し込まれるわよ〜♪ -->
       <div id="blog-list" class="blog-list">
@@ -1662,38 +1662,18 @@
   <!-- ===============================================
         5. お知らせ タブ
   ================================================ -->
-  <div id="tab-news" class="tab-content">
-    <section class="section-padding">
-      <div class="container">
-        <h2 class="section-title">お知らせ一覧</h2>
-        <div class="news-list" style="max-width: 800px; margin: 0 auto;">
-          <div class="news-card">
-            <span class="news-badge">NEW</span>
-            <span class="news-date">2026.09.20</span>
-            <p class="news-text">蛙太郎ウェブサイトをオープンしました！</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+<!-- お知らせタブ（全件表示） -->
+<div id="tab-news" class="tab-content">
+  <div class="container" style="max-width: 800px; margin: 0 auto;">
+    <h2 style="color: var(--yellow); margin-bottom: 24px;">INFORMATION</h2>
 
-<!-- ===============================================
-        5. お知らせ タブ
-  ================================================ -->
-  <div id="tab-news" class="tab-content">
-    <section class="section-padding">
-      <div class="container">
-        <h2 class="section-title">お知らせ一覧</h2>
-        <div class="news-list" style="max-width: 800px; margin: 0 auto;">
-          <div class="news-card">
-            <span class="news-badge">NEW</span>
-            <span class="news-date">2026.09.20</span>
-            <p class="news-text">蛙太郎ウェブサイトをオープンしました！</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- ★ここに id="all-news-list" を指定するわ！ -->
+    <div class="news-list" id="all-news-list">
+      <p class="news-text" style="color: var(--gray-text);">お知らせを読み込み中...</p>
+    </div>
+
   </div>
+</div>
 
   <!-- ★ 全タブ共通 フッターエリア ★ -->
   <footer class="footer">
@@ -1944,6 +1924,118 @@ function fetchNoteBlog() {
 }
 
 document.addEventListener('DOMContentLoaded', fetchNoteBlog);
+
+  // ==========================================================================
+// NEWS（お知らせ）統合管理スクリプト
+// ・TOPタブ：最新3件を表示（#news-list）
+// ・お知らせタブ：全件を表示（#all-news-list）
+// ==========================================================================
+
+const noteUserId = 'notakanonoryet'; // noteのID
+
+// ★ 手動でお知らせを書き足したい時はここにデータを追加してね！
+const manualNews = [
+  {
+    title: 'ポートフォリオサイトを開設しました！',
+    date: '2026-09-15', // YYYY-MM-DD形式
+    link: '#',           // 遷移先URL（無ければ '#'）
+    category: 'INFO'     // バッジの文字（NEWがつかない時に表示されるわ）
+  }
+];
+
+function initNewsSystem() {
+  const topNewsContainer = document.getElementById('news-list');       // TOPタブの枠
+  const allNewsContainer = document.getElementById('all-news-list');   // お知らせタブの枠
+
+  // どちらの要素も存在しない場合は処理をスキップ
+  if (!topNewsContainer && !allNewsContainer) return;
+
+  // note RSS取得（キャッシュ回避用タイムスタンプ付き）
+  const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteUserId}/rss?t=${new Date().getTime()}`)}`;
+
+  fetch(rssUrl)
+    .then(res => res.json())
+    .then(data => {
+      let combinedNews = [];
+
+      // 1. noteの記事を取得して配列に追加
+      if (data.items) {
+        data.items.forEach(item => {
+          combinedNews.push({
+            title: item.title,
+            date: item.pubDate,
+            link: item.link,
+            category: 'Blog'
+          });
+        });
+      }
+
+      // 2. 手動お知らせデータを合体
+      combinedNews = combinedNews.concat(manualNews);
+
+      // 3. 全データを日付が新しい順（降順）に並べ替え
+      combinedNews.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      // 4. TOPタブ用（最新3件）を出力
+      if (topNewsContainer) {
+        const top3News = combinedNews.slice(0, 3);
+        renderNewsCards(topNewsContainer, top3News);
+      }
+
+      // 5. お知らせタブ用（全件）を出力
+      if (allNewsContainer) {
+        renderNewsCards(allNewsContainer, combinedNews);
+      }
+    })
+    .catch(err => {
+      console.error('お知らせの取得に失敗しました:', err);
+      const errorHtml = '<p class="news-text" style="color:var(--text-dark);">お知らせの読み込みに失敗しました。</p>';
+      if (topNewsContainer) topNewsContainer.innerHTML = errorHtml;
+      if (allNewsContainer) allNewsContainer.innerHTML = errorHtml;
+    });
+}
+
+// --------------------------------------------------------------------------
+// カード生成共通関数（既存のCSSクラス名をそのまま使用）
+// --------------------------------------------------------------------------
+function renderNewsCards(container, newsArray) {
+  if (newsArray.length === 0) {
+    container.innerHTML = '<p class="news-text">お知らせはありません。</p>';
+    return;
+  }
+
+  container.innerHTML = ''; // ローディング等のクリア
+
+  newsArray.forEach((news, index) => {
+    // 日付フォーマット整形 (YYYY.MM.DD)
+    const d = new Date(news.date);
+    const formattedDate = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+
+    // 一番最初（最新）の1件だけ「NEW」、それ以外はカテゴリ名を表示
+    const badgeText = (index === 0) ? 'NEW' : (news.category || 'INFO');
+
+    // 既存のCSSクラス構造通りに生成
+    const card = document.createElement('a');
+    card.className = 'news-card';
+    card.href = news.link || '#';
+    
+    if (news.link && news.link !== '#') {
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+    }
+
+    card.innerHTML = `
+      <span class="news-badge">${badgeText}</span>
+      <span class="news-date">${formattedDate}</span>
+      <span class="news-text">${news.title}</span>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+// ページ読み込み完了時に実行
+document.addEventListener('DOMContentLoaded', initNewsSystem);
   
 </script>
   
