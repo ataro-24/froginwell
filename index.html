@@ -1679,6 +1679,7 @@
   ================================================ -->
 <!-- お知らせタブ（全件表示） -->
 <div id="tab-news" class="tab-content">
+  <section class="section-padding">
   <div class="container" style="max-width: 800px; margin: 0 auto;">
     <h2 class="section-title">お知らせ</h2>
 
@@ -1867,7 +1868,7 @@ function fetchNoteBlog() {
   const blogContainer = document.getElementById('blog-list');
   if (!blogContainer) return;
 
-const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteUserId}/rss`)}&nocache=${new Date().getTime()}`;
+const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteId}/rss`)}`;
 
   fetch(rssUrl)
     .then(res => res.json())
@@ -1964,7 +1965,7 @@ function initNewsSystem() {
 
   if (!topNewsContainer && !allNewsContainer) return;
 
-const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteUserId}/rss?t=${new Date().getTime()}`)}`;
+const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteUserId}/rss`)}`;
 
   fetch(rssUrl)
     .then(res => res.json())
