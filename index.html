@@ -576,6 +576,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  text-decoration: none;
 }
 
 .news-badge {
@@ -1665,7 +1666,7 @@
 <!-- お知らせタブ（全件表示） -->
 <div id="tab-news" class="tab-content">
   <div class="container" style="max-width: 800px; margin: 0 auto;">
-    <h2 style="color: var(--yellow); margin-bottom: 24px;">INFORMATION</h2>
+    <h2 style="color: var(--yellow); margin-bottom: 24px;">お知らせ</h2>
 
     <!-- ★ここに id="all-news-list" を指定するわ！ -->
     <div class="news-list" id="all-news-list">
@@ -1852,7 +1853,8 @@ function fetchNoteBlog() {
   const blogContainer = document.getElementById('blog-list');
   if (!blogContainer) return;
 
-  const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://note.com/${noteId}/rss`;
+// URLの末尾に「?t=今の時間」を付けることで、APIに最新のデータを毎回取りに行かせるのよ♪
+const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteId}/rss?t=${new Date().getTime()}`)}`;
 
   fetch(rssUrl)
     .then(res => res.json())
@@ -1937,9 +1939,8 @@ const noteUserId = 'notakanonoryet'; // noteのID
 const manualNews = [
   {
     title: 'ポートフォリオサイトを開設しました！',
-    date: '2026-09-15', // YYYY-MM-DD形式
-    link: '#',           // 遷移先URL（無ければ '#'）
-    category: 'INFO'     // バッジの文字（NEWがつかない時に表示されるわ）
+    date: '2026-09-22', // YYYY-MM-DD形式
+    link: '#',           // 遷移先URL（無ければ '#')
   }
 ];
 
@@ -1965,7 +1966,6 @@ function initNewsSystem() {
             title: item.title,
             date: item.pubDate,
             link: item.link,
-            category: 'Blog'
           });
         });
       }
