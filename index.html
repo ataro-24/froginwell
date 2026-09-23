@@ -1135,10 +1135,10 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
-/* アイキャッチ画像枠（16:9比率） */
+/* アイキャッチ画像枠（共通設定） */
 .blog-card-img {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 9; /* 16:9の比率を維持するわ */
   overflow: hidden;
   background-color: #e5e7eb;
 }
@@ -1184,16 +1184,19 @@
   overflow: hidden;
 }
 
-/* PC等でカードを横並びレイアウト（画像左・テキスト右）にしたい場合はスマホ以上でレスポンシブにもできるわよ♪ */
+/* ★ PCサイズ（640px以上）のレイアウト修正 ★ */
 @media (min-width: 640px) {
   .blog-card {
-    flex-direction: row;
+    flex-direction: row; /* 横並び（左：画像、右：テキスト）にするわ */
   }
+  
   .blog-card-img {
     width: 280px;
+    height: 180px;      /* 明確な高さを指定して潰れを防止するわよ〜♪ */
+    aspect-ratio: auto; /* 固定高さにするからautoでOKね */
     flex-shrink: 0;
-    aspect-ratio: auto;
   }
+  
   .blog-card-content {
     flex: 1;
   }
@@ -1842,7 +1845,7 @@ data.images.forEach(imgSrc => {
     document.getElementById('gallery-list-view').style.display = 'block';
   }
 
-  // ==========================================================================
+// ==========================================================================
 // BLOG タブ：note RSS 自動取得＆表示スクリプト
 // ==========================================================================
 
@@ -1876,16 +1879,33 @@ function fetchNoteBlog() {
         const plainText = tempDiv.textContent || tempDiv.innerText || '';
         const excerpt = plainText.trim().substring(0, 120) + '...';
 
-        // アイキャッチ画像の取得（thumbnail または description内の最初のimg）
-        let thumbnail = item.thumbnail;
-        if (!thumbnail) {
-          const imgMatch = (item.description || '').match(/<img[^>]+src=["']([^"']+)["']/);
+        // ★ アイキャッチ画像の抽出ロジック（noteのRSS構造に対応！）
+        let thumbnail = '';
+
+        // 1. thumbnail プロパティチェック
+        if (item.thumbnail && item.thumbnail !== '') {
+          thumbnail = item.thumbnail;
+        } 
+        // 2. enclosure（添付ファイルデータ）チェック
+        else if (item.enclosure && item.enclosure.link) {
+          thumbnail = item.enclosure.link;
+        } 
+        // 3. description または content 内から最初に出てくる <img> の src を抽出
+        else {
+          const fullHtml = (item.description || '') + (item.content || '');
+          const imgMatch = fullHtml.match(/<img[^>]+src=["']([^"']+)["']/i);
           if (imgMatch) {
             thumbnail = imgMatch[1];
-          } else {
-            // 画像がない場合のプレースホルダー（必要に応じて画像パスを変更してね）
-            thumbnail = 'https://via.placeholder.com/600x338?text=No+Image';
           }
+        }
+
+        // 画像枠要素の作成
+        let imgHtml = '';
+        if (thumbnail) {
+          imgHtml = `<div class="blog-card-img"><img src="${thumbnail}" alt="${item.title}"></div>`;
+        } else {
+          // 画像が一切見つからなかった場合はグレー背景の枠を表示
+          imgHtml = `<div class="blog-card-img" style="background-color: var(--gray-text); opacity: 0.2;"></div>`;
         }
 
         // ブログカードHTMLの作成
@@ -1896,9 +1916,7 @@ function fetchNoteBlog() {
         card.className = 'blog-card';
 
         card.innerHTML = `
-          <div class="blog-card-img">
-            <img src="${thumbnail}" alt="${item.title}">
-          </div>
+          ${imgHtml}
           <div class="blog-card-content">
             <span class="blog-date">${formattedDate}</span>
             <h3 class="blog-title">${item.title}</h3>
