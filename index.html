@@ -1184,15 +1184,6 @@
   overflow: hidden;
 }
 
-/* note公式埋め込みカードの枠調整（基本設定） */
-.note-embed-wrapper iframe {
-  width: 100%;
-  height: 160px; /* PCなど基本の高さ */
-  max-width: 800px;
-  margin: 0 auto;
-  display: block;
-}
-
 /* ★ スマホサイズ（640px未満）：note埋め込み枠の設定 ★ */
 @media (max-width: 640px) {
   .note-embed-wrapper iframe {
@@ -1861,8 +1852,8 @@ data.images.forEach(imgSrc => {
     document.getElementById('gallery-list-view').style.display = 'block';
   }
 
-  // ==========================================================================
-// BLOG タブ：note公式 埋め込みカード（iframe）自動生成スクリプト
+// ==========================================================================
+// BLOG タブ：note RSS + Microlink API（アイキャッチ画像完全取得版）
 // ==========================================================================
 
 const noteId = 'notakanonoryet';
@@ -1883,26 +1874,57 @@ function fetchNoteBlog() {
 
       blogContainer.innerHTML = ''; // 読み込み中表示をクリア
 
-      data.items.forEach(item => {
-        // ★ note公式の埋め込み用URLを作成（記事URLの末尾に /embd をつけるのよ♪）
-        // 例: https://note.com/notakanonoryet/n/n6063cfdea624/embd
-        const embedUrl = `${item.link}/embd`;
+      data.items.forEach((item, index) => {
+        // 日付のフォーマット整形（YYYY.MM.DD）
+        const d = new Date(item.pubDate);
+        const formattedDate = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
 
-        // 埋め込みカード用ラッパー要素
-        const cardWrapper = document.createElement('div');
-        cardWrapper.className = 'note-embed-wrapper';
-        cardWrapper.style.marginBottom = '20px';
+        // 本文からプレビュー用テキストを抽出（120文字）
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = item.description || item.content || '';
+        const plainText = tempDiv.textContent || tempDiv.innerText || '';
+        const excerpt = plainText.trim().substring(0, 120) + '...';
 
-        // note公式 iframe の生成
-        cardWrapper.innerHTML = `
-          <iframe 
-            src="${embedUrl}" 
-            style="width: 100%; height: 160px; border: none; overflow: hidden; border-radius: 8px;" 
-            scrolling="no">
-          </iframe>
+        const imgContainerId = `note-img-${index}`;
+
+        // ブログカードの要素を作成
+        const card = document.createElement('a');
+        card.href = item.link;
+        card.target = '_blank';
+        card.rel = 'noopener noreferrer';
+        card.className = 'blog-card';
+
+        card.innerHTML = `
+          <div class="blog-card-img" id="${imgContainerId}">
+            <!-- 読み込み中は薄いグレー枠を表示 -->
+            <div style="background-color: #e5e7eb; width: 100%; height: 100%;"></div>
+          </div>
+          <div class="blog-card-content">
+            <span class="blog-date">${formattedDate}</span>
+            <h3 class="blog-title">${item.title}</h3>
+            <p class="blog-excerpt">${excerpt}</p>
+          </div>
         `;
 
-        blogContainer.appendChild(cardWrapper);
+        blogContainer.appendChild(card);
+
+        // ★ Microlink API を使ってnoteのアイキャッチ画像URLを取得するわよ〜♪
+        const microlinkUrl = `https://api.microlink.io?url=${encodeURIComponent(item.link)}`;
+
+        fetch(microlinkUrl)
+          .then(res => res.json())
+          .then(mlData => {
+            const imgContainer = document.getElementById(imgContainerId);
+            if (!imgContainer) return;
+
+            if (mlData.status === 'success' && mlData.data && mlData.data.image) {
+              const imageUrl = mlData.data.image.url;
+              imgContainer.innerHTML = `<img src="${imageUrl}" alt="${item.title}">`;
+            }
+          })
+          .catch(err => {
+            console.error('画像取得エラー:', err);
+          });
       });
     })
     .catch(err => {
