@@ -1138,7 +1138,7 @@
 /* アイキャッチ画像枠（スマホ表示：縦並び時の高さ設定） */
 .blog-card-img {
   width: 100%;
-  height: 200px; /* 高さを直接指定して枠の潰れを100%防ぐわ♪ */
+  height: 200px;
   overflow: hidden;
   background-color: #e5e7eb;
   flex-shrink: 0;
@@ -1184,7 +1184,23 @@
   overflow: hidden;
 }
 
-/* ★ PCサイズ（640px以上）：横並びカードの設定 ★ */
+/* note公式埋め込みカードの枠調整（基本設定） */
+.note-embed-wrapper iframe {
+  width: 100%;
+  height: 160px; /* PCなど基本の高さ */
+  max-width: 800px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* ★ スマホサイズ（640px未満）：note埋め込み枠の設定 ★ */
+@media (max-width: 640px) {
+  .note-embed-wrapper iframe {
+    height: 140px; /* スマホでは少しコンパクトに */
+  }
+}
+
+/* ★ PCサイズ（640px以上）：自作カード横並びの設定 ★ */
 @media (min-width: 640px) {
   .blog-card {
     flex-direction: row;
@@ -1193,7 +1209,7 @@
   
   .blog-card-img {
     width: 260px;
-    height: auto; /* 横並びの時は親要素（カード）の高さに合わせるわ */
+    height: auto;
     min-height: 160px;
   }
   
@@ -1845,8 +1861,8 @@ data.images.forEach(imgSrc => {
     document.getElementById('gallery-list-view').style.display = 'block';
   }
 
-// ==========================================================================
-// BLOG タブ：note RSS 自動取得＆表示スクリプト（OGP画像確実取得版）
+  // ==========================================================================
+// BLOG タブ：note公式 埋め込みカード（iframe）自動生成スクリプト
 // ==========================================================================
 
 const noteId = 'notakanonoryet';
@@ -1867,66 +1883,26 @@ function fetchNoteBlog() {
 
       blogContainer.innerHTML = ''; // 読み込み中表示をクリア
 
-      data.items.forEach((item, index) => {
-        // 日付のフォーマット整形（YYYY.MM.DD）
-        const d = new Date(item.pubDate);
-        const formattedDate = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+      data.items.forEach(item => {
+        // ★ note公式の埋め込み用URLを作成（記事URLの末尾に /embd をつけるのよ♪）
+        // 例: https://note.com/notakanonoryet/n/n6063cfdea624/embd
+        const embedUrl = `${item.link}/embd`;
 
-        // 本文からHTMLタグを除去してプレビュー用のテキストを生成
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = item.description || item.content || '';
-        const plainText = tempDiv.textContent || tempDiv.innerText || '';
-        const excerpt = plainText.trim().substring(0, 120) + '...';
+        // 埋め込みカード用ラッパー要素
+        const cardWrapper = document.createElement('div');
+        cardWrapper.className = 'note-embed-wrapper';
+        cardWrapper.style.marginBottom = '20px';
 
-        // カードのHTML枠を先に生成（画像部分は後から非同期で差し込むわ）
-        const card = document.createElement('a');
-        card.href = item.link;
-        card.target = '_blank';
-        card.rel = 'noopener noreferrer';
-        card.className = 'blog-card';
-
-        const cardImgId = `blog-card-img-${index}`;
-
-        card.innerHTML = `
-          <div class="blog-card-img" id="${cardImgId}">
-            <div style="background-color: #f3f4f6; width:100%; height:100%;"></div>
-          </div>
-          <div class="blog-card-content">
-            <span class="blog-date">${formattedDate}</span>
-            <h3 class="blog-title">${item.title}</h3>
-            <p class="blog-excerpt">${excerpt}</p>
-          </div>
+        // note公式 iframe の生成
+        cardWrapper.innerHTML = `
+          <iframe 
+            src="${embedUrl}" 
+            style="width: 100%; height: 160px; border: none; overflow: hidden; border-radius: 8px;" 
+            scrolling="no">
+          </iframe>
         `;
 
-        blogContainer.appendChild(card);
-
-        // ★ OGP（metaタグ）から本物の見出し画像URLを抽出する処理
-        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(item.link)}`;
-        
-        fetch(proxyUrl)
-          .then(response => response.json())
-          .then(ogData => {
-            const imgContainer = document.getElementById(cardImgId);
-            if (!imgContainer) return;
-
-            // 記事ページのHTMLから og:image を探すわ
-            const match = ogData.contents.match(/<meta\s+property="og:image"\s+content="([^"]+)"/i) ||
-                          ogData.contents.match(/<meta\s+name="og:image"\s+content="([^"]+)"/i);
-
-            if (match && match[1]) {
-              imgContainer.innerHTML = `<img src="${match[1]}" alt="${item.title}">`;
-            } else {
-              // それでも見つからない場合のみグレー背景
-              imgContainer.innerHTML = `<div style="background-color: #e5e7eb; width:100%; height:100%;"></div>`;
-            }
-          })
-          .catch(() => {
-            // エラー時のフォールバック
-            const imgContainer = document.getElementById(cardImgId);
-            if (imgContainer) {
-              imgContainer.innerHTML = `<div style="background-color: #e5e7eb; width:100%; height:100%;"></div>`;
-            }
-          });
+        blogContainer.appendChild(cardWrapper);
       });
     })
     .catch(err => {
@@ -1936,13 +1912,6 @@ function fetchNoteBlog() {
 }
 
 document.addEventListener('DOMContentLoaded', fetchNoteBlog);
-
-  data.items.forEach(item => {
-  // ★ ブラウザのF12キー -> 「コンソール (Console)」タブでデータの中身を確認するわよ〜！
-  console.log('noteの記事データ:', item);
-
-  // ... (以下略)
-});
   
 </script>
   
