@@ -1929,6 +1929,13 @@ function fetchNoteBlog() {
 }
 
 document.addEventListener('DOMContentLoaded', fetchNoteBlog);
+
+  data.items.forEach(item => {
+  // ★ ブラウザのF12キー -> 「コンソール (Console)」タブでデータの中身を確認するわよ〜！
+  console.log('noteの記事データ:', item);
+
+  // ... (以下略)
+});
   
 </script>
   
