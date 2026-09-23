@@ -1105,6 +1105,7 @@
   .gallery-card-grid {
     grid-template-columns: 1fr; /* スマホでは1列 */
   }
+} /* ★ここ！閉じカッコを追加したわ！ */
 
 /* ===============================================
    ブログタブ（BLOG）用スタイル
@@ -1123,8 +1124,8 @@
 
 /* 横長ブログカード本体 */
 .blog-card {
-  background-color: var(--gray-light, #f9fafb);
-  color: var(--text-dark, #333);
+  background-color: var(--gray-light);
+  color: var(--text-dark);
   border-radius: 12px;
   overflow: hidden;
   display: flex;
@@ -1143,7 +1144,7 @@
 
 /* 左側：小さめのアイキャッチ画像枠 */
 .blog-card-img {
-  width: 160px;  /* 画像エリアの幅（お好みで140px〜180px程度に調整OK） */
+  width: 180px;  /* 画像エリアの幅（お好みで140px〜180px程度に調整OK） */
   height: 120px; /* 画像エリアの高さ */
   flex-shrink: 0; /* 画像が潰れるのを防ぐ */
   overflow: hidden;
