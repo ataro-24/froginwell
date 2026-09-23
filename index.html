@@ -1846,7 +1846,7 @@ data.images.forEach(imgSrc => {
   }
 
 // ==========================================================================
-// BLOG タブ：note RSS 自動取得＆表示スクリプト（アイキャッチ完全補正版）
+// BLOG タブ：note RSS 自動取得＆表示スクリプト（OGP画像確実取得版）
 // ==========================================================================
 
 const noteId = 'notakanonoryet';
@@ -1867,7 +1867,7 @@ function fetchNoteBlog() {
 
       blogContainer.innerHTML = ''; // 読み込み中表示をクリア
 
-      data.items.forEach(item => {
+      data.items.forEach((item, index) => {
         // 日付のフォーマット整形（YYYY.MM.DD）
         const d = new Date(item.pubDate);
         const formattedDate = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
@@ -1878,35 +1878,19 @@ function fetchNoteBlog() {
         const plainText = tempDiv.textContent || tempDiv.innerText || '';
         const excerpt = plainText.trim().substring(0, 120) + '...';
 
-        // ★ noteの記事ID（n6063cfdea624 など）をURLから抽出
-        const noteKeyMatch = item.link.match(/\/n\/([a-zA-Z0-9]+)/);
-        const noteKey = noteKeyMatch ? noteKeyMatch[1] : '';
-
-        // ★ noteの画像用URLを自動生成（RSSになくてもnoteの画像サーバーから取得！）
-        // 画像がない場合の予備画像（NO IMAGE）も用意しておくわ♪
-        let thumbnail = item.thumbnail || item.enclosure?.link || '';
-        
-        if (!thumbnail && noteKey) {
-          // noteの記事キーから画像を取得する仕組み
-          thumbnail = `https://assets.st-note.com/production/uploads/images/${noteKey}/rectangle_large_type_2_${noteKey}.jpeg`;
-        }
-
-        // ブログカードHTMLの作成
+        // カードのHTML枠を先に生成（画像部分は後から非同期で差し込むわ）
         const card = document.createElement('a');
         card.href = item.link;
         card.target = '_blank';
         card.rel = 'noopener noreferrer';
         card.className = 'blog-card';
 
-        // 画像タグ（エラー時はNo Imageを表示するフォールバック付き）
-        const imgHtml = `
-          <div class="blog-card-img">
-            <img src="${thumbnail}" alt="${item.title}" onerror="this.onerror=null; this.src='https://placehold.jp/24/cccccc/ffffff/600x338.png?text=BLOG';">
-          </div>
-        `;
+        const cardImgId = `blog-card-img-${index}`;
 
         card.innerHTML = `
-          ${imgHtml}
+          <div class="blog-card-img" id="${cardImgId}">
+            <div style="background-color: #f3f4f6; width:100%; height:100%;"></div>
+          </div>
           <div class="blog-card-content">
             <span class="blog-date">${formattedDate}</span>
             <h3 class="blog-title">${item.title}</h3>
@@ -1915,6 +1899,34 @@ function fetchNoteBlog() {
         `;
 
         blogContainer.appendChild(card);
+
+        // ★ OGP（metaタグ）から本物の見出し画像URLを抽出する処理
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(item.link)}`;
+        
+        fetch(proxyUrl)
+          .then(response => response.json())
+          .then(ogData => {
+            const imgContainer = document.getElementById(cardImgId);
+            if (!imgContainer) return;
+
+            // 記事ページのHTMLから og:image を探すわ
+            const match = ogData.contents.match(/<meta\s+property="og:image"\s+content="([^"]+)"/i) ||
+                          ogData.contents.match(/<meta\s+name="og:image"\s+content="([^"]+)"/i);
+
+            if (match && match[1]) {
+              imgContainer.innerHTML = `<img src="${match[1]}" alt="${item.title}">`;
+            } else {
+              // それでも見つからない場合のみグレー背景
+              imgContainer.innerHTML = `<div style="background-color: #e5e7eb; width:100%; height:100%;"></div>`;
+            }
+          })
+          .catch(() => {
+            // エラー時のフォールバック
+            const imgContainer = document.getElementById(cardImgId);
+            if (imgContainer) {
+              imgContainer.innerHTML = `<div style="background-color: #e5e7eb; width:100%; height:100%;"></div>`;
+            }
+          });
       });
     })
     .catch(err => {
