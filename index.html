@@ -1134,7 +1134,7 @@
   text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--gray-light);
 }
 
 .blog-card:hover {
@@ -1148,7 +1148,7 @@
   height: 120px; /* 画像エリアの高さ */
   flex-shrink: 0; /* 画像が潰れるのを防ぐ */
   overflow: hidden;
-  background-color: #e5e7eb;
+  background-color:var(--gray-light) ;
 }
 
 .blog-card-img img {
@@ -1174,7 +1174,7 @@
   font-weight: 700;
   line-height: 1.4;
   margin: 0;
-  color: var(--text-dark, #111827);
+  color: var(--text-dark);
   /* 2行を超えたら省略記号(...)にする */
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1185,18 +1185,18 @@
 /* 日付 */
 .blog-date {
   font-size: 13px;
-  color: #6b7280;
+  color: var(--text-dark);
 }
 
 /* 本文プレビュー */
 .blog-excerpt {
   font-size: 13px;
   line-height: 1.5;
-  color: #4b5563;
+  color: var(--text-dark);
   margin: 0;
   /* 2行を超えたら省略記号(...)にする */
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1204,7 +1204,7 @@
 /* ローディング表示 */
 .blog-loading {
   text-align: center;
-  color: var(--gray-text, #6b7280);
+  color: var(--gray-text);
   font-size: 14px;
   padding: 40px 0;
 }
@@ -1223,10 +1223,6 @@
 
   .blog-title {
     font-size: 14px;
-  }
-
-  .blog-excerpt {
-    display: none; /* スマホで縦長になりすぎる場合は本文を隠す（表示したい場合はこの行を削除してね） */
   }
 }
   
@@ -1425,7 +1421,7 @@
           <div class="form-group">
             <label for="name">お名前</label>
             <!-- ★ name="name" を追加 -->
-            <input type="text" id="name" name="name" placeholder="山田 太郎" required>
+            <input type="text" id="name" name="name" placeholder="佐藤 太郎" required>
           </div>
           <div class="form-group">
             <label for="email">メールアドレス</label>
