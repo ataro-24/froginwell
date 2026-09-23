@@ -1868,6 +1868,9 @@ function fetchNoteBlog() {
       blogContainer.innerHTML = ''; // 読み込み中表示をクリア
 
       data.items.forEach(item => {
+        // ★ F12キーの「コンソール (Console)」タブで各記事の構造を確認できるログ！
+        console.log('noteの記事データ:', item);
+
         // 日付のフォーマット整形（YYYY.MM.DD）
         const d = new Date(item.pubDate);
         const formattedDate = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
@@ -1878,7 +1881,7 @@ function fetchNoteBlog() {
         const plainText = tempDiv.textContent || tempDiv.innerText || '';
         const excerpt = plainText.trim().substring(0, 120) + '...';
 
-        // ★ アイキャッチ画像の抽出（あらゆる可能性をチェックするわよ〜♪）
+        // アイキャッチ画像の抽出
         let thumbnail = '';
 
         if (item.thumbnail && item.thumbnail !== '') {
