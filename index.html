@@ -321,6 +321,21 @@
       cursor: pointer;
     }
 
+    /* バナー内のリンク文字のスタイル */
+.banner-link {
+  color: var(--navy);           /* リンクとわかりやすいアクセントカラー（お好みで変えてね） */
+  text-decoration: none;     /* 下線を消す */
+  font-weight: bold;
+  margin-left: 8px;          /* 手前のテキストとの間の余白 */
+  transition: opacity 0.2s;  /* ホバー時のじわっとした変化 */
+}
+
+/* マウスを乗せた（ホバーした）とき */
+.banner-link:hover {
+  opacity: 0.8;              /* ちょっと透けさせてクリック感を出す */
+  text-decoration: underline;/* ホバー時だけ下線を出す */
+}
+
     /* -----------------------------------
        TOPタブ：ヒーローセクション
     ----------------------------------- */
@@ -1341,6 +1356,7 @@
       <span class="banner-badge">NEXT STAGE</span>
       <div class="banner-text">
         ◎近代古典塾 芯劇　第2回公演「十二夜」2026年12月17日(木)〜20日(日)＠劇場HOPE
+        <a href="https://shingeki.corich.co/shingeki-zyuniya/Aippan?elu=011" target="_blank" rel="noopener noreferrer" class="banner-link">&raquo; チケット（A席）</a>
       </div>
     </div>
 
