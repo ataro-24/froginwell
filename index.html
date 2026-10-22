@@ -1878,7 +1878,7 @@ data.images.forEach(imgSrc => {
   }
 
 // ==========================================================================
-// BLOG タブ：note RSS + Microlink API（キャッシュ＆高速化・安全版）
+// BLOG タブ：Cloudflare Functions (/rss) + Microlink API（キャッシュ＆安全版）
 // ==========================================================================
 
 const noteId = 'notakanonoryet';
@@ -1887,8 +1887,8 @@ function fetchNoteBlog() {
   const blogContainer = document.getElementById('blog-list');
   if (!blogContainer) return;
 
-  const BLOG_CACHE_KEY = 'note_blog_cache_v1';
-  const BLOG_CACHE_TIME_KEY = 'note_blog_cache_time_v1';
+  const BLOG_CACHE_KEY = 'note_blog_cache_v2';
+  const BLOG_CACHE_TIME_KEY = 'note_blog_cache_time_v2';
   const TWO_HOURS = 2 * 60 * 60 * 1000; // 2時間キャッシュ
 
   const cachedData = localStorage.getItem(BLOG_CACHE_KEY);
@@ -1906,13 +1906,13 @@ function fetchNoteBlog() {
     }
   }
 
-  const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteId}/rss`)}`;
-
-  fetch(rssUrl)
-    .then(res => res.json())
-    .then(data => {
-      if (!data.items || data.items.length === 0) {
-        // 万が一記事がない場合でも、古いキャッシュがあればそれを救済表示
+  // Cloudflare Functions のエンドポイント（/rss）からXMLを取得するわ
+  fetch('/rss')
+    .then(res => res.text())
+    .then(str => new window.DOMParser().parseFromString(str, 'text/xml'))
+    .then(xml => {
+      const items = xml.querySelectorAll('item');
+      if (!items || items.length === 0) {
         if (tryRenderBlogCache(cachedData, blogContainer)) return;
         blogContainer.innerHTML = '<p class="blog-loading">まだ記事がありません。</p>';
         return;
@@ -1921,21 +1921,26 @@ function fetchNoteBlog() {
       blogContainer.innerHTML = ''; // 読み込み中表示をクリア
 
       let articles = [];
-      let pendingImages = data.items.length;
+      let pendingImages = items.length;
 
-      data.items.forEach((item, index) => {
-        const d = new Date(item.pubDate);
-        const formattedDate = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+      items.forEach((item, index) => {
+        const pubDateStr = item.querySelector('pubDate')?.textContent || '';
+        const d = new Date(pubDateStr);
+        const formattedDate = isNaN(d.getTime()) ? '2026.00.00' : `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
 
+        const description = item.querySelector('description')?.textContent || item.querySelector('content\\:encoded, encoded')?.textContent || '';
         const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = item.description || item.content || '';
+        tempDiv.innerHTML = description;
         const plainText = tempDiv.textContent || tempDiv.innerText || '';
         const excerpt = plainText.trim().substring(0, 120) + '...';
+
+        const title = item.querySelector('title')?.textContent || '';
+        const link = item.querySelector('link')?.textContent || '#';
 
         const imgContainerId = `note-img-${index}`;
 
         const card = document.createElement('a');
-        card.href = item.link;
+        card.href = link;
         card.target = '_blank';
         card.rel = 'noopener noreferrer';
         card.className = 'blog-card';
@@ -1946,7 +1951,7 @@ function fetchNoteBlog() {
           </div>
           <div class="blog-card-content">
             <span class="blog-date">${formattedDate}</span>
-            <h3 class="blog-title">${item.title}</h3>
+            <h3 class="blog-title">${title}</h3>
             <p class="blog-excerpt">${excerpt}</p>
           </div>
         `;
@@ -1954,15 +1959,16 @@ function fetchNoteBlog() {
         blogContainer.appendChild(card);
 
         let articleObj = {
-          title: item.title,
-          link: item.link,
+          title: title,
+          link: link,
           date: formattedDate,
           excerpt: excerpt,
           imageUrl: ''
         };
         articles.push(articleObj);
 
-        const microlinkUrl = `https://api.microlink.io?url=${encodeURIComponent(item.link)}`;
+        // Microlink API でアイキャッチ画像を取得
+        const microlinkUrl = `https://api.microlink.io?url=${encodeURIComponent(link)}`;
 
         fetch(microlinkUrl)
           .then(res => res.json())
@@ -1973,7 +1979,7 @@ function fetchNoteBlog() {
             if (mlData.status === 'success' && mlData.data && mlData.data.image) {
               const imageUrl = mlData.data.image.url;
               articleObj.imageUrl = imageUrl;
-              imgContainer.innerHTML = `<img src="${imageUrl}" alt="${item.title}">`;
+              imgContainer.innerHTML = `<img src="${imageUrl}" alt="${title}">`;
             }
           })
           .catch(err => {
@@ -1990,7 +1996,6 @@ function fetchNoteBlog() {
     })
     .catch(err => {
       console.error('noteの取得に失敗しました:', err);
-      // 通信エラーでも、古いキャッシュがあればそれを表示して救済するわ！
       if (tryRenderBlogCache(cachedData, blogContainer)) return;
       blogContainer.innerHTML = '<p class="blog-loading">記事の読み込みに失敗しました。</p>';
     });
@@ -2037,87 +2042,60 @@ function renderBlogCards(articles, container) {
 
 document.addEventListener('DOMContentLoaded', fetchNoteBlog);
 
-
 // ==========================================================================
-// NEWS（お知らせ）統合管理スクリプト（キャッシュ＆安全・手動保持版）
+// お知らせ タブ　Cloudflare Functions (/rss) を使った安全・高速なRSS取得スクリプト
 // ==========================================================================
 
-const noteUserId = 'notakanonoryet'; // noteのID
+const noteUserId = 'notakanonoryet';
 
-  // ★ 手動でお知らせを書き足したい時はここにデータを追加してね！
+// ★ 手動でお知らせを書き足したい時はここにデータを追加してね！
 const manualNews = [
   {
     title: 'ポートフォリオサイトを開設しました！',
-    date: '2026-09-22', // YYYY-MM-DD形式
-    link: '#'           // 遷移先URL（無ければ '#'）
+    date: '2026-09-22',
+    link: '#'
   },
   {
     title: '芯劇『十二夜』チケット発売開始！',
-    date: '2026-10-17', // YYYY-MM-DD形式
-    link: 'https://note.com/notakanonoryet/n/nc1afaa356030'           // 遷移先URL（無ければ '#'）
+    date: '2026-10-17',
+    link: 'https://note.com/notakanonoryet/n/nc1afaa356030'
   }
 ];
 
 function initNewsSystem() {
-  const topNewsContainer = document.getElementById('news-list');       // TOPタブの枠
-  const allNewsContainer = document.getElementById('all-news-list');   // お知らせタブの枠
-
+  const topNewsContainer = document.getElementById('news-list');
+  const allNewsContainer = document.getElementById('all-news-list');
   if (!topNewsContainer && !allNewsContainer) return;
 
-  // 1. まずは手動お知らせをベースにして即座に表示（安全設計！）
+  // 1. まず手動お知らせをベースに即座に表示（安全設計）
   let combinedNews = [...manualNews];
   combinedNews.sort((a, b) => new Date(b.date) - new Date(a.date));
   renderTopAndAll(topNewsContainer, allNewsContainer, combinedNews);
 
-  // 2. ニュース用キャッシュ（1時間）のチェック
-  const NEWS_CACHE_KEY = 'note_news_cache_v1';
-  const NEWS_CACHE_TIME_KEY = 'note_news_cache_time_v1';
-  const ONE_HOUR = 60 * 60 * 1000;
-
-  const cachedData = localStorage.getItem(NEWS_CACHE_KEY);
-  const cachedTime = localStorage.getItem(NEWS_CACHE_TIME_KEY);
-  const now = new Date().getTime();
-
-  if (cachedData && cachedTime && (now - cachedTime < ONE_HOUR)) {
-    try {
-      const noteItems = JSON.parse(cachedData);
-      updateNewsList(noteItems, topNewsContainer, allNewsContainer);
-      return; // キャッシュがあればAPIをスキップ！
-    } catch (e) {}
-  }
-
-  // 3. APIから最新を取得
-  const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://note.com/${noteUserId}/rss`)}`;
-
-  fetch(rssUrl)
-    .then(res => res.json())
-    .then(data => {
-      if (data && data.status === 'ok' && Array.isArray(data.items)) {
+  // 2. 自前のFunctionsエンドポイント（/rss）から取得するわ
+  fetch('/rss')
+    .then(res => res.text())
+    .then(str => new window.DOMParser().parseFromString(str, 'text/xml'))
+    .then(xml => {
+      const items = xml.querySelectorAll('item');
+      if (items.length > 0) {
         let noteItems = [];
-        data.items.forEach(item => {
+        items.forEach(item => {
           noteItems.push({
-            title: item.title,
-            date: item.pubDate,
-            link: item.link
+            title: item.querySelector('title')?.textContent || '',
+            date: item.querySelector('pubDate')?.textContent || '',
+            link: item.querySelector('link')?.textContent || ''
           });
         });
 
-        // 成功したらキャッシュに保存
-        localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify(noteItems));
-        localStorage.setItem(NEWS_CACHE_TIME_KEY, now);
-
-        updateNewsList(noteItems, topNewsContainer, allNewsContainer);
+        combinedNews = [...noteItems, ...manualNews];
+        combinedNews.sort((a, b) => new Date(b.date) - new Date(a.date));
+        renderTopAndAll(topNewsContainer, allNewsContainer, combinedNews);
       }
     })
     .catch(err => {
-      console.warn('noteのお知らせ取得はスキップされたけど手動分で安全に動いているわよ:', err);
+      console.warn('noteの取得はスキップされたけど手動分で安全に動いているわよ:', err);
     });
-}
-
-function updateNewsList(noteItems, topContainer, allContainer) {
-  let combinedNews = [...noteItems, ...manualNews];
-  combinedNews.sort((a, b) => new Date(b.date) - new Date(a.date));
-  renderTopAndAll(topContainer, allContainer, combinedNews);
 }
 
 function renderTopAndAll(topContainer, allContainer, newsArray) {
@@ -2130,7 +2108,6 @@ function renderTopAndAll(topContainer, allContainer, newsArray) {
   }
 }
 
-// カード生成共通関数（最新1件のみ「NEW」を付与）
 function renderNewsCards(container, newsArray) {
   if (!newsArray || newsArray.length === 0) {
     container.innerHTML = '<p class="news-text">お知らせはありません。</p>';
@@ -2141,7 +2118,7 @@ function renderNewsCards(container, newsArray) {
 
   newsArray.forEach((news, index) => {
     const d = new Date(news.date);
-    const formattedDate = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+    const formattedDate = isNaN(d.getTime()) ? '2026.00.00' : `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
 
     const badgeHtml = (index === 0) ? '<span class="news-badge">NEW</span>' : '';
 
